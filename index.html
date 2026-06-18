@@ -4,94 +4,318 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>MedCalc Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Roboto+Flex:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#EEF2F7;min-height:100vh}
-.bar{background:#1565C0;color:#fff;height:56px;display:flex;align-items:center;padding:0 16px;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.bar-ico{width:34px;height:34px;background:#1976D2;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.bar-title{font-size:18px;font-weight:700}
-.bar-tag{margin-left:auto;font-size:11px;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;white-space:nowrap}
-.tabs{background:#0D47A1;display:flex;position:sticky;top:56px;z-index:99;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-.tab{flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;user-select:none}
-.tab.on{color:#fff;border-bottom-color:#00BCD4}
+/* ══════════════════════════════════════════════════════════════════════════
+   MEDCALC PRO — MATERIAL DESIGN 3 (Material You)
+   ══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* M3 color roles — Medical Teal seed */
+  --md-primary:#006A60;--md-on-primary:#FFFFFF;
+  --md-primary-container:#9FF2E3;--md-on-primary-container:#00201C;
+  --md-secondary:#4A635F;--md-secondary-container:#CCE8E2;--md-on-secondary-container:#06201C;
+  --md-tertiary:#456179;--md-tertiary-container:#CCE5FF;--md-on-tertiary-container:#001E2F;
+  --md-error:#BA1A1A;--md-error-container:#FFDAD6;--md-on-error-container:#410002;
+  --md-warn:#8A5300;--md-warn-container:#FFDDB3;--md-on-warn-container:#2B1700;
+  --md-surface:#FAFDFB;--md-surface-dim:#DAEAE5;--md-surface-bright:#FAFDFB;
+  --md-surface-container-lowest:#FFFFFF;--md-surface-container-low:#F3FBF8;
+  --md-surface-container:#EEF5F1;--md-surface-container-high:#E8EFEB;--md-surface-container-highest:#E2EAE6;
+  --md-on-surface:#161D1B;--md-on-surface-variant:#3F4946;
+  --md-outline:#6F7976;--md-outline-variant:#BEC9C5;
+  --md-inverse-surface:#2B3230;--md-inverse-on-surface:#ECF2EE;
+  --md-elev1:0px 1px 2px 0px rgba(0,0,0,0.3),0px 1px 3px 1px rgba(0,0,0,0.15);
+  --md-elev2:0px 1px 2px 0px rgba(0,0,0,0.3),0px 2px 6px 2px rgba(0,0,0,0.15);
+  --md-elev3:0px 1px 3px 0px rgba(0,0,0,0.3),0px 4px 8px 3px rgba(0,0,0,0.15);
+  --md-elev4:0px 2px 3px 0px rgba(0,0,0,0.3),0px 6px 10px 4px rgba(0,0,0,0.15);
+  --shape-xs:4px;--shape-sm:8px;--shape-md:12px;--shape-lg:16px;--shape-xl:28px;--shape-full:100px;
+  --font:'Roboto Flex','Roboto',system-ui,sans-serif;
+  --font-d:'Roboto','Roboto Flex',system-ui,sans-serif;
+  --mono:'Roboto Mono',monospace;
+  --motion-standard:cubic-bezier(0.2,0,0,1);
+  --motion-emphasized:cubic-bezier(0.3,0,0,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--md-surface);min-height:100vh;color:var(--md-on-surface)}
+
+/* ── M3 State Layer Utility (ripple-like hover/press) ── */
+@keyframes md-ripple{from{opacity:.16}to{opacity:0}}
+
+/* ── Top App Bar (M3 Center-aligned Small) ── */
+.bar{
+  position:sticky;top:0;z-index:200;
+  height:64px;display:flex;align-items:center;padding:0 8px 0 16px;gap:12px;
+  background:var(--md-surface-container);
+  box-shadow:var(--md-elev1)
+}
+.bar-ico{
+  width:40px;height:40px;border-radius:var(--shape-md);
+  background:var(--md-primary-container);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  flex-shrink:0;color:var(--md-on-primary-container)
+}
+.bar-title{font-size:18px;font-weight:500;color:var(--md-on-surface);letter-spacing:0;font-family:var(--font-d)}
+.bar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.bar-tag{
+  font-size:11px;font-weight:600;letter-spacing:.2px;
+  background:var(--md-secondary-container);color:var(--md-on-secondary-container);
+  padding:6px 12px;border-radius:var(--shape-full);white-space:nowrap
+}
+
+/* ── Tabs (M3 Primary Tabs) ── */
+.tabs{
+  position:sticky;top:64px;z-index:199;
+  display:flex;background:var(--md-surface);
+  border-bottom:1px solid var(--md-surface-container-highest)
+}
+.tab{
+  flex:1;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14px;font-weight:600;letter-spacing:.1px;color:var(--md-on-surface-variant);
+  cursor:pointer;user-select:none;position:relative;transition:color .2s var(--motion-standard);
+  font-family:var(--font-d)
+}
+.tab.on{color:var(--md-primary)}
+.tab.on::after{
+  content:'';position:absolute;bottom:0;left:25%;width:50%;height:3px;
+  background:var(--md-primary);border-radius:3px 3px 0 0
+}
+.tab:active{background:var(--md-surface-container-low)}
+
+/* ── Panels ── */
 .panel{display:none;padding:12px}
 .panel.on{display:block}
-.card{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.1);margin-bottom:12px;overflow:hidden}
-.sh{padding:12px 14px 0}
-.sh-lbl{font-size:10px;font-weight:700;color:#90A4AE;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.sh-box{display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:8px;padding:8px 12px;border:1.5px solid #E8ECF0}
-.sh-box input{border:none;background:none;outline:none;font-size:14px;color:#333;width:100%;font-family:inherit}
-.chips{display:flex;gap:5px;flex-wrap:wrap;padding:8px 14px 10px}
-.chip{padding:4px 12px;border-radius:16px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #DDE3EA;color:#607D8B;background:#fff;white-space:nowrap;transition:all .15s;user-select:none}
-.chip.on{background:#1565C0;border-color:#1565C0;color:#fff}
+
+/* ── Cards (M3 Elevated/Filled Card) ── */
+.card{
+  background:var(--md-surface-container-low);border-radius:var(--shape-lg);
+  box-shadow:none;border:1px solid var(--md-surface-container-highest);
+  margin-bottom:12px;overflow:hidden
+}
+
+/* ── Search Field (M3 Search Bar) ── */
+.sh{padding:16px 14px 0}
+.sh-lbl{
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--md-on-surface-variant);font-family:var(--font-d)
+}
+.sh-lbl::before{
+  content:'';width:4px;height:14px;border-radius:2px;
+  background:var(--md-primary);display:inline-block
+}
+.sh-box{
+  display:flex;align-items:center;gap:10px;background:var(--md-surface-container-high);
+  border-radius:var(--shape-full);padding:12px 16px;
+  border:none;transition:all .2s var(--motion-standard)
+}
+.sh-box:focus-within{
+  background:var(--md-surface-container-highest);
+  box-shadow:inset 0 0 0 2px var(--md-primary)
+}
+.sh-box input{
+  border:none;background:none;outline:none;font-size:14px;font-weight:400;
+  color:var(--md-on-surface);width:100%;font-family:var(--font)
+}
+.sh-box input::placeholder{color:var(--md-on-surface-variant)}
+
+/* ── Filter Chips (M3 Filter Chip) ── */
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px 14px}
+.chip{
+  padding:7px 16px;border-radius:var(--shape-sm);font-size:13px;font-weight:500;
+  cursor:pointer;border:1px solid var(--md-outline-variant);color:var(--md-on-surface-variant);
+  background:transparent;white-space:nowrap;transition:all .16s var(--motion-standard);
+  user-select:none;font-family:var(--font-d)
+}
+.chip:active{transform:scale(.95)}
+.chip.on{
+  background:var(--md-secondary-container);border-color:transparent;
+  color:var(--md-on-secondary-container);font-weight:600
+}
+
+/* ── List Items (M3 List) ── */
 .lst{padding:4px 0}
-.li{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid #F5F7FA;transition:background .15s;user-select:none}
-.li:last-child{border-bottom:none}
-.li:active{background:#F0F4FF}
-.li.on{background:#EBF0FF}
-.ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.li{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;
+  border-radius:0;transition:background .12s var(--motion-standard);user-select:none
+}
+.li:active{background:var(--md-surface-container-high)}
+.li.on{background:var(--md-secondary-container)}
+.ico{
+  width:40px;height:40px;border-radius:var(--shape-md);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px
+}
 .li-info{flex:1;min-width:0}
-.li-name{font-size:13px;font-weight:600;color:#1A2332;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.li-sub{font-size:11px;color:#90A4AE;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.li-arr{color:#D0D7E0;font-size:18px}
-.empty{padding:20px;text-align:center;color:#B0BEC5;font-size:13px}
+.li-name{font-size:14px;font-weight:500;color:var(--md-on-surface);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-d)}
+.li-sub{font-size:12px;color:var(--md-on-surface-variant);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li-arr{color:var(--md-outline);font-size:14px;flex-shrink:0}
+.empty{padding:32px;text-align:center;color:var(--md-on-surface-variant);font-size:14px;font-weight:400}
+
+/* ── Calculator Header (M3 Hero Surface) ── */
 .cc{display:none}
-.cc-head{padding:18px 18px 14px;color:#fff;position:relative}
-.cc-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.2);border:none;cursor:pointer;color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;font-family:inherit}
-.cc-row{display:flex;align-items:flex-start;gap:10px;padding-right:36px}
-.cc-ico{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.cc-name{font-size:16px;font-weight:700;line-height:1.3}
-.cc-abbr{font-size:11px;opacity:.75;margin-top:2px}
-.cc-desc{font-size:12px;opacity:.85;margin-top:9px;line-height:1.6}
-.cc-fml{display:inline-flex;align-items:center;background:rgba(255,255,255,.15);border-radius:16px;padding:3px 10px;font-size:11px;margin-top:7px;font-family:monospace}
-.cc-body{padding:16px 14px}
-.fld{margin-bottom:13px}
-.fld-lbl{font-size:10px;font-weight:700;color:#78909C;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
-.fld-row{display:flex;border:1.5px solid #DDE3EA;border-radius:9px;overflow:hidden;transition:border-color .2s}
-.fld-row:focus-within{border-color:#1565C0;box-shadow:0 0 0 3px rgba(21,101,192,.1)}
-.fld-row.err{border-color:#E53935;box-shadow:0 0 0 3px rgba(229,57,53,.1)}
-.inp{flex:1;border:none;outline:none;padding:10px 12px;font-size:15px;font-family:inherit;color:#1A2332;background:#fff;min-width:0}
-.usel{border:none;outline:none;background:#F5F7FA;padding:0 18px 0 8px;font-size:12px;font-weight:600;color:#607D8B;font-family:inherit;cursor:pointer;border-left:1.5px solid #DDE3EA;min-width:68px;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23999' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;background-color:#F5F7FA}
-.ubadge{background:#F5F7FA;padding:0 11px;font-size:11px;font-weight:600;color:#90A4AE;border-left:1.5px solid #DDE3EA;display:flex;align-items:center;white-space:nowrap;font-family:monospace}
-.sex-row{display:flex;gap:7px;margin-bottom:13px}
-.sx{flex:1;border:1.5px solid #DDE3EA;border-radius:9px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;color:#78909C;background:#fff;transition:all .15s;user-select:none}
-.sx.on{background:#EBF0FF;border-color:#1565C0;color:#1565C0}
-.btns{display:flex;gap:8px;margin-top:16px}
-.btn{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.3px;transition:all .2s;user-select:none}
-.btn-p{background:#1565C0;color:#fff;box-shadow:0 3px 8px rgba(21,101,192,.35)}
-.btn-p:active{background:#0D47A1;transform:scale(.98)}
-.btn-s{background:#fff;color:#1565C0;border:1.5px solid #1565C0}
-.btn-s:active{background:#EBF0FF}
-.res{margin-top:14px;border-radius:10px;overflow:hidden;display:none;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.res.show{display:block;animation:up .2s ease}
-@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.res-hd{padding:10px 14px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-.res-val{background:#fff;padding:12px 14px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.res-n{font-size:30px;font-weight:300;font-family:monospace;color:#1A2332}
-.res-u{font-size:13px;color:#90A4AE}
-.res-txt{background:#fff;padding:10px 14px;font-size:13px;line-height:1.7;color:#455A64;border-top:1px solid #F0F3F7}
-.res-ru{display:flex;align-items:center;gap:8px;padding:8px 14px;background:#F8FAFC;border-top:1px solid #F0F3F7}
-.res-ru-lbl{font-size:10px;font-weight:700;color:#90A4AE;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0}
-.res-ru-sel{border:1.5px solid #DDE3EA;border-radius:7px;padding:5px 22px 5px 8px;font-size:12px;font-weight:600;font-family:inherit;color:#1565C0;background:#fff;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%231565C0' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 5px center;outline:none}
-.res-refs{padding:8px 14px 12px}
-.refs-lbl{font-size:10px;font-weight:700;color:#B0BEC5;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-.ref-tags{display:flex;flex-wrap:wrap;gap:4px}
-.rtag{padding:2px 8px;border-radius:5px;font-size:11px;font-family:monospace;color:#546E7A}
-.rn{background:#F1F8E9}.rn .res-hd{background:#388E3C}.rn .res-refs{background:#E8F5E9}.rn .rtag{background:#C8E6C9}
-.rl{background:#E3F2FD}.rl .res-hd{background:#1565C0}.rl .res-refs{background:#BBDEFB}.rl .rtag{background:#90CAF9}
-.rh{background:#FFF5F5}.rh .res-hd{background:#C62828}.rh .res-refs{background:#FFEBEE}.rh .rtag{background:#FFCDD2}
-.rw{background:#FFFBF0}.rw .res-hd{background:#E65100}.rw .res-refs{background:#FFF3E0}.rw .rtag{background:#FFE0B2}
-.ri{background:#F0FAFA}.ri .res-hd{background:#00695C}.ri .res-refs{background:#E0F2F1}.ri .rtag{background:#B2DFDB}
-.cv-hd{padding:18px 18px 14px;color:#fff;position:relative}
-.cv-swap{width:38px;height:38px;border-radius:50%;background:#E3F2FD;border:none;cursor:pointer;color:#1565C0;font-size:20px;display:flex;align-items:center;justify-content:center;margin:6px auto;user-select:none}
-.cv-out{margin-top:10px;padding:12px 14px;background:#F0F8FF;border-radius:8px;border:1.5px solid #BBDEFB;font-size:14px;color:#1565C0;font-weight:600;font-family:monospace;min-height:44px;word-break:break-all}
+.cc-head{padding:24px 16px 20px;color:var(--md-on-primary);position:relative;overflow:hidden;background:var(--md-primary)}
+.cc-close{
+  position:absolute;top:12px;right:12px;z-index:10;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:none;cursor:pointer;color:#fff;
+  font-size:18px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font);transition:background .14s var(--motion-standard)
+}
+.cc-close:active{background:rgba(255,255,255,.28)}
+.cc-row{display:flex;align-items:flex-start;gap:14px;padding-right:40px;position:relative;z-index:1}
+.cc-ico{
+  width:48px;height:48px;border-radius:var(--shape-md);font-size:24px;
+  background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0
+}
+.cc-name{font-size:18px;font-weight:500;line-height:1.3;letter-spacing:0;font-family:var(--font-d)}
+.cc-abbr{font-size:11px;opacity:.85;margin-top:4px;letter-spacing:.3px;font-weight:500}
+.cc-desc{font-size:13px;opacity:.92;margin-top:12px;line-height:1.7;position:relative;z-index:1}
+.cc-fml{
+  display:inline-flex;align-items:center;background:rgba(255,255,255,.16);border-radius:var(--shape-sm);
+  padding:6px 12px;font-size:12px;margin-top:10px;font-family:var(--mono);letter-spacing:.2px;
+  position:relative;z-index:1
+}
+.cc-body{padding:18px 16px;background:var(--md-surface-container-low)}
+
+/* ── Form Fields (M3 Outlined Text Field) ── */
+.fld{margin-bottom:14px}
+.fld-lbl{
+  font-size:12px;font-weight:500;color:var(--md-on-surface-variant);
+  letter-spacing:.1px;display:block;margin-bottom:7px;font-family:var(--font-d)
+}
+.fld-row{
+  display:flex;border:1px solid var(--md-outline);border-radius:var(--shape-xs);
+  overflow:hidden;transition:all .18s var(--motion-standard);background:var(--md-surface-container-lowest)
+}
+.fld-row:focus-within{border:2px solid var(--md-primary)}
+.fld-row.err{border:2px solid var(--md-error)}
+.inp{
+  flex:1;border:none;outline:none;padding:13px 14px;font-size:15px;
+  font-family:var(--font);color:var(--md-on-surface);background:transparent;min-width:0;font-weight:400
+}
+.inp::placeholder{color:var(--md-outline)}
+.usel{
+  border:none;outline:none;background:var(--md-surface-container-high);padding:0 26px 0 12px;
+  font-size:12px;font-weight:600;color:var(--md-primary);font-family:var(--font-d);cursor:pointer;
+  border-left:1px solid var(--md-outline-variant);min-width:78px;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23006A60' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 6px center;background-color:var(--md-surface-container-high)
+}
+.ubadge{
+  background:var(--md-surface-container-high);padding:0 13px;font-size:12px;font-weight:600;color:var(--md-on-surface-variant);
+  border-left:1px solid var(--md-outline-variant);display:flex;align-items:center;
+  white-space:nowrap;font-family:var(--mono)
+}
+
+/* ── Sex Toggle (M3 Segmented Button) ── */
+.sex-row{display:flex;gap:0;margin-bottom:14px;border:1px solid var(--md-outline);border-radius:var(--shape-full);overflow:hidden}
+.sx{
+  flex:1;padding:10px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;
+  color:var(--md-on-surface-variant);background:transparent;transition:all .14s var(--motion-standard);
+  user-select:none;font-family:var(--font-d);border-right:1px solid var(--md-outline)
+}
+.sx:last-child{border-right:none}
+.sx:active{background:var(--md-surface-container-high)}
+.sx.on{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+
+/* ── Buttons (M3 Filled + Outlined) ── */
+.btns{display:flex;gap:10px;margin-top:20px}
+.btn{
+  padding:11px 24px;border-radius:var(--shape-full);font-size:14px;font-weight:600;
+  cursor:pointer;border:none;font-family:var(--font-d);
+  display:inline-flex;align-items:center;gap:8px;letter-spacing:.1px;
+  transition:all .16s var(--motion-standard);user-select:none
+}
+.btn-p{background:var(--md-primary);color:var(--md-on-primary);box-shadow:var(--md-elev1)}
+.btn-p:active{box-shadow:none;background:#005048}
+.btn-s{background:transparent;color:var(--md-primary);border:1px solid var(--md-outline)}
+.btn-s:active{background:var(--md-secondary-container)}
+
+/* ── Result Cards (M3 Tonal Surface) ── */
+.res{
+  margin-top:16px;border-radius:var(--shape-lg);overflow:hidden;
+  display:none;box-shadow:var(--md-elev1)
+}
+.res.show{display:block;animation:md-grow .28s var(--motion-emphasized)}
+@keyframes md-grow{from{opacity:0;transform:scaleY(.92) translateY(8px);transform-origin:top}to{opacity:1;transform:none}}
+.res-hd{
+  padding:12px 16px;font-size:11px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px;
+  font-family:var(--font-d)
+}
+.res-hd::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.res-val{padding:14px 16px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.res-n{font-size:34px;font-weight:400;font-family:var(--mono);letter-spacing:-.5px}
+.res-u{font-size:13px;font-weight:500;opacity:.75}
+.res-txt{padding:11px 16px;font-size:13px;line-height:1.75;opacity:.92}
+.res-ru{display:flex;align-items:center;gap:8px;padding:9px 16px;background:rgba(0,0,0,.04)}
+.res-ru-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;opacity:.7}
+.res-ru-sel{
+  border:1px solid currentColor;border-radius:var(--shape-xs);padding:5px 24px 5px 10px;opacity:.85;
+  font-size:12px;font-weight:600;font-family:var(--font-d);background:transparent;cursor:pointer;
+  -webkit-appearance:none;appearance:none;color:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23161D1B' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 6px center;outline:none
+}
+.res-refs{padding:11px 16px 14px;background:rgba(0,0,0,.025)}
+.refs-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;opacity:.65}
+.ref-tags{display:flex;flex-wrap:wrap;gap:6px}
+.rtag{padding:4px 11px;border-radius:var(--shape-xs);font-size:11px;font-family:var(--mono);font-weight:500}
+
+/* ── M3 Tonal Result Themes (using container/on-container pairs) ── */
+.rn{background:var(--md-surface-container-lowest)}
+.rn .res-hd{background:#2E7D32;color:#fff}.rn .res-hd::before{background:rgba(255,255,255,.7)}
+.rn .res-val,.rn .res-txt{color:#1B5E20}.rn .res-ru{color:#1B5E20}.rn .rtag{background:#C8E6C9;color:#1B5E20}
+
+.rl{background:var(--md-surface-container-lowest)}
+.rl .res-hd{background:var(--md-primary);color:#fff}.rl .res-hd::before{background:rgba(255,255,255,.7)}
+.rl .res-val,.rl .res-txt{color:var(--md-on-primary-container)}.rl .res-ru{color:var(--md-on-primary-container)}.rl .rtag{background:var(--md-primary-container);color:var(--md-on-primary-container)}
+
+.rh{background:var(--md-surface-container-lowest)}
+.rh .res-hd{background:var(--md-error);color:#fff}.rh .res-hd::before{background:rgba(255,255,255,.7)}
+.rh .res-val,.rh .res-txt{color:var(--md-on-error-container)}.rh .res-ru{color:var(--md-on-error-container)}.rh .rtag{background:var(--md-error-container);color:var(--md-on-error-container)}
+
+.rw{background:var(--md-surface-container-lowest)}
+.rw .res-hd{background:var(--md-warn);color:#fff}.rw .res-hd::before{background:rgba(255,255,255,.7)}
+.rw .res-val,.rw .res-txt{color:var(--md-on-warn-container)}.rw .res-ru{color:var(--md-on-warn-container)}.rw .rtag{background:var(--md-warn-container);color:var(--md-on-warn-container)}
+
+.ri{background:var(--md-surface-container-lowest)}
+.ri .res-hd{background:var(--md-tertiary);color:#fff}.ri .res-hd::before{background:rgba(255,255,255,.7)}
+.ri .res-val,.ri .res-txt{color:var(--md-on-tertiary-container)}.ri .res-ru{color:var(--md-on-tertiary-container)}.ri .rtag{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+
+/* ── Converter UI ── */
+.cv-hd{padding:24px 16px 20px;color:#fff;position:relative;overflow:hidden;background:var(--md-tertiary)}
+.cv-swap{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--md-surface-container-highest);
+  border:none;cursor:pointer;color:var(--md-primary);font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  margin:10px auto;box-shadow:var(--md-elev2);
+  transition:transform .24s var(--motion-emphasized);user-select:none
+}
+.cv-swap:active{transform:rotate(180deg) scale(.9)}
+.cv-out{
+  margin-top:12px;padding:14px 16px;
+  background:var(--md-primary-container);
+  border-radius:var(--shape-md);
+  font-size:17px;font-weight:600;color:var(--md-on-primary-container);
+  font-family:var(--mono);min-height:48px;word-break:break-all;letter-spacing:.1px
+}
+
+/* ── Biochem badge ── */
+.bcat{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--md-tertiary-container);
+  border-radius:var(--shape-full);
+  padding:3px 10px;font-size:11px;font-weight:600;color:var(--md-on-tertiary-container);
+  letter-spacing:.2px;margin-top:6px
+}
 </style>
 </head>
 <body>
 <div class="bar">
   <div class="bar-ico">&#9877;&#65039;</div>
   <span class="bar-title">MedCalc Pro</span>
-  <span class="bar-tag">Clinical Calculator</span>
+  <span class="bar-tag">125 Calcs · 61 Converters</span>
 </div>
 <div class="tabs">
   <div class="tab on" id="t-med" onclick="switchTab('med')">&#128302; Medical Tests</div>
@@ -100,7 +324,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="panel on" id="p-med">
   <div class="card">
     <div class="sh">
-      <div class="sh-lbl">Calculators (56)</div>
+      <div class="sh-lbl">Calculators (125)</div>
       <div class="sh-box">&#128269; <input id="med-q" placeholder="Search tests..." oninput="renderMed()"></div>
       <div class="chips" id="chips">
         <span class="chip on" onclick="setCat('all',this)">All</span>
@@ -116,6 +340,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <span class="chip" onclick="setCat('gi',this)">GI</span>
         <span class="chip" onclick="setCat('infect',this)">Infection</span>
         <span class="chip" onclick="setCat('ortho',this)">Ortho</span>
+        <span class="chip" onclick="setCat('biochem',this)">🧪 Biochem</span>
+        <span class="chip" onclick="setCat('blood',this)">🩸 Blood Tests</span>
       </div>
     </div>
     <div class="lst" id="med-list"></div>
@@ -125,7 +351,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="panel" id="p-conv">
   <div class="card">
     <div class="sh">
-      <div class="sh-lbl">Unit Categories (30)</div>
+      <div class="sh-lbl">Unit Categories (61)</div>
       <div class="sh-box">&#128269; <input id="conv-q" placeholder="Search converters..." oninput="renderConv()"></div>
     </div>
     <div class="lst" id="conv-list"></div>
@@ -174,7 +400,9 @@ var CCAT={
   obs:{em:'\u{1F930}',bg:'#FBE9E7',fg:'#BF360C',gr:'linear-gradient(135deg,#BF360C,#D84315)'},
   gi:{em:'\u{1FAD9}',bg:'#FFFDE7',fg:'#F57F17',gr:'linear-gradient(135deg,#E65100,#F57C00)'},
   infect:{em:'\u{1F9AB}',bg:'#E8F5E9',fg:'#1B5E20',gr:'linear-gradient(135deg,#1B5E20,#2E7D32)'},
-  ortho:{em:'\u{1F9B4}',bg:'#E8EAF6',fg:'#283593',gr:'linear-gradient(135deg,#283593,#3949AB)'}
+  ortho:{em:'\u{1F9B4}',bg:'#E8EAF6',fg:'#283593',gr:'linear-gradient(135deg,#283593,#3949AB)'},
+  biochem:{em:'\u{1F9EA}',bg:'#ECFDF5',fg:'#065F46',gr:'linear-gradient(135deg,#065F46,#0D9488)'},
+  blood:{em:'\u{1FA78}',bg:'#FFEBEE',fg:'#B71C1C',gr:'linear-gradient(135deg,#B71C1C,#D32F2F)'}
 };
 
 // TESTS
@@ -670,7 +898,730 @@ var T=[
     {i:'msu',l:'MSU crystals on microscopy (6=Yes)',p:'0/6',u:['pts'],cv:function(v){return v}}],
  calc:function(v){return Math.round(v.ankle+v.mtp+v.erythema+v.tender+v.male+v.hx+v.ua+v.msu)},
  ru:'points',refs:['<4:Unlikely','4-7:Indeterminate','\u22658:Gout likely'],
- interp:function(r){var v=+r;if(v<4)return rn('Unlikely','Score '+v+' \u2014 Consider septic arthritis, pseudogout.');if(v<8)return rw('Indeterminate','Score '+v+' \u2014 Joint aspiration for MSU crystals.');return rh('Gout Likely','Score '+v+' \u2014 Anti-inflammatory treatment.')}}
+ interp:function(r){var v=+r;if(v<4)return rn('Unlikely','Score '+v+' \u2014 Consider septic arthritis, pseudogout.');if(v<8)return rw('Indeterminate','Score '+v+' \u2014 Joint aspiration for MSU crystals.');return rh('Gout Likely','Score '+v+' \u2014 Anti-inflammatory treatment.')}},
+
+// ── NEW TESTS ────────────────────────────────────────────
+{id:'ldl',n:'LDL (Friedewald)',a:'LDL Estimation',c:'cardiac',d:'Valid when TG<400 mg/dL.',f:'LDL=TC\u2212HDL\u2212(TG\u00f75)',
+ F:[{i:'tc',l:'Total Cholesterol',p:'e.g. 200',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.chol(v,u)}},
+    {i:'hdl',l:'HDL Cholesterol',p:'e.g. 55',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.chol(v,u)}},
+    {i:'tg',l:'Triglycerides',p:'e.g. 150',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.tg(v,u)}}],
+ calc:function(v){return(v.tc-v.hdl-(v.tg/5)).toFixed(1)},
+ ru:'mg/dL',ruU:['mg/dL','mmol/L'],ruF:function(v,i){return i?+(v/38.67).toFixed(2):+v},
+ refs:['Optimal:<100','Near optimal:100-129','Borderline:130-159','High:160-189','Very high:\u2265190'],
+ interp:function(r){var v=+r;if(v<100)return rn('Optimal (<100)','LDL '+v+' mg/dL.');if(v<130)return rn('Near Optimal','LDL '+v+' mg/dL.');if(v<160)return rw('Borderline High','LDL '+v+' \u2014 Lifestyle intervention.');if(v<190)return rh('High','LDL '+v+' \u2014 Statin therapy consideration.');return rh('Very High (\u2265190)','LDL '+v+' \u2014 Statin therapy indicated.')}},
+
+{id:'pcv',n:'Packed Cell Volume',a:'Hematocrit Correction',c:'hema',d:'Corrects PCV for plasma trapping (factor 0.96).',f:'True Hct = PCV \u00d7 0.96',
+ F:[{i:'pcv',l:'PCV (Spun Hematocrit)',p:'e.g. 45',u:['%'],cv:function(v){return v}}],
+ calc:function(v){return(v.pcv*0.96).toFixed(1)},
+ ru:'% (true Hct)',refs:['Male normal:41-53%','Female normal:36-46%','Polycythemia:>52% M / >48% F'],
+ interp:function(r){var v=+r;if(v<36)return rl('Low','True Hct '+v+'% — Investigate for anaemia.');if(v<=52)return rn('Normal','True Hct '+v+'%.');return rh('Elevated','True Hct '+v+'% — Polycythemia workup.')}},
+
+{id:'map',n:'Mean Arterial Pressure',a:'MAP',c:'cardiac',d:'MAP \u226565 mmHg required for end-organ perfusion.',f:'DBP + (SBP\u2212DBP)\u00f73',
+ F:[{i:'sbp',l:'Systolic BP',p:'e.g. 120',u:['mmHg','kPa'],cv:function(v,u){return UC.pr(v,u)}},
+    {i:'dbp',l:'Diastolic BP',p:'e.g. 80',u:['mmHg','kPa'],cv:function(v,u){return UC.pr(v,u)}}],
+ calc:function(v){return(v.dbp+(v.sbp-v.dbp)/3).toFixed(0)},
+ ru:'mmHg',ruU:['mmHg','kPa'],ruF:function(v,i){return i?+(v/7.5006).toFixed(2):+v},
+ refs:['Critical:<65','Hypotension:65-70','Normal:70-100','Hypertension:>100'],
+ interp:function(r){var v=+r;if(v<65)return rh('Critical (<65)','MAP '+v+' — Immediate resuscitation. Vasopressors.');if(v<70)return rw('Low-Normal','MAP '+v+' — Monitor closely.');if(v<=100)return rn('Normal','MAP '+v+' mmHg.');return rh('Hypertensive','MAP '+v+' — Antihypertensive review.')}},
+
+{id:'phenytoin',n:'Phenytoin Correction',a:'Adjusted Phenytoin Level',c:'neuro',d:'Adjusts total phenytoin for hypoalbuminemia.',f:'Corrected=(Measured)\u00f7(0.2\u00d7Albumin+0.1)',
+ F:[{i:'phen',l:'Measured Phenytoin',p:'e.g. 8',u:['mcg/mL'],cv:function(v){return v}},
+    {i:'alb',l:'Albumin',p:'e.g. 2.5',u:['g/dL','g/L'],cv:function(v,u){return UC.alb(v,u)}}],
+ calc:function(v){return(v.phen/(0.2*v.alb+0.1)).toFixed(1)},
+ ru:'mcg/mL',refs:['Therapeutic:10-20 mcg/mL','Toxic:>20','Sub-therapeutic:<10'],
+ interp:function(r){var v=+r;if(v<10)return rl('Sub-Therapeutic','Corrected '+v+' — Dose review.');if(v<=20)return rn('Therapeutic','Corrected '+v+' mcg/mL.');return rh('Toxic Range','Corrected '+v+' — Risk of nystagmus/ataxia.')}},
+
+{id:'pedi_wt',n:'Paediatric Weight Estimate',a:'Age-Based Weight',c:'meta',d:'Estimates weight for paediatric drug dosing when scale unavailable.',f:'1-12mo:(Age_mo+9)/2  1-5yr:2\u00d7(Age+5)  6-12yr:4\u00d7Age',
+ F:[{i:'age',l:'Age',p:'e.g. 4',u:['years','months'],cv:function(v,u){return u==='months'?-v:v}}],
+ rawCalc:1,
+ calc:function(v){var raw=v.age;var isMonths=raw<0;var age=Math.abs(raw);var wt;
+   if(isMonths){wt=age<=12?(age+9)/2:2*(age/12+5)}
+   else{wt=age<1?(age*12+9)/2:age<=5?2*(age+5):4*age}
+   return Math.max(3,wt).toFixed(1)},
+ ru:'kg',
+ interp:function(r,v){
+   var raw=v.age;var isMonths=raw<0;var age=Math.abs(raw);
+   return ri('Estimated Weight',r+' kg (based on age '+age+' '+(isMonths?'months':'years')+'). Use actual measured weight when available.')}},
+
+{id:'ckd_stage',n:'CKD Staging (eGFR+ACR)',a:'KDIGO 2012',c:'renal',d:'Combines GFR and albuminuria categories for CKD prognosis.',f:'G1-G5 \u00d7 A1-A3 heatmap risk',
+ F:[{i:'gfr',l:'eGFR',p:'e.g. 55',u:['mL/min/1.73m\u00b2'],cv:function(v){return v}},
+    {i:'acr',l:'Urine Albumin:Creatinine Ratio',p:'e.g. 35',u:['mg/g'],cv:function(v){return v}}],
+ calc:function(v){var g=+v.gfr>=90?1:+v.gfr>=60?2:+v.gfr>=45?'3a':+v.gfr>=30?'3b':+v.gfr>=15?4:5;var a=+v.acr<30?'A1':+v.acr<300?'A2':'A3';return 'G'+g+'-'+a},
+ ru:'Stage',refs:['G1-G2+A1:Low risk','A2 or G3:Moderate','G3b+/A3:High-Very high'],
+ interp:function(r){var g=parseInt(r.match(/G(\d+)/)[1]),a=r.split('-')[1];
+   var risk=g<=2&&a==='A1'?rn:g<=3&&a!=='A3'?rw:rh;
+   return risk('Stage '+r,'GFR category G'+g+', Albuminuria '+a+'. '+(g>=4?'Nephrology referral mandatory.':a==='A3'?'Nephrology evaluation.':'Monitor renal function.'))}},
+
+{id:'opioid_conv',n:'Opioid Conversion (Oral MME)',a:'Morphine Milligram Equivalents',c:'meta',d:'Converts oral opioid doses to oral MME for comparison and monitoring.',f:'Dose \u00d7 conversion factor',
+ F:[{i:'dose',l:'Opioid Dose',p:'e.g. 10',u:['mg/day'],cv:function(v){return v}}],
+ rawCalc:1,
+ calc:function(v){return v.dose},
+ ru:'MME/day',
+ interp:function(r){var v=+r;return ri('Oral MME Reference',
+   'Common MME factors: Morphine=1, Oxycodone=1.5, Hydrocodone=1, Hydromorphone=4, Codeine=0.15, Tramadol=0.1. '+
+   'High-dose threshold: \u226590 MME/day requires careful risk-benefit assessment.')}},
+
+{id:'gfr_diet',n:'Dietary Protein GFR Impact',a:'GFR-Based Protein Limit',c:'renal',d:'Estimates recommended protein intake based on CKD stage.',f:'0.6-0.8 g/kg/day (G3-G4), \u22650.8 (G1-G2)',
+ F:[{i:'wt',l:'Weight',p:'e.g. 70',u:['kg','lb'],cv:function(v,u){return UC.wt(v,u)}},
+    {i:'gfr',l:'eGFR',p:'e.g. 45',u:['mL/min/1.73m\u00b2'],cv:function(v){return v}}],
+ calc:function(v){var f=v.gfr>=60?0.8:v.gfr>=30?0.7:0.6;return(v.wt*f).toFixed(0)+' ('+f+' g/kg/day)'},
+ ru:'g protein/day',refs:['CKD G1-G2:\u22650.8 g/kg','CKD G3-G4:0.6-0.8 g/kg','Dialysis:1.2-1.5 g/kg'],
+ interp:function(r){return ri('Protein Target',r+'. Adjust for nutritional status and dialysis status.')}},
+
+{id:'wells_pe',n:'Wells PE Score',a:'Pulmonary Embolism Pre-test',c:'resp',d:'Clinical probability for PE. \u22655=high probability.',f:'Weighted criteria (0-12.5)',
+ F:[{i:'dvt_sx',l:'Clinical signs of DVT (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'alt_dx',l:'PE most likely diagnosis (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'hr',l:'HR>100 (1.5=Yes)',p:'0/1.5',u:['pts'],cv:function(v){return v}},
+    {i:'imm',l:'Immobilisation or surgery in 4wk (1.5=Yes)',p:'0/1.5',u:['pts'],cv:function(v){return v}},
+    {i:'dvt_hx',l:'Prior DVT/PE (1.5=Yes)',p:'0/1.5',u:['pts'],cv:function(v){return v}},
+    {i:'hemo',l:'Haemoptysis (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'malig',l:'Active malignancy (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return(+v.dvt_sx+ +v.alt_dx+ +v.hr+ +v.imm+ +v.dvt_hx+ +v.hemo+ +v.malig).toFixed(1)},
+ ru:'points',refs:['<2:Low~3.4%','2-4:Moderate~27.8%','\u22655:High~78.4%'],
+ interp:function(r){var v=+r;if(v<2)return rn('Low Probability','Wells PE '+v+' — D-dimer if low pre-test.');if(v<5)return rw('Moderate Probability','Wells PE '+v+' — CT pulmonary angiography.');return rh('High Probability','Wells PE '+v+' — Immediate CTPA/anticoagulation.')}},
+
+{id:'caprini',n:'Caprini DVT Risk',a:'VTE Prophylaxis Assessment',c:'hema',d:'Predicts VTE risk in surgical patients. Higher scores require pharmacological prophylaxis.',f:'Sum of weighted risk factors',
+ F:[{i:'age',l:'Age: 0=<40, 1=41-60, 2=61-74, 3=\u226575',p:'0/1/2/3',u:['pts'],cv:function(v){return v}},
+    {i:'surgery',l:'Surgery type: 0=Minor, 1=Major<45min, 2=Major>45min, 3=Major lower limb',p:'0/1/2/3',u:['pts'],cv:function(v){return v}},
+    {i:'history',l:'Prior DVT/PE (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'cancer',l:'Active malignancy (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'immob',l:'Immobility / bedrest >72h (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'other',l:'Other risk factors sum',p:'e.g. 2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.age+ +v.surgery+ +v.history+ +v.cancer+ +v.immob+ +v.other)},
+ ru:'points',refs:['0-1:Very low (<0.5%)','2:Low~1.5%','3-4:Moderate~3%','\u22655:High>6%'],
+ interp:function(r){var v=+r;if(v<=1)return rn('Very Low','Caprini '+v+' — Early ambulation only.');if(v===2)return rn('Low','Caprini '+v+' — Pneumatic compression.');if(v<=4)return rw('Moderate','Caprini '+v+' — LMWH or pneumatic compression.');return rh('High Risk','Caprini '+v+' — LMWH + compression. Extended prophylaxis.')}},
+
+{id:'apri',n:'APRI Score',a:'AST-to-Platelet Ratio Index',c:'liver',d:'Non-invasive marker of hepatic fibrosis. APRI >1.5 suggests cirrhosis.',f:'(AST/ULN) \u00f7 Platelets(\u00d710\u2079/L) \u00d7 100',
+ F:[{i:'ast',l:'AST',p:'e.g. 60',u:['U/L'],cv:function(v){return v}},
+    {i:'uln',l:'AST Upper Limit of Normal (ULN)',p:'e.g. 40',u:['U/L'],cv:function(v){return v}},
+    {i:'plt',l:'Platelets',p:'e.g. 150',u:['\u00d710\u2079/L','\u00d710\u00b3/\u00b5L'],cv:function(v){return v}}],
+ calc:function(v){return((v.ast/v.uln)/v.plt*100).toFixed(2)},
+ ru:'',refs:['<0.5:Fibrosis unlikely','0.5-1.5:Indeterminate','>1.5:Cirrhosis likely'],
+ interp:function(r){var v=+r;if(v<0.5)return rn('Fibrosis Unlikely','APRI '+v+' \u2014 Low probability of significant fibrosis.');if(v<=1.5)return rw('Indeterminate','APRI '+v+' \u2014 Liver biopsy or elastography advised.');return rh('Cirrhosis Likely','APRI '+v+' \u2014 High probability of cirrhosis. Hepatology referral.')}},
+
+{id:'fib4',n:'FIB-4 Index',a:'Liver Fibrosis Assessment',c:'liver',d:'Non-invasive marker for advanced fibrosis. Validated in NAFLD and HCV.',f:'Age \u00d7 AST \u00f7 (Platelets \u00d7 \u221aALT)',
+ F:[{i:'age',l:'Age',p:'e.g. 50',u:['years'],cv:function(v){return v}},
+    {i:'ast',l:'AST',p:'e.g. 55',u:['U/L'],cv:function(v){return v}},
+    {i:'alt',l:'ALT',p:'e.g. 70',u:['U/L'],cv:function(v){return v}},
+    {i:'plt',l:'Platelets',p:'e.g. 130',u:['\u00d710\u2079/L'],cv:function(v){return v}}],
+ calc:function(v){return((v.age*v.ast)/(v.plt*Math.sqrt(v.alt))).toFixed(2)},
+ ru:'',refs:['<1.30:Low (F0-F1)','1.30-2.67:Indeterminate','>2.67:High (F3-F4)'],
+ interp:function(r){var v=+r;if(v<1.3)return rn('Low Fibrosis Risk','FIB-4 '+v+' \u2014 Advanced fibrosis unlikely. Reassess in 1-2 yr.');if(v<=2.67)return rw('Indeterminate','FIB-4 '+v+' \u2014 Elastography or biopsy recommended.');return rh('High Fibrosis Risk','FIB-4 '+v+' \u2014 Advanced fibrosis likely. Hepatology referral.')}},
+
+{id:'sofa',n:'SOFA Score',a:'Sequential Organ Failure Assessment',c:'infect',d:'Predicts ICU mortality. Score \u22652 per organ system = organ failure.',f:'Respiratory + Coagulation + Liver + CVS + CNS + Renal',
+ F:[{i:'pf',l:'P/F Ratio: 0=\u2265400, 1=<400, 2=<300, 3=<200+vent, 4=<100+vent',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'plt',l:'Platelets: 0=\u2265150, 1=<150, 2=<100, 3=<50, 4=<20 (\u00d710\u2079/L)',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'bili',l:'Bilirubin: 0=<1.2, 1=1.2-1.9, 2=2-5.9, 3=6-11.9, 4=\u226512 mg/dL',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'cvs',l:'CVS: 0=MAP\u226570, 1=MAP<70, 2=Dopa\u22645, 3=Dopa>5/Epi\u22640.1, 4=Dopa>15/Epi>0.1',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'gcs',l:'GCS: 0=15, 1=13-14, 2=10-12, 3=6-9, 4=<6',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'cr',l:'Creatinine: 0=<1.2, 1=1.2-1.9, 2=2-3.4, 3=3.5-4.9, 4=\u22655 mg/dL',p:'0-4',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.pf+ +v.plt+ +v.bili+ +v.cvs+ +v.gcs+ +v.cr)},
+ ru:'points',refs:['0-6:~<10% mortality','7-9:~15-20%','10-12:~40-50%','>12:>50%'],
+ interp:function(r){var v=+r;if(v<=6)return rn('Low','SOFA '+v+' \u2014 Mortality ~<10%.');if(v<=9)return rw('Moderate','SOFA '+v+' \u2014 Mortality ~15-20%. ICU monitoring.');if(v<=12)return rh('High','SOFA '+v+' \u2014 Mortality ~40-50%. Close ICU care.');return rh('Critical','SOFA '+v+' \u2014 Mortality >50%. Goals of care discussion.')}},
+
+{id:'qsofa',n:'qSOFA (Sepsis-3)',a:'Quick SOFA Bedside Score',c:'infect',d:'Rapid bedside sepsis screen. Score \u22652 = high risk of poor outcome.',f:'RR\u226522 + Altered mentation + SBP\u2264100',
+ F:[{i:'rr',l:'RR \u2265 22/min (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ams',l:'Altered Mental Status / GCS<15 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sbp',l:'SBP \u2264 100 mmHg (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.rr+ +v.ams+ +v.sbp)},
+ ru:'points',refs:['0-1:Low risk','\u22652:High risk \u2014 assess for organ dysfunction'],
+ interp:function(r){var v=+r;if(v<2)return rn('Low Risk','qSOFA '+v+' \u2014 Low probability of poor sepsis outcome.');return rh('High Risk (\u22652)','qSOFA '+v+' \u2014 Assess for organ dysfunction. Blood cultures. Full SOFA.')}},
+
+{id:'anion_gap',n:'Anion Gap',a:'Serum Anion Gap + Correction',c:'meta',d:'AG = Na \u2212 (Cl + HCO\u2083). Corrected AG accounts for hypoalbuminaemia. Gap >12 suggests MUDPILES.',f:'Na \u2212 (Cl + HCO\u2083)',
+ F:[{i:'na',l:'Sodium',p:'e.g. 140',u:['mEq/L'],cv:function(v){return v}},
+    {i:'cl',l:'Chloride',p:'e.g. 100',u:['mEq/L'],cv:function(v){return v}},
+    {i:'hco3',l:'Bicarbonate (HCO\u2083)',p:'e.g. 24',u:['mEq/L'],cv:function(v){return v}},
+    {i:'alb',l:'Albumin',p:'e.g. 4.0',u:['g/dL'],cv:function(v){return v}}],
+ calc:function(v){var ag=v.na-(v.cl+v.hco3);var corrAG=ag+2.5*(4.0-v.alb);return ag.toFixed(0)+'/'+corrAG.toFixed(1)},
+ ru:'mEq/L',
+ interp:function(r){var parts=r.split('/');var ag=+parts[0],cag=+parts[1];var s='AG='+ag+' / Corrected AG='+cag+' mEq/L. ';if(cag<=12)return rn('Normal AG',s+'Non-AG acidosis \u2014 HCO\u2083 loss (diarrhoea, RTA).');return rh('High Anion Gap',s+'MUDPILES: Methanol, Uraemia, DKA, Propylene glycol, INH/Iron, Lactic acidosis, Ethylene glycol, Salicylates.')}},
+
+{id:'ada_dm',n:'Diabetes Diagnostic Criteria',a:'ADA 2023 Thresholds',c:'endo',d:'ADA 2023. Diagnosis requires \u22652 abnormal tests on separate days (unless unequivocal hyperglycaemia).',f:'FPG\u2265126 or HbA1c\u22656.5%',
+ F:[{i:'fpg',l:'Fasting Plasma Glucose',p:'e.g. 115',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.glu(v,u)}},
+    {i:'hba1c',l:'HbA1c',p:'e.g. 6.2',u:['%'],cv:function(v){return v}}],
+ calc:function(v){return v.fpg+','+v.hba1c},
+ ru:'',
+ interp:function(r){var p=r.split(',');var fpg=+p[0],hba1=+p[1];var dFpg=fpg>=126,pFpg=fpg>=100&&fpg<126,dHba1=hba1>=6.5,pHba1=hba1>=5.7&&hba1<6.5;if(dFpg||dHba1)return rh('Consistent with Diabetes','FPG '+fpg+' mg/dL, HbA1c '+hba1+'%. Confirm with repeat test.');if(pFpg||pHba1)return rw('Prediabetes','FPG '+fpg+' mg/dL, HbA1c '+hba1+'%. Lifestyle intervention.');return rn('Normal','FPG '+fpg+' mg/dL, HbA1c '+hba1+'%. Reassess in 3 years.')}},
+
+{id:'nihss',n:'NIH Stroke Scale (6-domain)',a:'NIHSS Estimate',c:'neuro',d:'Full NIHSS requires bedside assessment. Estimates severity from 6 key domains (0-17).',f:'Sum of 6 key domains',
+ F:[{i:'loc',l:'LOC: 0=Alert, 1=Drowsy, 2=Obtunded, 3=Coma',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'gaze',l:'Gaze: 0=Normal, 1=Partial palsy, 2=Forced deviation',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'vis',l:'Visual: 0=None, 1=Partial hemianopia, 2=Complete, 3=Bilateral',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'motor',l:'Motor arm: 0=Normal, 1=Drift, 2=Effort, 3=No effort, 4=No movement',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'speech',l:'Aphasia: 0=Normal, 1=Mild-Mod, 2=Severe, 3=Mute',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'sens',l:'Sensory: 0=Normal, 1=Mild-Mod, 2=Severe',p:'0-2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.loc+ +v.gaze+ +v.vis+ +v.motor+ +v.speech+ +v.sens)},
+ ru:'points',refs:['0:No deficit','1-4:Minor','5-15:Moderate','16-20:Mod-Severe','21+:Severe'],
+ interp:function(r){var v=+r;if(v===0)return rn('No Deficit','NIHSS 0.');if(v<=4)return rl('Minor Stroke','NIHSS '+v+' \u2014 Thrombolysis decision individualized.');if(v<=15)return rw('Moderate Stroke','NIHSS '+v+' \u2014 Assess for tPA/thrombectomy.');if(v<=20)return rh('Moderate-Severe','NIHSS '+v+' \u2014 Urgent thrombectomy evaluation.');return rh('Severe Stroke','NIHSS '+v+' \u2014 High disability risk. Goals of care.')}},
+
+{id:'psi_port',n:'Pneumonia Severity (PSI)',a:'PSI/PORT Score',c:'resp',d:'Risk stratification for CAP. Class I-II may be treated as outpatient.',f:'Age + comorbidity + exam + lab points',
+ F:[{i:'age',l:'Age',p:'e.g. 65',u:['years'],cv:function(v){return v}},
+    {i:'nh',l:'Nursing home resident (10=Yes)',p:'0/10',u:['pts'],cv:function(v){return v}},
+    {i:'coexist',l:'Comorbidities (neoplasm=30, liver=20, CHF=10, CVA=10, renal=10)',p:'e.g. 10',u:['pts'],cv:function(v){return v}},
+    {i:'exam',l:'Exam (AMS=20, RR\u226530=20, SBP<90=20, temp<35/\u226540=15, HR\u2265125=10)',p:'e.g. 20',u:['pts'],cv:function(v){return v}},
+    {i:'labs',l:'Labs (pH<7.35=30, BUN\u226530=20, Na<130=20, Glc\u2265250=10, Hct<30=10, PO\u2082<60=10, effusion=10)',p:'e.g. 20',u:['pts'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v,s){return Math.round(+v.age+(s=='F'?-10:0)+ +v.nh+ +v.coexist+ +v.exam+ +v.labs)},
+ ru:'points',refs:['\u226550:Class I-II','51-70:Class III','71-90:Class IV','>90:Class V'],
+ interp:function(r){var v=+r;if(v<=50)return rn('Class I-II','PSI '+v+' \u2014 Outpatient treatment appropriate.');if(v<=70)return rw('Class III','PSI '+v+' \u2014 Brief inpatient or observation.');if(v<=90)return rh('Class IV','PSI '+v+' \u2014 Inpatient admission recommended.');return rh('Class V','PSI '+v+' \u2014 High mortality risk. ICU consideration.')}},
+
+{id:'timi_ua',n:'TIMI Risk (UA/NSTEMI)',a:'TIMI Score for ACS',c:'cardiac',d:'Predicts 14-day adverse outcomes in UA/NSTEMI. Score \u22653 = high risk.',f:'7 equally-weighted risk factors (0-7)',
+ F:[{i:'age',l:'Age \u226565 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cad',l:'\u22653 CAD risk factors (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sten',l:'Prior coronary stenosis \u226550% (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'stchg',l:'ST deviation on ECG (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ang',l:'\u22652 anginal events in 24h (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'asa',l:'Aspirin use in past 7 days (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'mkr',l:'Elevated cardiac markers (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.age+ +v.cad+ +v.sten+ +v.stchg+ +v.ang+ +v.asa+ +v.mkr)},
+ ru:'points',refs:['0-2:Low (5%)','3-4:Intermediate (13%)','5-7:High (26-41%)'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low Risk','TIMI '+v+' \u2014 ~5% adverse events. Early discharge pathway.');if(v<=4)return rw('Intermediate Risk','TIMI '+v+' \u2014 ~13%. Admit, anticoagulation, consider early invasive strategy.');return rh('High Risk','TIMI '+v+' \u2014 ~26-41%. Urgent cath lab. Dual antiplatelet + anticoagulation.')}},
+
+{id:'hashi',n:'Thyroid Autoantibody',a:'Anti-TPO + TSH Assessment',c:'endo',d:'Anti-TPO >35 IU/mL associated with autoimmune thyroid disease (Hashimoto, Graves).',f:'Anti-TPO + TSH clinical correlation',
+ F:[{i:'tpo',l:'Anti-TPO Antibodies',p:'e.g. 120',u:['IU/mL','U/mL'],cv:function(v){return v}},
+    {i:'tsh',l:'TSH',p:'e.g. 4.5',u:['mIU/L','\u00b5IU/mL'],cv:function(v){return v}}],
+ calc:function(v){return v.tpo+','+v.tsh},
+ ru:'',
+ interp:function(r){var p=+r.split(',')[0],t=+r.split(',')[1];var tshS=t<0.4?'Low TSH (possible Graves)':t>4.5?'High TSH (possible Hashimoto)':'Normal TSH';if(p<=35)return rn('Anti-TPO Normal','<35 IU/mL. '+tshS+'. Autoimmune disease less likely.');if(p<=200)return rw('Mildly Elevated',''+p+' IU/mL. '+tshS+'. Monitor thyroid function annually.');return rh('Markedly Elevated',''+p+' IU/mL. '+tshS+'. Consistent with autoimmune thyroiditis.')}}
+,
+
+// ── BATCH 4 NEW TESTS ───────────────────────────────
+{id:'grace',n:'GRACE ACS Score',a:'Global Registry ACS',c:'cardiac',d:'Predicts in-hospital and 6-month mortality after ACS. Score >140 = high risk.',f:'Age + HR + SBP + Creatinine + Killip + arrest + ST + enzymes',
+ F:[{i:'age2',l:'Age pts: <40=0, 40-49=18, 50-59=36, 60-69=55, 70-79=73, ≥80=91',p:'0-91',u:['pts'],cv:function(v){return v}},
+    {i:'hr2',l:'HR pts: <50=0, 50-69=3, 70-89=9, 90-109=15, 110-149=24, 150-199=38, ≥200=46',p:'0-46',u:['pts'],cv:function(v){return v}},
+    {i:'sbp2',l:'SBP pts: <80=58, 80-99=53, 100-119=43, 120-139=34, 140-159=24, 160-199=10, ≥200=0',p:'0-58',u:['pts'],cv:function(v){return v}},
+    {i:'cr2',l:'Creatinine pts: 0-0.39=1, 0.4-0.79=4, 0.8-1.19=7, 1.2-1.59=10, 1.6-1.99=13, 2-3.99=21, ≥4=28',p:'1-28',u:['pts'],cv:function(v){return v}},
+    {i:'killip',l:'Killip class: I=0, II=20, III=39, IV=59',p:'0/20/39/59',u:['pts'],cv:function(v){return v}},
+    {i:'arrest',l:'Cardiac arrest at admission (39=Yes)',p:'0/39',u:['pts'],cv:function(v){return v}},
+    {i:'stdev',l:'ST deviation on ECG (28=Yes)',p:'0/28',u:['pts'],cv:function(v){return v}},
+    {i:'enzymes',l:'Elevated cardiac enzymes (14=Yes)',p:'0/14',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.age2+ +v.hr2+ +v.sbp2+ +v.cr2+ +v.killip+ +v.arrest+ +v.stdev+ +v.enzymes)},
+ ru:'points',refs:['<109:Low <1%','109-140:Intermediate 1-3%','140-372:High >3%'],
+ interp:function(r){var v=+r;if(v<109)return rn('Low Risk','GRACE '+v+' — In-hospital mortality <1%. Conservative pathway.');if(v<=140)return rw('Intermediate Risk','GRACE '+v+' — Mortality 1-3%. Invasive strategy within 24-72h.');return rh('High Risk','GRACE '+v+' — Mortality >3%. Urgent invasive strategy <24h.')}},
+
+{id:'rockall',n:'Rockall Score (GI Bleed)',a:'Upper GI Bleed Risk',c:'gi',d:'Post-endoscopy Rockall score. Total ≥5 = high rebleed and mortality risk.',f:'Age + shock + comorbidity + diagnosis + SRH',
+ F:[{i:'rage',l:'Age: <60=0, 60-79=1, ≥80=2',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'shock',l:'Shock: None=0, Pulse>100+SBP≥100=1, SBP<100=2',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'comrb',l:'Comorbidity: None=0, IHD/CCF=2, Renal/liver/malignancy=3',p:'0/2/3',u:['pts'],cv:function(v){return v}},
+    {i:'diag',l:'Diagnosis: MW tear/no lesion=0, Other=1, Malignancy=2',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'srh',l:'Signs of recent haemorrhage: None=0, Dark clot/fresh blood=2',p:'0/2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.rage+ +v.shock+ +v.comrb+ +v.diag+ +v.srh)},
+ ru:'points',refs:['0-2:Low (0.2% mortality)','3-4:Moderate (5-11%)','5-7:High (24-41%)','≥8:Very high (>40%)'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low Risk','Rockall '+v+' — Early discharge with outpatient follow-up.');if(v<=4)return rw('Moderate Risk','Rockall '+v+' — Inpatient observation, repeat endoscopy if rebleed.');if(v<=7)return rh('High Risk','Rockall '+v+' — Close monitoring, surgical standby.');return rh('Very High Risk','Rockall '+v+' — ICU care, early surgical/IR consultation.')}},
+
+{id:'glasgow_blatch',n:'Glasgow-Blatchford Score',a:'Pre-endoscopy UGI Bleed',c:'gi',d:'Identifies low-risk UGIB safe for outpatient management. Score 0 = very low risk.',f:'BUN + Hb + SBP + HR + comorbidities',
+ F:[{i:'bun2',l:'BUN pts (mmol/L): <6.5=0, 6.5-7.9=2, 8-9.9=3, 10-24.9=4, ≥25=6',p:'0-6',u:['pts'],cv:function(v){return v}},
+    {i:'hgb2',l:'Hgb pts: M(≥13=0,12-12.9=1,10-11.9=3,<10=6) F(≥12=0,10-11.9=1,<10=6)',p:'0-6',u:['pts'],cv:function(v){return v}},
+    {i:'sbp4',l:'SBP pts: ≥110=0, 100-109=1, 90-99=2, <90=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'hr4',l:'HR ≥100 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'melena',l:'Melaena (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'syncope',l:'Syncope (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'liver2',l:'Liver disease (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'hf2',l:'Heart failure (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.bun2+ +v.hgb2+ +v.sbp4+ +v.hr4+ +v.melena+ +v.syncope+ +v.liver2+ +v.hf2)},
+ ru:'points',refs:['0:Very low (outpatient safe)','1-2:Low','3-5:Moderate','≥6:High (intervention likely)'],
+ interp:function(r){var v=+r;if(v===0)return rn('Very Low Risk','Score 0 — Safe for outpatient management.');if(v<=2)return rl('Low Risk','Score '+v+' — Consider urgent outpatient endoscopy.');if(v<=5)return rw('Moderate Risk','Score '+v+' — Admit for endoscopy within 24h.');return rh('High Risk','Score '+v+' — Urgent endoscopy. High likelihood of intervention.')}},
+
+{id:'padua',n:'Padua Prediction Score',a:'Medical VTE Prophylaxis',c:'hema',d:'VTE risk in hospitalised medical patients. Score ≥4 = high risk, LMWH prophylaxis indicated.',f:'Weighted clinical risk factors',
+ F:[{i:'cancer2',l:'Active cancer (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'vte_hx',l:'Previous VTE (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'mob2',l:'Reduced mobility ≥3 days (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'thromboph',l:'Known thrombophilia (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'trauma2',l:'Recent trauma/surgery ≤1 month (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'age_pad',l:'Age ≥70 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hf_resp',l:'Heart/respiratory failure (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ami_cva',l:'Acute MI or stroke (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'infect2',l:'Acute infection/rheumatological (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'obese2',l:'Obesity BMI>30 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hormone2',l:'Ongoing hormonal treatment (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.cancer2+ +v.vte_hx+ +v.mob2+ +v.thromboph+ +v.trauma2+ +v.age_pad+ +v.hf_resp+ +v.ami_cva+ +v.infect2+ +v.obese2+ +v.hormone2)},
+ ru:'points',refs:['<4:Low VTE risk (~0.3%)','>=4:High VTE risk (~11%)'],
+ interp:function(r){var v=+r;if(v<4)return rn('Low VTE Risk','Padua '+v+' — ~0.3%. Early ambulation, no pharmacological prophylaxis routinely.');return rh('High VTE Risk','Padua '+v+' — ~11%. LMWH prophylaxis recommended. Assess bleeding risk first.')}},
+
+{id:'mrc_dysp',n:'MRC Dyspnoea Scale',a:'Breathlessness Grading',c:'resp',d:'Simple 5-grade scale for breathlessness severity in chronic respiratory disease (COPD/ILD).',f:'Grade 1-5 self-reported impact',
+ F:[{i:'mrc',l:'Grade: 1=Strenuous only, 2=Hurrying/hills, 3=Slower than peers on flat, 4=Stop after 100m, 5=Too breathless to leave house',p:'1-5',u:['grade'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(v.mrc)},
+ ru:'grade',refs:['1-2:Mild','3:Moderate','4-5:Severe — pulmonary rehab indicated'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Mild (Grade '+v+')','Breathless only on significant exertion. Optimise bronchodilators.');if(v===3)return rw('Moderate (Grade 3)','Slower than peers on flat. Pulmonary rehabilitation referral.');return rh('Severe (Grade '+v+')','Activities severely limited. Urgent pulmonary rehab. Assess LTOT eligibility.')}},
+
+{id:'audit_c',n:'AUDIT-C (Alcohol Screen)',a:'Brief Alcohol Misuse Screen',c:'meta',d:'3-item abbreviated AUDIT. Score ≥3 (F) or ≥4 (M) = positive screen for hazardous use.',f:'Frequency + quantity + binge frequency',
+ F:[{i:'ac1',l:'Q1 Drinking frequency: Never=0, Monthly=1, 2-4/mo=2, 2-3/wk=3, ≥4/wk=4',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'ac2',l:'Q2 Drinks on a typical day: 1-2=0, 3-4=1, 5-6=2, 7-9=3, ≥10=4',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'ac3',l:'Q3 Six+ drinks in one occasion: Never=0, <Monthly=1, Monthly=2, Weekly=3, Daily=4',p:'0-4',u:['pts'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v){return Math.round(+v.ac1+ +v.ac2+ +v.ac3)},
+ ru:'points',refs:['M: <4=Negative, ≥4=Positive','F: <3=Negative, ≥3=Positive'],
+ interp:function(r,s){var v=+r;var thr=s==='F'?3:4;if(v<thr)return rn('Negative Screen','AUDIT-C '+v+' — Below threshold for '+s+'. Low-risk drinking.');return rh('Positive Screen','AUDIT-C '+v+' — Above threshold for '+s+'. Full AUDIT or brief intervention recommended.')}},
+
+{id:'frs',n:'Framingham Risk Score',a:'10-Year CVD Risk',c:'cardiac',d:'Estimates 10-year risk of first cardiovascular event. Enter pre-calculated point totals from ATP III tables.',f:'Weighted sum → % risk table lookup',
+ F:[{i:'fr_pts',l:'Total Framingham points (from ATP III table)',p:'e.g. 9',u:['pts'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v){return v.fr_pts},
+ ru:'points',
+ interp:function(r,s){var v=+r;var pct,rsk;
+  if(s==='F'){pct=v<=8?'<1%':v<=12?'1-2%':v<=14?'3-5%':v<=17?'10-20%':'≥20%';rsk=v<=8?rn:v<=14?rw:rh}
+  else{pct=v<=0?'<1%':v<=6?'2-5%':v<=9?'5-10%':v<=13?'10-20%':v<=16?'20-30%':'≥30%';rsk=v<=6?rn:v<=9?rw:rh}
+  return rsk('10-Year CVD Risk: '+pct,'Framingham pts '+v+'. Statin therapy generally indicated if ≥10% risk and age ≥40.')}},
+
+{id:'bap65',n:'BAP-65 (COPD Exacerbation)',a:'COPD Severity Score',c:'resp',d:'Predicts in-hospital mortality in COPD exacerbation. Guides ICU admission decision.',f:'BUN + Altered mentation + Pulse≥109 + Age≥65',
+ F:[{i:'bap_bun',l:'BUN >25 mg/dL (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'bap_ms',l:'Altered mental status (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'bap_hr',l:'Pulse ≥109 bpm (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'bap_age',l:'Age ≥65 years (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.bap_bun+ +v.bap_ms+ +v.bap_hr+ +v.bap_age)},
+ ru:'points',refs:['0-1:Class I-II (low)','2:Class III (moderate)','3-4:Class IV-V (high)'],
+ interp:function(r){var v=+r;if(v<=1)return rn('Class I-II','BAP-65 '+v+' — Low risk. Standard ward management.');if(v===2)return rw('Class III','BAP-65 '+v+' — Moderate risk. Step-down unit. Close monitoring.');return rh('Class IV-V','BAP-65 '+v+' — High risk. ICU admission. Prepare for mechanical ventilation.')}},
+
+{id:'saps2',n:'SAPS II Score',a:'Simplified Acute Physiology Score',c:'infect',d:'Predicts ICU mortality from 15 physiological and chronic health variables.',f:'Weighted variables (0-163 pts)',
+ F:[{i:'s_age',l:'Age pts: <40=0, 40-59=7, 60-69=12, 70-74=15, 75-79=16, ≥80=18',p:'0-18',u:['pts'],cv:function(v){return v}},
+    {i:'s_hr',l:'HR pts: <40=11, 40-69=2, 70-119=0, 120-159=4, ≥160=7',p:'0-11',u:['pts'],cv:function(v){return v}},
+    {i:'s_sbp',l:'SBP pts: <70=13, 70-99=5, 100-199=0, ≥200=2',p:'0-13',u:['pts'],cv:function(v){return v}},
+    {i:'s_temp',l:'Temp pts: <39°C=0, ≥39°C=3',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'s_pf',l:'PaO₂/FiO₂ (ventilated): <100=11, 100-199=9, ≥200 or not vent=6',p:'6-11',u:['pts'],cv:function(v){return v}},
+    {i:'s_uo',l:'Urine output pts: <0.5L/day=11, 0.5-0.99=4, ≥1=0',p:'0-11',u:['pts'],cv:function(v){return v}},
+    {i:'s_bun',l:'BUN pts (mmol/L): <10=0, 10-29=6, ≥30=10',p:'0-10',u:['pts'],cv:function(v){return v}},
+    {i:'s_wbc',l:'WBC pts (×10⁹/L): <1=12, 1-19.9=0, ≥20=3',p:'0-12',u:['pts'],cv:function(v){return v}},
+    {i:'s_na',l:'Sodium pts: <125=5, 125-144=0, ≥145=1',p:'0-5',u:['pts'],cv:function(v){return v}},
+    {i:'s_k',l:'Potassium pts: <3=3, 3-4.9=0, ≥5=3',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'s_hco3',l:'HCO₃ pts: <15=6, 15-19=3, ≥20=0',p:'0-6',u:['pts'],cv:function(v){return v}},
+    {i:'s_bili',l:'Bilirubin pts (mg/dL): <4=0, 4-5.9=4, ≥6=9',p:'0-9',u:['pts'],cv:function(v){return v}},
+    {i:'s_gcs',l:'GCS pts: <6=26, 6-8=13, 9-10=7, 11-13=5, 14-15=0',p:'0-26',u:['pts'],cv:function(v){return v}},
+    {i:'s_adm',l:'Admission type: Scheduled surgical=0, Medical=6, Unscheduled surgical=8',p:'0/6/8',u:['pts'],cv:function(v){return v}},
+    {i:'s_chron',l:'Chronic disease: None=0, Metastatic cancer=9, Haematologic malignancy=10, AIDS=17',p:'0-17',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.s_age+ +v.s_hr+ +v.s_sbp+ +v.s_temp+ +v.s_pf+ +v.s_uo+ +v.s_bun+ +v.s_wbc+ +v.s_na+ +v.s_k+ +v.s_hco3+ +v.s_bili+ +v.s_gcs+ +v.s_adm+ +v.s_chron)},
+ ru:'points',refs:['<29:Low <10% mortality','29-40:Moderate ~25%','41-52:High ~40%','>52:Very high >50%'],
+ interp:function(r){var v=+r;var mort=Math.round(Math.exp(-7.7631+0.0737*v+0.9971*Math.log(v+1))/(1+Math.exp(-7.7631+0.0737*v+0.9971*Math.log(v+1)))*100);if(v<29)return rn('Low Risk','SAPS II '+v+' — Predicted mortality ~'+mort+'%.');if(v<=40)return rw('Moderate Risk','SAPS II '+v+' — Predicted mortality ~'+mort+'%.');if(v<=52)return rh('High Risk','SAPS II '+v+' — Predicted mortality ~'+mort+'%. ICU-level care.');return rh('Very High Risk','SAPS II '+v+' — Predicted mortality ~'+mort+'%. Goals of care discussion.')}},
+
+{id:'cci',n:'Charlson Comorbidity Index',a:'CCI Mortality Prediction',c:'meta',d:'Predicts 10-year survival based on comorbidity burden. Widely used for risk adjustment.',f:'Weighted comorbidity points + age adjustment',
+ F:[{i:'mi',l:'MI (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'chf2',l:'CHF (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'pvd2',l:'Peripheral vascular disease (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cva2',l:'CVA / TIA (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'dementia',l:'Dementia (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'copd2',l:'COPD (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ctd',l:'Connective tissue disease (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'pud',l:'Peptic ulcer disease (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'liver3',l:'Mild liver disease (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'dm3',l:'Diabetes without end-organ damage (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hemi',l:'Hemiplegia (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'renal2',l:'Moderate/severe renal disease (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'dm_eod',l:'Diabetes with end-organ damage (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'tumor',l:'Solid tumour (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'liver4',l:'Moderate/severe liver disease (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'metastatic',l:'Metastatic solid tumour (6=Yes)',p:'0/6',u:['pts'],cv:function(v){return v}},
+    {i:'aids2',l:'AIDS (6=Yes)',p:'0/6',u:['pts'],cv:function(v){return v}},
+    {i:'cci_age',l:'Age: <50=0, 50-59=1, 60-69=2, 70-79=3, ≥80=4',p:'0-4',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mi+ +v.chf2+ +v.pvd2+ +v.cva2+ +v.dementia+ +v.copd2+ +v.ctd+ +v.pud+ +v.liver3+ +v.dm3+ +v.hemi+ +v.renal2+ +v.dm_eod+ +v.tumor+ +v.liver4+ +v.metastatic+ +v.aids2+ +v.cci_age)},
+ ru:'points',refs:['0:~98% 10-yr survival','1-2:~90%','3-4:~77%','5-6:~52%','≥7:~21%'],
+ interp:function(r){var v=+r;var surv=v===0?'~98%':v<=2?'~90%':v<=4?'~77%':v<=6?'~52%':'~21%';if(v===0)return rn('Minimal Comorbidity','CCI 0 — 10-yr survival '+surv+'. Excellent prognosis.');if(v<=2)return rn('Low Comorbidity','CCI '+v+' — 10-yr survival '+surv+'.');if(v<=4)return rw('Moderate Comorbidity','CCI '+v+' — 10-yr survival '+surv+'.');return rh('High Comorbidity Burden','CCI '+v+' — 10-yr survival '+surv+'. Consider goals of care and risk-stratified management.')}}
+,
+
+// ── BATCH 5 ──────────────────────────────────────────────────────────────
+{id:'stop_bang',n:'STOP-BANG Score',a:'Obstructive Sleep Apnoea Screen',c:'resp',d:'OSA screening tool. Score \u22653 = high risk. Validated perioperative tool.',f:'S+T+O+P+B+A+N+G (8 binary items)',
+ F:[{i:'snore',l:'Snoring loudly (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'tired',l:'Tired/sleepy during day (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'obs',l:'Observed apnoea (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sbp_stop',l:'BP treated or >140/90 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'bmi_stop',l:'BMI >35 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'age_stop',l:'Age >50 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'neck',l:'Neck circumference >40 cm (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sex_stop',l:'Male sex (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.snore+ +v.tired+ +v.obs+ +v.sbp_stop+ +v.bmi_stop+ +v.age_stop+ +v.neck+ +v.sex_stop)},
+ ru:'points',refs:['0-2:Low risk','3-4:Intermediate risk','5-8:High risk'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low OSA Risk','STOP-BANG '+v+' \u2014 OSA unlikely. Standard perioperative care.');if(v<=4)return rw('Intermediate Risk','STOP-BANG '+v+' \u2014 Consider sleep study. Caution with sedatives/opioids.');return rh('High OSA Risk','STOP-BANG '+v+' \u2014 High probability OSA. Formal polysomnography. CPAP therapy.')}},
+
+{id:'ess',n:'Epworth Sleepiness Scale',a:'Daytime Sleepiness',c:'resp',d:'Measures daytime somnolence. Score >10 = excessive daytime sleepiness.',f:'Likelihood of dozing in 8 situations (0-3 each)',
+ F:[{i:'es1',l:'Sitting and reading (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es2',l:'Watching TV (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es3',l:'Sitting inactive in public (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es4',l:'Passenger in car for 1h+ (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es5',l:'Lying down to rest afternoon (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es6',l:'Sitting and talking to someone (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es7',l:'Sitting quietly after lunch (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'es8',l:'In a car, stopped in traffic (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.es1+ +v.es2+ +v.es3+ +v.es4+ +v.es5+ +v.es6+ +v.es7+ +v.es8)},
+ ru:'points',refs:['0-7:Normal','8-9:Average','10-15:Excessive sleepiness','16-24:Severely excessive'],
+ interp:function(r){var v=+r;if(v<=7)return rn('Normal','ESS '+v+' \u2014 No significant daytime sleepiness.');if(v<=9)return rl('Average','ESS '+v+' \u2014 Borderline. Lifestyle counselling.');if(v<=15)return rw('Excessive Daytime Sleepiness','ESS '+v+' \u2014 Investigate for OSA, narcolepsy, or sleep deprivation.');return rh('Severely Excessive','ESS '+v+' \u2014 Urgent sleep medicine referral. Driving safety assessment.')}},
+
+{id:'find_risc',n:'FINDRISC Score',a:'Finnish Diabetes Risk Score',c:'endo',d:'Estimates 10-year risk of developing type 2 diabetes. Score \u226515 = high risk.',f:'Age + BMI + waist + activity + diet + BP meds + prior glucose + family history',
+ F:[{i:'fr_age',l:'Age: <45=0, 45-54=2, 55-64=3, \u226565=4',p:'0-4',u:['pts'],cv:function(v){return v}},
+    {i:'fr_bmi',l:'BMI: <25=0, 25-30=1, >30=3',p:'0/1/3',u:['pts'],cv:function(v){return v}},
+    {i:'fr_waist',l:'Waist (M): <94=0, 94-102=3, >102=4; (F): <80=0, 80-88=3, >88=4',p:'0/3/4',u:['pts'],cv:function(v){return v}},
+    {i:'fr_act',l:'Physical activity <30 min/day (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'fr_veg',l:'Rarely eat vegetables/fruit (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'fr_bp',l:'BP meds taken (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'fr_gluc',l:'High blood glucose ever (5=Yes)',p:'0/5',u:['pts'],cv:function(v){return v}},
+    {i:'fr_fam',l:'Family history DM: 0=None, 3=2nd degree, 5=1st degree/sibling',p:'0/3/5',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.fr_age+ +v.fr_bmi+ +v.fr_waist+ +v.fr_act+ +v.fr_veg+ +v.fr_bp+ +v.fr_gluc+ +v.fr_fam)},
+ ru:'points',refs:['<7:Low (<1%)','7-11:Slightly elevated (~4%)','12-14:Moderate (~17%)','15-20:High (~33%)','>20:Very high (~50%)'],
+ interp:function(r){var v=+r;if(v<7)return rn('Low Risk','FINDRISC '+v+' \u2014 <1% 10-yr T2DM risk. General wellness advice.');if(v<=11)return rn('Slightly Elevated','FINDRISC '+v+' \u2014 ~4% risk. Lifestyle modification counselling.');if(v<=14)return rw('Moderate Risk','FINDRISC '+v+' \u2014 ~17% risk. Glucose screening. Structured lifestyle programme.');if(v<=20)return rh('High Risk','FINDRISC '+v+' \u2014 ~33% risk. Oral glucose tolerance test. Metformin consideration.');return rh('Very High Risk','FINDRISC '+v+' \u2014 ~50% risk. Diabetes prevention programme. Endocrine referral.')}},
+
+{id:'pirat',n:'Pittsburgh Sleep Quality Index',a:'PSQI Simplified',c:'resp',d:'Assesses sleep quality over the past month. Score >5 = poor sleep quality.',f:'7 components: subjective quality, latency, duration, efficiency, disturbance, medication, daytime dysfunction',
+ F:[{i:'psq1',l:'Subjective sleep quality: Very good=0, Fairly good=1, Fairly bad=2, Very bad=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq2',l:'Sleep latency component (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq3',l:'Sleep duration: >7h=0, 6-7h=1, 5-6h=2, <5h=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq4',l:'Sleep efficiency: \u226585%=0, 75-84%=1, 65-74%=2, <65%=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq5',l:'Sleep disturbances component (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq6',l:'Sleep medication use: None=0, <1/wk=1, 1-2/wk=2, \u22653/wk=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'psq7',l:'Daytime dysfunction: None=0, Mild=1, Moderate=2, Severe=3',p:'0-3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.psq1+ +v.psq2+ +v.psq3+ +v.psq4+ +v.psq5+ +v.psq6+ +v.psq7)},
+ ru:'points',refs:['0-5:Good sleep quality','6-10:Poor sleep quality (moderate)','11-21:Poor sleep quality (severe)'],
+ interp:function(r){var v=+r;if(v<=5)return rn('Good Sleep Quality','PSQI '+v+' \u2014 Normal sleep. Maintain sleep hygiene.');if(v<=10)return rw('Poor Sleep Quality','PSQI '+v+' \u2014 Sleep disorder likely. CBT-I or sleep medicine referral.');return rh('Severely Poor Sleep','PSQI '+v+' \u2014 Significant sleep impairment. Formal sleep evaluation. Consider polysomnography.')}},
+
+{id:'decubitus',n:'Braden Scale (Pressure Injury)',a:'Pressure Ulcer Risk',c:'meta',d:'Predicts pressure injury risk. Score \u226418 = at risk. Lower = higher risk.',f:'Sensory + Moisture + Activity + Mobility + Nutrition + Friction',
+ F:[{i:'bsens',l:'Sensory perception: 1=Completely limited, 2=Very limited, 3=Slightly limited, 4=No impairment',p:'1-4',u:['pts'],cv:function(v){return v}},
+    {i:'bmoist',l:'Moisture: 1=Constantly moist, 2=Very moist, 3=Occasionally moist, 4=Rarely moist',p:'1-4',u:['pts'],cv:function(v){return v}},
+    {i:'bact',l:'Activity: 1=Bedfast, 2=Chairfast, 3=Walks occasionally, 4=Walks frequently',p:'1-4',u:['pts'],cv:function(v){return v}},
+    {i:'bmob',l:'Mobility: 1=Completely immobile, 2=Very limited, 3=Slightly limited, 4=No limitation',p:'1-4',u:['pts'],cv:function(v){return v}},
+    {i:'bnut',l:'Nutrition: 1=Very poor, 2=Probably inadequate, 3=Adequate, 4=Excellent',p:'1-4',u:['pts'],cv:function(v){return v}},
+    {i:'bfric',l:'Friction/Shear: 1=Problem, 2=Potential problem, 3=No apparent problem',p:'1-3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.bsens+ +v.bmoist+ +v.bact+ +v.bmob+ +v.bnut+ +v.bfric)},
+ ru:'points',refs:['\u226418:At risk','15-18:Mild risk','13-14:Moderate risk','10-12:High risk','\u22649:Very high risk'],
+ interp:function(r){var v=+r;if(v>=19)return rn('No Significant Risk','Braden '+v+' \u2014 No special pressure injury prevention needed.');if(v>=15)return rw('Mild-Moderate Risk','Braden '+v+' \u2014 Repositioning every 2h, pressure-relieving mattress, nutrition optimisation.');if(v>=10)return rh('High Risk','Braden '+v+' \u2014 Specialised mattress, regular skin inspection, consider wound care referral.');return rh('Very High Risk','Braden '+v+' \u2014 Highest pressure injury risk. Intensive prevention protocol. Daily skin assessment.')}},
+
+{id:'morse_fall',n:'Morse Fall Scale',a:'Inpatient Fall Risk Assessment',c:'meta',d:'Predicts fall risk in hospitalised patients. Score \u226545 = high risk.',f:'6 items: history, secondary diagnosis, ambulatory aid, IV, gait, mental status',
+ F:[{i:'mf_hist',l:'Fall history in last 3 months (25=Yes)',p:'0/25',u:['pts'],cv:function(v){return v}},
+    {i:'mf_dx',l:'Secondary diagnosis (15=Yes)',p:'0/15',u:['pts'],cv:function(v){return v}},
+    {i:'mf_aid',l:'Ambulatory aid: None/bedrest/nurse=0, Crutch/cane/walker=15, Furniture=30',p:'0/15/30',u:['pts'],cv:function(v){return v}},
+    {i:'mf_iv',l:'IV therapy / heparin lock (20=Yes)',p:'0/20',u:['pts'],cv:function(v){return v}},
+    {i:'mf_gait',l:'Gait: Normal/bedrest=0, Weak=10, Impaired=20',p:'0/10/20',u:['pts'],cv:function(v){return v}},
+    {i:'mf_ms',l:'Mental status: Oriented=0, Forgets limitations=15',p:'0/15',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mf_hist+ +v.mf_dx+ +v.mf_aid+ +v.mf_iv+ +v.mf_gait+ +v.mf_ms)},
+ ru:'points',refs:['0-24:Low risk','25-44:Medium risk','\u226545:High risk'],
+ interp:function(r){var v=+r;if(v<25)return rn('Low Fall Risk','Morse '+v+' \u2014 Standard care. Good lighting and call bell.');if(v<45)return rw('Medium Fall Risk','Morse '+v+' \u2014 Fall prevention protocol. Bed alarm, non-slip footwear, orientation.');return rh('High Fall Risk','Morse '+v+' \u2014 High-risk protocol. Regular checks, bed low, rails up, physio referral.')}},
+
+{id:'nutric',n:'NUTRIC Score',a:'ICU Nutrition Risk (mNUTRIC)',c:'infect',d:'Identifies ICU patients benefiting from aggressive nutrition therapy. Modified version excludes IL-6.',f:'Age + APACHE II + SOFA + comorbidities + days pre-ICU',
+ F:[{i:'n_age',l:'Age: <50=0, 50-74=1, \u226575=2',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'n_apache',l:'APACHE II: <15=0, 15-19=1, 20-27=2, \u226528=3',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'n_sofa',l:'SOFA score: <6=0, 6-9=1, \u226510=2',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'n_comrb',l:'Number of comorbidities: 0-1=0, \u22652=1',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'n_days',l:'Days in hospital before ICU: 0=0, \u22651=1',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.n_age+ +v.n_apache+ +v.n_sofa+ +v.n_comrb+ +v.n_days)},
+ ru:'points',refs:['0-4:Low nutrition risk','5-9:High nutrition risk'],
+ interp:function(r){var v=+r;if(v<=4)return rn('Low Nutrition Risk','mNUTRIC '+v+' \u2014 Standard enteral nutrition. Reassess daily.');return rh('High Nutrition Risk','mNUTRIC '+v+' \u2014 Aggressive early nutrition therapy. Dietitian referral. Target 25-30 kcal/kg/day.')}},
+
+{id:'mna',n:'Mini Nutritional Assessment (MNA-SF)',a:'Malnutrition Screen',c:'meta',d:'Short-form MNA. Score 0-7: malnourished, 8-11: at risk, 12-14: normal.',f:'6-item rapid screen (MNA-SF)',
+ F:[{i:'mn1',l:'Food intake decline last 3 months: 0=Severe, 1=Moderate, 2=None',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'mn2',l:'Weight loss last 3 months: 0=\u22653kg, 1=Unknown, 2=1-3kg, 3=None',p:'0/1/2/3',u:['pts'],cv:function(v){return v}},
+    {i:'mn3',l:'Mobility: 0=Bed/chair, 1=Out of bed (no outdoors), 2=Goes outdoors',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'mn4',l:'Acute disease or psychological stress in past 3 months (0=Yes, 2=No)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'mn5',l:'Neuropsychological problems: 0=Severe dementia/depression, 1=Mild dementia, 2=None',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'mn6',l:'BMI or calf circumference: 0=<19 or CC<31cm, 1=19-21, 2=21-23, 3=\u226523 or CC\u226531cm',p:'0/1/2/3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mn1+ +v.mn2+ +v.mn3+ +v.mn4+ +v.mn5+ +v.mn6)},
+ ru:'points',refs:['0-7:Malnourished','8-11:At risk of malnutrition','12-14:Normal status'],
+ interp:function(r){var v=+r;if(v>=12)return rn('Normal Nutritional Status','MNA-SF '+v+' \u2014 Reassess at each visit.');if(v>=8)return rw('At Risk of Malnutrition','MNA-SF '+v+' \u2014 Full MNA assessment, dietitian referral, nutritional supplements.');return rh('Malnourished','MNA-SF '+v+' \u2014 Urgent dietitian referral. Nutritional intervention plan. Monitor anthropometrics.')}},
+
+{id:'has_bled',n:'HAS-BLED Score',a:'Bleeding Risk on Anticoagulation',c:'cardiac',d:'Estimates annual bleeding risk in AF patients on anticoagulation. Score \u22653 = high risk.',f:'Hypertension + Renal/Liver + Stroke + Bleeding + Labile INR + Elderly + Drugs/Alcohol',
+ F:[{i:'hb_htn',l:'Uncontrolled hypertension SBP>160 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_renal',l:'Renal disease (creatinine >200\u00b5mol/L) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_liver',l:'Liver disease (cirrhosis or bilirubin >2\u00d7ULN) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_stroke',l:'Prior stroke (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_bleed',l:'Prior bleeding or predisposition (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_inr',l:'Labile INR (TTR <60%) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_age',l:'Age >65 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_drugs',l:'Antiplatelet or NSAID use (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'hb_alc',l:'Alcohol use \u22658 drinks/week (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.hb_htn+ +v.hb_renal+ +v.hb_liver+ +v.hb_stroke+ +v.hb_bleed+ +v.hb_inr+ +v.hb_age+ +v.hb_drugs+ +v.hb_alc)},
+ ru:'points',refs:['0-2:Low bleeding risk','3-4:Moderate risk','\u22655:High risk'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low Bleeding Risk','HAS-BLED '+v+' \u2014 Anticoagulation benefits likely outweigh risk. Continue OAC.');if(v<=4)return rw('Moderate Risk','HAS-BLED '+v+' \u2014 Address modifiable risk factors. Regular INR monitoring.');return rh('High Bleeding Risk','HAS-BLED '+v+' \u2014 Correct modifiable factors. High-risk does not contraindicate OAC but mandates close monitoring.')}},
+
+{id:'mmse_mini',n:'Mini-MMSE (Cognitive Screen)',a:'Cognitive Impairment Rapid Screen',c:'neuro',d:'Rapid 5-item cognitive screen. Does not replace full MMSE (30-point scale). Score \u22644 = impairment likely.',f:'Year + Month + Recall + Attention + Copy',
+ F:[{i:'mm1',l:'Correct year (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'mm2',l:'Correct month (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'mm3',l:'Recall 3 objects after 2 min (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'mm4',l:'Serial 7s (5 subtractions): 0=None, 1=1, 2=2, 3=3, 4=4, 5=5 correct',p:'0-5',u:['pts'],cv:function(v){return v}},
+    {i:'mm5',l:'Copy overlapping pentagons (1=Correct)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mm1+ +v.mm2+ +v.mm3+ +v.mm4+ +v.mm5)},
+ ru:'points',refs:['11:Full marks (normal)','8-10:Mild impairment','5-7:Moderate','0-4:Severe impairment'],
+ interp:function(r){var v=+r;if(v>=8)return rn('No Significant Impairment','Mini-MMSE '+v+'/11. Routine follow-up.');if(v>=5)return rw('Moderate Cognitive Impairment','Mini-MMSE '+v+'/11. Full neuropsychological assessment. Safety evaluation.');return rh('Severe Cognitive Impairment','Mini-MMSE '+v+'/11. Urgent comprehensive assessment. Dementia workup. Safeguarding review.')}},
+
+{id:'cha2ds2',n:'CHA\u2082DS\u2082-VASc Score',a:'AF Stroke Risk (Expanded)',c:'cardiac',d:'Expanded stroke risk in AF including vascular disease and sex as risk modifiers.',f:'CHF+HTN+Age\u226575(\u00d72)+DM+Stroke(\u00d72)+Vasc+Age65-74+Sex',
+ F:[{i:'cv_chf',l:'Congestive heart failure (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cv_htn',l:'Hypertension (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cv_age75',l:'Age \u226575 (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'cv_dm',l:'Diabetes mellitus (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cv_stroke',l:'Prior stroke/TIA/thromboembolism (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'cv_vasc',l:'Vascular disease (MI, PAD, aortic plaque) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cv_age65',l:'Age 65-74 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cv_sex',l:'Female sex (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ rawCalc:1,
+ calc:function(v){return Math.round(+v.cv_chf+ +v.cv_htn+ +v.cv_age75+ +v.cv_dm+ +v.cv_stroke+ +v.cv_vasc+ +v.cv_age65+ +v.cv_sex)},
+ ru:'points',refs:['M: 0=Very low, 1=Low, \u22652=OAC indicated','F: 0-1=Low, \u22652=OAC consideration, \u22653=OAC indicated'],
+ interp:function(r,v){var sc=+r;var isFem=v&&(+v.cv_sex)===1;
+  var thr=isFem?3:2;var low=isFem?sc<=1:sc===0;
+  if(low)return rn('Low Stroke Risk','CHA\u2082DS\u2082-VASc '+sc+' \u2014 Anticoagulation generally not indicated. Reassess annually.');
+  if(sc<thr)return rw('Intermediate','CHA\u2082DS\u2082-VASc '+sc+' \u2014 Consider OAC. Discuss risk/benefit with patient.');
+  return rh('OAC Indicated','CHA\u2082DS\u2082-VASc '+sc+' \u2014 Anticoagulation recommended. DOAC preferred over warfarin.')}},
+
+{id:'abcd2',n:'ABCD\u00b2 Score',a:'TIA Short-Term Stroke Risk',c:'neuro',d:'Predicts 2-day stroke risk after TIA. Score \u22654 = high risk.',f:'Age + BP + Clinical features + Duration + Diabetes',
+ F:[{i:'ab_age',l:'Age \u226560 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ab_bp',l:'BP \u2265140/90 at presentation (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ab_clin',l:'Clinical features: Unilateral weakness=2, Speech disturbance (no weakness)=1, Other=0',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'ab_dur',l:'Duration: \u226560 min=2, 10-59 min=1, <10 min=0',p:'0/1/2',u:['pts'],cv:function(v){return v}},
+    {i:'ab_dm',l:'Diabetes mellitus (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.ab_age+ +v.ab_bp+ +v.ab_clin+ +v.ab_dur+ +v.ab_dm)},
+ ru:'points',refs:['0-3:Low (~1% 2-day stroke)','4-5:Moderate (~4%)','6-7:High (~8%)'],
+ interp:function(r){var v=+r;if(v<=3)return rn('Low 2-Day Stroke Risk','ABCD\u00b2 '+v+' \u2014 ~1% 2-day risk. Outpatient TIA clinic within 24h.');if(v<=5)return rw('Moderate Risk','ABCD\u00b2 '+v+' \u2014 ~4% 2-day risk. Urgent TIA clinic or admission consideration.');return rh('High Risk','ABCD\u00b2 '+v+' \u2014 ~8% 2-day risk. Hospital admission. Urgent imaging and secondary prevention.')}}
+,
+
+// ── BIOCHEMISTRY PANEL ───────────────────────────────────────────────────────
+{id:'bx_alt',n:'ALT Interpretation',a:'Alanine Aminotransferase',c:'biochem',d:'ALT is a sensitive marker of hepatocellular injury. Normal: M <45 U/L, F <35 U/L.',f:'ALT degree of elevation → clinical context',
+ F:[{i:'alt',l:'ALT',p:'e.g. 65',u:['U/L'],cv:function(v){return v}},
+    {i:'alt_uln',l:'ULN for your lab (M=45, F=35 typical)',p:'e.g. 45',u:['U/L'],cv:function(v){return v}}],
+ calc:function(v){return(v.alt/v.alt_uln).toFixed(1)},
+ ru:'× ULN',refs:['<1×:Normal','1-3×:Mild','3-10×:Moderate','>10×:Marked elevation','>100×:Ischaemia/viral/toxic'],
+ interp:function(r){var v=+r;if(v<1)return rn('Normal ALT',v+'× ULN — No hepatocellular injury indicated.');if(v<3)return rl('Mild Elevation',v+'× ULN — Non-alcoholic fatty liver, alcohol, medications, thyroid, exercise. Repeat in 4-6 wk.');if(v<10)return rw('Moderate Elevation',v+'× ULN — Viral hepatitis, drug-induced injury, autoimmune hepatitis. Hepatology workup.');if(v<100)return rh('Marked Elevation',v+'× ULN — Acute hepatitis, ischaemia, drug toxicity. Urgent evaluation.');return rh('Severe / Acute Liver Injury',v+'× ULN — Ischaemic hepatitis, acute viral hepatitis, toxin (paracetamol). Emergency management.')}},
+
+{id:'bx_ast',n:'AST Interpretation',a:'Aspartate Aminotransferase',c:'biochem',d:'AST/ALT ratio >2:1 suggests alcoholic liver disease. Less specific than ALT for liver.',f:'AST/ULN ratio + AST:ALT ratio',
+ F:[{i:'ast',l:'AST',p:'e.g. 80',u:['U/L'],cv:function(v){return v}},
+    {i:'alt2',l:'ALT (for ratio)',p:'e.g. 40',u:['U/L'],cv:function(v){return v}},
+    {i:'ast_uln',l:'AST ULN (typical 40 U/L)',p:'e.g. 40',u:['U/L'],cv:function(v){return v}}],
+ calc:function(v){var ratio=(v.ast/v.alt2).toFixed(2);var xULN=(v.ast/v.ast_uln).toFixed(1);return xULN+','+ratio},
+ ru:'',
+ interp:function(r){var p=r.split(',');var xULN=+p[0],ratio=+p[1];
+  var ratioStr=ratio>2?'AST:ALT >2 — Suggests alcoholic liver disease or cirrhosis.':ratio>1?'AST:ALT 1-2 — Non-specific pattern.':'AST:ALT <1 — More typical of non-alcoholic hepatocellular injury.';
+  if(xULN<1)return rn('Normal AST',xULN+'× ULN. '+ratioStr);if(xULN<3)return rl('Mild Elevation',xULN+'× ULN. '+ratioStr);if(xULN<10)return rw('Moderate Elevation',xULN+'× ULN. '+ratioStr);return rh('Marked Elevation',xULN+'× ULN. '+ratioStr+' Urgent evaluation.')}},
+
+{id:'bx_ggt',n:'GGT Interpretation',a:'Gamma-Glutamyl Transferase',c:'biochem',d:'GGT elevated in alcohol use, cholestasis, medications, metabolic syndrome. Not specific alone.',f:'Degree of elevation → context',
+ F:[{i:'ggt',l:'GGT',p:'e.g. 90',u:['U/L'],cv:function(v){return v}},
+    {i:'ggt_uln',l:'GGT ULN (M=55, F=38 typical)',p:'e.g. 55',u:['U/L'],cv:function(v){return v}},
+    {i:'ggt_alp',l:'ALP (for cholestasis pattern)',p:'e.g. 100',u:['U/L'],cv:function(v){return v}}],
+ calc:function(v){return(v.ggt/v.ggt_uln).toFixed(1)+','+(v.ggt>v.ggt_uln&&v.ggt_alp>120?'cholest':'other')},
+ ru:'× ULN',
+ interp:function(r){var p=r.split(',');var xULN=+p[0],pat=p[1];
+  var ctx=pat==='cholest'?'GGT + ALP elevation: cholestasis pattern. Consider MRCP/ultrasound.':'Isolated GGT: alcohol use, metabolic syndrome, medications, or fatty liver.';
+  if(xULN<1)return rn('Normal GGT',xULN+'× ULN. '+ctx);if(xULN<3)return rl('Mild Elevation',xULN+'× ULN. '+ctx);if(xULN<10)return rw('Moderate Elevation',xULN+'× ULN. '+ctx);return rh('Marked Elevation',xULN+'× ULN. Urgent hepatology assessment. '+ctx)}},
+
+{id:'bx_alp',n:'ALP Interpretation',a:'Alkaline Phosphatase',c:'biochem',d:'ALP elevated in bone disease, cholestasis, or pregnancy. GGT co-elevation confirms hepatic origin.',f:'ALP/ULN + GGT pattern',
+ F:[{i:'alp',l:'ALP',p:'e.g. 200',u:['U/L'],cv:function(v){return v}},
+    {i:'alp_uln',l:'ALP ULN (typical 120 U/L)',p:'e.g. 120',u:['U/L'],cv:function(v){return v}},
+    {i:'alp_ggt',l:'GGT elevated? (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return(v.alp/v.alp_uln).toFixed(1)+','+v.alp_ggt},
+ ru:'× ULN',
+ interp:function(r){var p=r.split(',');var xULN=+p[0],ggt=+p[1];
+  var src=ggt?'GGT elevated — hepatic origin confirmed. Consider cholestasis, PBC, PSC, drugs, infiltration.':'GGT normal — bone source likely. Consider Paget’s, bone metastases, hyperparathyroidism, growth.';
+  if(xULN<1)return rn('Normal ALP',xULN+'× ULN.');if(xULN<2)return rl('Mild Elevation',xULN+'× ULN. '+src);if(xULN<5)return rw('Moderate Elevation',xULN+'× ULN. '+src);return rh('Marked Elevation',xULN+'× ULN. '+src+' Urgent imaging.')}},
+
+{id:'bx_bili_dir',n:'Bilirubin Fractionation',a:'Direct vs Indirect Bilirubin',c:'biochem',d:'Direct (conjugated) >50% of total = hepatocellular or cholestatic. Indirect dominant = haemolysis or Gilbert’s.',f:'Direct% = Direct/(Total) × 100',
+ F:[{i:'tbili',l:'Total Bilirubin',p:'e.g. 3.5',u:['mg/dL','µmol/L'],cv:function(v,u){return UC.bili(v,u)}},
+    {i:'dbili',l:'Direct (Conjugated) Bilirubin',p:'e.g. 0.8',u:['mg/dL','µmol/L'],cv:function(v,u){return UC.bili(v,u)}}],
+ calc:function(v){var pct=(v.dbili/v.tbili*100).toFixed(0);return v.tbili.toFixed(2)+','+pct},
+ ru:'',
+ interp:function(r){var p=r.split(',');var tot=+p[0],pct=+p[1];var ibil=(tot*(1-pct/100)).toFixed(2);
+  if(tot<1.2)return rn('Normal Bilirubin','Total '+tot+' mg/dL. No pathological jaundice.');
+  if(pct<20)return rw('Indirect (Unconjugated) Dominant','Direct '+pct+'%. Indirect predominant ('+ibil+' mg/dL). Haemolysis, Gilbert’s syndrome, ineffective erythropoiesis.');
+  if(pct<50)return rw('Mixed Pattern','Direct '+pct+'%. Hepatocellular disease or mixed origin. LFT + viral hepatitis screen.');
+  return rh('Direct (Conjugated) Dominant','Direct '+pct+'% of total '+tot+' mg/dL. Hepatocellular disease or cholestasis. MRCP/ultrasound.')}},
+
+{id:'bx_tp',n:'Total Protein Interpretation',a:'Serum Total Protein',c:'biochem',d:'Normal 60-80 g/L. Hyperproteinaemia → paraprotein screen (SPEP). Hypoproteinaemia → nutritional/liver/loss.',f:'Total Protein → clinical pattern',
+ F:[{i:'tp',l:'Total Protein',p:'e.g. 70',u:['g/L','g/dL'],cv:function(v,u){return UC.tp(v,u)}},
+    {i:'tp_alb',l:'Albumin',p:'e.g. 38',u:['g/L','g/dL'],cv:function(v,u){return UC.alb(v,u)}}],
+ calc:function(v){var glob=(v.tp-v.tp_alb).toFixed(1);var ratio=(v.tp_alb/glob).toFixed(2);return v.tp.toFixed(1)+','+glob+','+ratio},
+ ru:'g/L',
+ interp:function(r){var p=r.split(',');var tp=+p[0],glob=+p[1],ratio=+p[2];
+  var agStr='A:G ratio '+ratio+(ratio<1?' (reversed A:G — chronic liver disease, myeloma, inflammation)':ratio>2.5?' (high A:G — unusual, verify)':' (normal)');
+  if(tp<60)return rw('Hypoproteinaemia','Total protein '+tp+' g/L, Globulins '+glob+' g/L. '+agStr+'. Causes: malnutrition, liver disease, nephrotic syndrome, protein-losing enteropathy.');
+  if(tp>85)return rw('Hyperproteinaemia','Total protein '+tp+' g/L, Globulins '+glob+' g/L. '+agStr+'. Consider SPEP/SFLC for paraprotein. Dehydration.');
+  return rn('Normal Total Protein','Total protein '+tp+' g/L, Globulins '+glob+' g/L. '+agStr+'.')}},
+
+{id:'bx_ldh',n:'LDH Interpretation',a:'Lactate Dehydrogenase',c:'biochem',d:'LDH released by cell injury. Non-specific but useful for haemolysis, lymphoma, hepatocellular injury.',f:'LDH/ULN → clinical context',
+ F:[{i:'ldh',l:'LDH',p:'e.g. 350',u:['U/L'],cv:function(v){return v}},
+    {i:'ldh_uln',l:'LDH ULN (typical 250 U/L)',p:'e.g. 250',u:['U/L'],cv:function(v){return v}}],
+ calc:function(v){return(v.ldh/v.ldh_uln).toFixed(1)},
+ ru:'× ULN',refs:['<1×:Normal','1-2×:Mild','2-5×:Moderate','>5×:Marked'],
+ interp:function(r){var v=+r;if(v<1)return rn('Normal LDH',v+'× ULN.');if(v<2)return rl('Mild Elevation',v+'× ULN. Non-specific. Consider haemolysis, liver disease, or vigorous exercise.');if(v<5)return rw('Moderate Elevation',v+'× ULN. Evaluate for haemolysis (haptoglobin, retics, smear), lymphoma, acute liver injury, or pulmonary embolism.');return rh('Marked Elevation',v+'× ULN. Haemolysis, high-grade lymphoma, hepatic infarction, rhabdomyolysis. Urgent evaluation.')}},
+
+{id:'bx_ck',n:'CK Interpretation',a:'Creatine Kinase',c:'biochem',d:'CK-MM = skeletal muscle. CK-MB = cardiac. CK-BB = brain (rarely measured). Normal M <200, F <150 U/L.',f:'CK/ULN → pattern',
+ F:[{i:'ck',l:'CK (Total)',p:'e.g. 1200',u:['U/L'],cv:function(v){return v}},
+    {i:'ck_uln',l:'CK ULN (M=200, F=150 typical)',p:'e.g. 200',u:['U/L'],cv:function(v){return v}},
+    {i:'ck_mb',l:'CK-MB (if available)',p:'e.g. 12',u:['U/L'],cv:function(v){return v}},
+    {i:'ck_mb_pct',l:'CK-MB % of total (>5-6% = cardiac)',p:'auto or enter %',u:['%'],cv:function(v){return v}}],
+ calc:function(v){var xULN=(v.ck/v.ck_uln).toFixed(1);var mbPct=v.ck_mb>0?(v.ck_mb/v.ck*100).toFixed(1):v.ck_mb_pct;return xULN+','+mbPct},
+ ru:'× ULN',
+ interp:function(r){var p=r.split(',');var xULN=+p[0],mbPct=+p[1];
+  var cardiac=mbPct>5.6?'CK-MB '+mbPct+'% (>5.6%) — Cardiac source likely. Correlate with troponin and ECG.':'CK-MB '+mbPct+'% (≤5.6%) — Predominantly skeletal muscle source.';
+  if(xULN<1)return rn('Normal CK',xULN+'× ULN. '+cardiac);if(xULN<5)return rl('Mild Elevation',xULN+'× ULN. '+cardiac+' Consider vigorous exercise, statins, hypothyroidism, IM injections.');if(xULN<10)return rw('Moderate Elevation',xULN+'× ULN. '+cardiac+' Inflammatory myopathy, myocarditis, trauma.');if(xULN<50)return rh('Marked Elevation',xULN+'× ULN. Rhabdomyolysis territory. Monitor renal function and urine myoglobin.');return rh('Severe Elevation — Rhabdomyolysis',xULN+'× ULN. Aggressive IV hydration. Target urine output >200 mL/hr. Monitor K⁺, creatinine, Ca²⁺.')}},
+
+{id:'bx_amm',n:'Ammonia Interpretation',a:'Serum Ammonia',c:'biochem',d:'Elevated in hepatic encephalopathy, urea cycle disorders, GI bleeding. Level correlates poorly with grade of HE.',f:'Ammonia level → clinical context',
+ F:[{i:'nh3',l:'Ammonia',p:'e.g. 80',u:['µmol/L','µg/dL'],cv:function(v,u){return u==='µg/dL'?v*0.5872:v}}],
+ calc:function(v){return v.nh3.toFixed(0)},
+ ru:'µmol/L',refs:['Normal:<47','Mild HE:47-100','Moderate/Severe HE:>100','Coma-range:>200'],
+ interp:function(r){var v=+r;if(v<47)return rn('Normal Ammonia',v+' µmol/L. Hepatic encephalopathy unlikely (though level-grade correlation is poor).');if(v<100)return rw('Elevated Ammonia',v+' µmol/L. Hepatic encephalopathy possible. Assess precipitants (GI bleed, infection, constipation, diuretics). Lactulose/rifaximin.');return rh('Markedly Elevated',v+' µmol/L. Severe hepatic dysfunction. Treat precipitants. Consider liver transplant evaluation. Ensure sample handled correctly (ice, rapid processing).')}},
+
+{id:'bx_uric',n:'Uric Acid Interpretation',a:'Serum Urate',c:'biochem',d:'Hyperuricaemia >420 µmol/L (M) or >360 (F). Risk for gout, nephrolithiasis, CKD.',f:'Serum urate → clinical risk',
+ F:[{i:'ua',l:'Uric Acid',p:'e.g. 480',u:['µmol/L','mg/dL'],cv:function(v,u){return u==='mg/dL'?v*59.48:v}}],
+ sex:1,
+ calc:function(v){return v.ua.toFixed(0)},
+ ru:'µmol/L',refs:['M normal:<420','F normal:<360','Gout target:<360','Crystal formation:>420'],
+ interp:function(r,s){var v=+r;var thr=s==='F'?360:420;var mgdl=(v/59.48).toFixed(1);if(v<thr)return rn('Normal Urate',v+' µmol/L ('+mgdl+' mg/dL). Within normal range for '+s+'.');if(v<500)return rw('Hyperuricaemia',v+' µmol/L. Asymptomatic hyperuricaemia. Lifestyle modification: reduce red meat, purine-rich foods, alcohol, fructose. Increase hydration.');if(v<600)return rh('Significant Hyperuricaemia',v+' µmol/L. Gout risk high. If symptomatic: ULT (allopurinol/febuxostat) to target <360 µmol/L.');return rh('Severe Hyperuricaemia',v+' µmol/L. Very high crystal deposition risk. Review medications (diuretics, ciclosporin). Initiate urate-lowering therapy.')}},
+
+{id:'bx_prot_cr',n:'Protein:Creatinine Ratio (Urine)',a:'Urine PCR / Proteinuria',c:'biochem',d:'Spot urine protein:creatinine ratio approximates 24h urine protein. PCR ≥30 mg/mmol = significant proteinuria.',f:'Protein (mg/L) ÷ Creatinine (mmol/L)',
+ F:[{i:'u_prot',l:'Urine Protein',p:'e.g. 300',u:['mg/L','g/L'],cv:function(v,u){return u==='g/L'?v*1000:v}},
+    {i:'u_cr',l:'Urine Creatinine',p:'e.g. 10',u:['mmol/L','mg/dL'],cv:function(v,u){return u==='mg/dL'?v*0.08841:v}}],
+ calc:function(v){return(v.u_prot/v.u_cr).toFixed(1)},
+ ru:'mg/mmol',refs:['<15:Normal','15-30:Mildly increased (A2)','30-300:Moderately increased (A3)','>300:Severely increased — nephrotic range'],
+ interp:function(r){var v=+r;if(v<15)return rn('Normal PCR',v+' mg/mmol. No significant proteinuria.');if(v<30)return rl('Mildly Increased',v+' mg/mmol. CKD Albuminuria A2. Monitor. Optimise BP (<130/80) and RAS blockade.');if(v<300)return rw('Moderately Increased',v+' mg/mmol. CKD Albuminuria A3. Nephrology referral. ACE inhibitor / ARB. Dietary protein restriction.');return rh('Severely Increased / Nephrotic',v+' mg/mmol. Nephrotic range. Serum albumin, lipids, renal biopsy consideration. Nephrology referral.')}},
+
+{id:'bx_acr',n:'Albumin:Creatinine Ratio (Urine)',a:'Microalbuminuria Screen',c:'biochem',d:'ACR is the preferred method for CKD and diabetic nephropathy screening. ACR ≥3 mg/mmol = significant.',f:'Albumin (mg/L) ÷ Creatinine (mmol/L)',
+ F:[{i:'u_alb',l:'Urine Albumin',p:'e.g. 45',u:['mg/L','mg/g (as mg/mmol×0.113)'],cv:function(v,u){return u==='mg/g (as mg/mmol×0.113)'?v*0.113:v}},
+    {i:'u_cr2',l:'Urine Creatinine',p:'e.g. 10',u:['mmol/L','mg/dL'],cv:function(v,u){return u==='mg/dL'?v*0.08841:v}}],
+ calc:function(v){return(v.u_alb/v.u_cr2).toFixed(2)},
+ ru:'mg/mmol',refs:['<3:Normal (A1)','3-30:Moderately increased (A2)','>30:Severely increased (A3)','>220:Nephrotic range'],
+ interp:function(r){var v=+r;if(v<3)return rn('Normal ACR',v+' mg/mmol. No significant albuminuria.');if(v<30)return rw('Moderately Increased (A2)',v+' mg/mmol. Microalbuminuria. Confirm with 2 of 3 early morning samples. ACE-I/ARB. BP optimisation.');if(v<220)return rh('Severely Increased (A3)',v+' mg/mmol. Macroalbuminuria. Nephrology referral. Aggressive RAS blockade. HbA1c <53 mmol/mol if diabetic.');return rh('Nephrotic-Range ACR',v+' mg/mmol. Urgent nephrology. Serum albumin, consider renal biopsy.')}},
+
+{id:'bx_osmgap',n:'Osmol Gap',a:'Serum Osmol Gap',c:'biochem',d:'Osmol gap >10 mOsm/kg suggests unmeasured osmoles (methanol, ethanol, ethylene glycol, mannitol, severe lactic acidosis).',f:'Measured Osm − Calculated Osm; Calculated = 2×Na + Glucose/18 + BUN/2.8',
+ F:[{i:'osm_meas',l:'Measured Osmolality',p:'e.g. 310',u:['mOsm/kg'],cv:function(v){return v}},
+    {i:'osm_na',l:'Sodium',p:'e.g. 138',u:['mEq/L'],cv:function(v){return v}},
+    {i:'osm_glu',l:'Glucose',p:'e.g. 90',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.glu(v,u)}},
+    {i:'osm_bun',l:'BUN / Urea Nitrogen',p:'e.g. 14',u:['mg/dL','mmol/L'],cv:function(v,u){return UC.bun(v,u)}}],
+ calc:function(v){var calc=2*v.osm_na+v.osm_glu/18+v.osm_bun/2.8;var gap=v.osm_meas-calc;return gap.toFixed(1)+','+calc.toFixed(0)},
+ ru:'mOsm/kg',refs:['Normal:<10 mOsm/kg','Elevated:10-20','Significant:>20','Critical:>50'],
+ interp:function(r){var p=r.split(',');var gap=+p[0],calc=+p[1];if(gap<10)return rn('Normal Osmol Gap','Gap '+gap+' mOsm/kg (Calculated Osm: '+calc+'). No significant unmeasured osmoles.');if(gap<20)return rw('Mildly Elevated Gap','Gap '+gap+' mOsm/kg. Repeat. Consider early toxic alcohol ingestion, mannitol, severe hyperlipidaemia.');if(gap<50)return rh('Significant Osmol Gap','Gap '+gap+' mOsm/kg. Toxic alcohol (methanol, ethylene glycol, isopropanol), mannitol, or severe lactic acidosis. Toxicology screen. Ethanol level.');return rh('Critical Osmol Gap','Gap '+gap+' mOsm/kg. Very high. Emergency toxicology. Methanol or ethylene glycol poisoning. Fomepizole ± haemodialysis.')}},
+
+{id:'bx_phos',n:'Phosphate Interpretation',a:'Serum Phosphate',c:'biochem',d:'Hypophosphataemia <0.8 mmol/L. Hyperphosphataemia >1.45 mmol/L. Critical in refeeding syndrome and CKD.',f:'Phosphate level → clinical risk',
+ F:[{i:'phos',l:'Phosphate',p:'e.g. 0.6',u:['mmol/L','mg/dL'],cv:function(v,u){return u==='mg/dL'?v*0.3229:v}}],
+ calc:function(v){return v.phos.toFixed(2)},
+ ru:'mmol/L',refs:['Normal:0.8-1.45 mmol/L','Mild hypo:0.6-0.8','Moderate hypo:0.32-0.6','Severe hypo:<0.32','Hyperphosphataemia:>1.45'],
+ interp:function(r){var v=+r;var mgdl=(v/0.3229).toFixed(1);if(v>=0.8&&v<=1.45)return rn('Normal Phosphate',v+' mmol/L ('+mgdl+' mg/dL).');if(v<0.32)return rh('Severe Hypophosphataemia',v+' mmol/L. Refeeding syndrome, severe malabsorption, hyperparathyroidism. IV phosphate replacement. Monitor cardiac and respiratory function.');if(v<0.6)return rh('Moderate Hypophosphataemia',v+' mmol/L. Oral or IV phosphate replacement. Review cause: malabsorption, DKA treatment, respiratory alkalosis, alcohol withdrawal.');if(v<0.8)return rw('Mild Hypophosphataemia',v+' mmol/L. Oral phosphate supplement. Dietary optimisation. Review cause.');return rh('Hyperphosphataemia',v+' mmol/L ('+mgdl+' mg/dL). CKD, hypoparathyroidism, rhabdomyolysis. Phosphate binders. Dietary restriction (<800 mg/day). Nephrology review.')}},
+
+{id:'bx_mg',n:'Magnesium Interpretation',a:'Serum Magnesium',c:'biochem',d:'Magnesium critical for cardiac, neuromuscular, and glucose metabolism. Hypomagnesaemia often accompanies hypokalaemia.',f:'Serum Mg → clinical risk',
+ F:[{i:'mg',l:'Magnesium',p:'e.g. 0.7',u:['mmol/L','mg/dL','mEq/L'],cv:function(v,u){return u==='mg/dL'?v*0.4114:u==='mEq/L'?v*0.5:v}}],
+ calc:function(v){return v.mg.toFixed(2)},
+ ru:'mmol/L',refs:['Normal:0.7-1.0 mmol/L','Mild hypo:0.5-0.7','Severe hypo:<0.5','Hypermagnesaemia:>1.1'],
+ interp:function(r){var v=+r;var mgdl=(v/0.4114).toFixed(1);if(v>=0.7&&v<=1.0)return rn('Normal Magnesium',v+' mmol/L ('+mgdl+' mg/dL).');if(v<0.5)return rh('Severe Hypomagnesaemia',v+' mmol/L. IV magnesium sulphate. Cardiac monitoring (long QT, arrhythmia). Correct concomitant hypokalaemia and hypocalcaemia.');if(v<0.7)return rw('Hypomagnesaemia',v+' mmol/L. Oral magnesium supplement (magnesium glycinate/oxide). Review diuretics, PPI use, alcohol intake, diabetes.');return rw('Hypermagnesaemia',v+' mmol/L. Renal failure, excess supplementation, antacid overuse. Stop Mg supplements. Haemodialysis if severe (>3 mmol/L).')}},
+
+// ── BLOOD TESTS (CBC / HAEMATOLOGY PANEL) ─────────────────────────────────
+{id:'bt_hgb',n:'Haemoglobin Interpretation',a:'Hgb / Anaemia Screen',c:'blood',d:'WHO anaemia thresholds: Hgb <130 g/L (M), <120 g/L (F), <110 g/L (pregnant).',f:'Hgb level \u2192 anaemia severity',
+ F:[{i:'hgb',l:'Haemoglobin',p:'e.g. 105',u:['g/L','g/dL'],cv:function(v,u){return u==='g/dL'?v*10:v}}],
+ sex:1,
+ calc:function(v){return v.hgb.toFixed(0)},
+ ru:'g/L',refs:['M normal:\u2265130','F normal:\u2265120','Mild anaemia:110-119(F)/100-129(M)','Moderate:80-109','Severe:<80'],
+ interp:function(r,s){var v=+r;var thr=s==='F'?120:130;var gdl=(v/10).toFixed(1);if(v>=thr)return rn('Normal Haemoglobin',v+' g/L ('+gdl+' g/dL). No anaemia.');if(v>=110)return rl('Mild Anaemia',v+' g/L. Investigate cause: iron studies, B12/folate, reticulocyte count.');if(v>=80)return rw('Moderate Anaemia',v+' g/L. Symptomatic likely. Urgent workup. Consider transfusion if symptomatic or cardiac history.');return rh('Severe Anaemia',v+' g/L. High risk of cardiac decompensation. Urgent transfusion assessment. Identify and treat underlying cause.')}},
+
+{id:'bt_mcv',n:'MCV Classification',a:'Mean Corpuscular Volume',c:'blood',d:'Classifies anaemia by red cell size: microcytic, normocytic, or macrocytic.',f:'MCV \u2192 morphological category',
+ F:[{i:'mcv',l:'MCV',p:'e.g. 75',u:['fL'],cv:function(v){return v}}],
+ calc:function(v){return v.mcv.toFixed(1)},
+ ru:'fL',refs:['Microcytic:<80','Normocytic:80-100','Macrocytic:>100'],
+ interp:function(r){var v=+r;if(v<80)return rw('Microcytic Anaemia Pattern','MCV '+v+' fL. Iron deficiency, thalassaemia, chronic disease, sideroblastic anaemia. Check ferritin, Hb electrophoresis.');if(v<=100)return rn('Normocytic Pattern','MCV '+v+' fL. Acute blood loss, chronic disease, renal failure, haemolysis, mixed deficiency.');return rw('Macrocytic Pattern','MCV '+v+' fL. B12/folate deficiency, liver disease, hypothyroidism, myelodysplasia, alcohol excess, reticulocytosis.')}},
+
+{id:'bt_retic',n:'Reticulocyte Production Index',a:'Corrected Reticulocyte / RPI',c:'blood',d:'Assesses bone marrow erythropoietic response to anaemia. RPI <2 = inadequate marrow response.',f:'RPI = (Retic% \u00d7 Hct/45) \u00f7 Maturation factor',
+ F:[{i:'retic',l:'Reticulocyte %',p:'e.g. 3.5',u:['%'],cv:function(v){return v}},
+    {i:'hct',l:'Haematocrit',p:'e.g. 28',u:['%'],cv:function(v){return v}}],
+ calc:function(v){var corrRetic=(v.retic*v.hct/45).toFixed(2);var matFactor=v.hct<25?2.5:v.hct<35?1.5:1;var rpi=(corrRetic/matFactor).toFixed(2);return corrRetic+','+rpi},
+ ru:'',
+ interp:function(r){var p=r.split(',');var cr=+p[0],rpi=+p[1];if(rpi<2)return rw('Inadequate Marrow Response','Corrected retic '+cr+'%, RPI '+rpi+'. Hypoproliferative anaemia \u2014 iron/B12/folate deficiency, marrow failure, chronic disease. Bone marrow evaluation may be needed.');return rn('Adequate Marrow Response','Corrected retic '+cr+'%, RPI '+rpi+'. Appropriate response \u2014 consistent with haemolysis or blood loss with intact marrow.')}},
+
+{id:'bt_wbc_diff',n:'WBC Differential Interpreter',a:'Absolute Neutrophil/Lymphocyte',c:'blood',d:'Converts WBC differential percentages to absolute counts for clinical interpretation.',f:'Absolute count = Total WBC \u00d7 (%/100)',
+ F:[{i:'wbc_tot',l:'Total WBC',p:'e.g. 8.0',u:['\u00d710\u2079/L'],cv:function(v){return v}},
+    {i:'neut_pct',l:'Neutrophils %',p:'e.g. 60',u:['%'],cv:function(v){return v}},
+    {i:'lymph_pct',l:'Lymphocytes %',p:'e.g. 30',u:['%'],cv:function(v){return v}}],
+ calc:function(v){var anc=(v.wbc_tot*v.neut_pct/100).toFixed(2);var alc=(v.wbc_tot*v.lymph_pct/100).toFixed(2);return anc+','+alc},
+ ru:'\u00d710\u2079/L',
+ interp:function(r){var p=r.split(',');var anc=+p[0],alc=+p[1];
+  var ancStr=anc<0.5?'Severe neutropenia (ANC<0.5) \u2014 high infection risk, neutropenic precautions.':anc<1.5?'Neutropenia (ANC<1.5) \u2014 monitor for infection.':anc>7.5?'Neutrophilia \u2014 infection, inflammation, steroids, stress.':'Normal ANC.';
+  var alcStr=alc<1?'Lymphopenia \u2014 viral infection, immunosuppression, steroids.':alc>4?'Lymphocytosis \u2014 viral infection, CLL, pertussis (consider age).':'Normal ALC.';
+  var risk=anc<0.5?rh:anc<1.5||alc<1?rw:rn;
+  return risk('ANC '+anc+' / ALC '+alc+' (\u00d710\u2079/L)',ancStr+' '+alcStr)}},
+
+{id:'bt_iron_panel',n:'Iron Studies Panel',a:'Iron / TIBC / Ferritin / Transferrin Saturation',c:'blood',d:'Differentiates iron deficiency from chronic disease anaemia using transferrin saturation.',f:'TSAT% = Serum Iron \u00f7 TIBC \u00d7 100',
+ F:[{i:'fe',l:'Serum Iron',p:'e.g. 40',u:['\u00b5g/dL','\u00b5mol/L'],cv:function(v,u){return u==='\u00b5mol/L'?v*5.587:v}},
+    {i:'tibc',l:'TIBC',p:'e.g. 450',u:['\u00b5g/dL','\u00b5mol/L'],cv:function(v,u){return u==='\u00b5mol/L'?v*5.587:v}},
+    {i:'ferr',l:'Ferritin',p:'e.g. 8',u:['ng/mL'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v){var tsat=(v.fe/v.tibc*100).toFixed(1);return tsat+','+v.ferr},
+ ru:'% saturation',
+ interp:function(r,s){var p=r.split(',');var tsat=+p[0],ferr=+p[1];var ferrThr=s==='F'?20:30;
+  if(tsat<16&&ferr<ferrThr)return rh('Iron Deficiency','TSAT '+tsat+'%, Ferritin '+ferr+' ng/mL. Classic iron deficiency pattern. Oral/IV iron replacement. Investigate source of loss (GI, menstrual).');
+  if(tsat<16&&ferr>=100)return rw('Anaemia of Chronic Disease/Inflammation','TSAT '+tsat+'%, Ferritin '+ferr+' ng/mL (elevated as acute phase reactant). Treat underlying inflammatory/chronic condition.');
+  if(tsat>45&&ferr>300)return rw('Iron Overload Pattern','TSAT '+tsat+'%, Ferritin '+ferr+' ng/mL. Consider haemochromatosis, transfusion overload, liver disease. HFE genetic testing.');
+  return rn('Normal/Indeterminate Iron Status','TSAT '+tsat+'%, Ferritin '+ferr+' ng/mL. Correlate with clinical picture and MCV.')}},
+
+{id:'bt_b12_folate',n:'B12 / Folate Deficiency',a:'Macrocytic Anaemia Workup',c:'blood',d:'B12 <200 pg/mL and folate <3 ng/mL indicate deficiency. Both cause macrocytic anaemia.',f:'B12 + Folate levels \u2192 deficiency pattern',
+ F:[{i:'b12',l:'Vitamin B12',p:'e.g. 150',u:['pg/mL','pmol/L'],cv:function(v,u){return u==='pmol/L'?v/0.738:v}},
+    {i:'fol',l:'Folate',p:'e.g. 2',u:['ng/mL','nmol/L'],cv:function(v,u){return u==='nmol/L'?v/2.266:v}}],
+ calc:function(v){return v.b12.toFixed(0)+','+v.fol.toFixed(1)},
+ ru:'',
+ interp:function(r){var p=r.split(',');var b12=+p[0],fol=+p[1];
+  var b12Str=b12<200?'B12 deficient':b12<300?'B12 borderline':'B12 normal';
+  var folStr=fol<3?'Folate deficient':fol<4?'Folate borderline':'Folate normal';
+  if(b12<200||fol<3)return rh('Deficiency Confirmed',b12Str+' ('+b12+' pg/mL), '+folStr+' ('+fol+' ng/mL). Replace deficient vitamin. Check intrinsic factor/parietal cell antibodies if B12 low. Investigate malabsorption.');
+  if(b12<300||fol<4)return rw('Borderline Levels',b12Str+' ('+b12+' pg/mL), '+folStr+' ('+fol+' ng/mL). Consider methylmalonic acid/homocysteine for functional B12 deficiency.');
+  return rn('Normal B12/Folate',b12Str+' ('+b12+' pg/mL), '+folStr+' ('+fol+' ng/mL).')}},
+
+{id:'bt_haptoglobin',n:'Haemolysis Panel',a:'Haptoglobin / LDH / Bilirubin Triad',c:'blood',d:'Classic haemolysis triad: low haptoglobin + high LDH + high indirect bilirubin.',f:'3-marker concordance for haemolysis',
+ F:[{i:'hap',l:'Haptoglobin',p:'e.g. 15',u:['mg/dL'],cv:function(v){return v}},
+    {i:'ldh_h',l:'LDH (\u00d7ULN)',p:'e.g. 2.5',u:['\u00d7 ULN'],cv:function(v){return v}},
+    {i:'ibili',l:'Indirect Bilirubin',p:'e.g. 2.5',u:['mg/dL'],cv:function(v){return v}}],
+ calc:function(v){var score=(v.hap<30?1:0)+(v.ldh_h>1.5?1:0)+(v.ibili>1.2?1:0);return score+','+v.hap+','+v.ldh_h+','+v.ibili},
+ ru:'markers positive',
+ interp:function(r){var p=r.split(',');var score=+p[0],hap=+p[1],ldh=+p[2],ibil=+p[3];
+  if(score>=3)return rh('Haemolysis Confirmed','All 3 markers positive: Haptoglobin '+hap+' mg/dL (low), LDH '+ldh+'\u00d7ULN (high), Indirect bilirubin '+ibil+' mg/dL (high). Direct Coombs test, peripheral smear, reticulocyte count.');
+  if(score===2)return rw('Probable Haemolysis','2/3 markers positive. Haptoglobin '+hap+', LDH '+ldh+'\u00d7, Indirect bili '+ibil+'. Repeat testing, correlate with reticulocyte count and smear.');
+  return rn('Haemolysis Unlikely','Only '+score+'/3 markers positive. Haptoglobin '+hap+', LDH '+ldh+'\u00d7, Indirect bili '+ibil+'.')}},
+
+{id:'bt_plt_interp',n:'Platelet Count Interpretation',a:'Thrombocytopenia/Thrombocytosis',c:'blood',d:'Normal range 150-450\u00d710\u2079/L. Bleeding risk increases significantly below 20-30.',f:'Platelet count \u2192 clinical risk',
+ F:[{i:'plt',l:'Platelet Count',p:'e.g. 45',u:['\u00d710\u2079/L'],cv:function(v){return v}}],
+ calc:function(v){return v.plt.toFixed(0)},
+ ru:'\u00d710\u2079/L',refs:['Normal:150-450','Mild thrombocytopenia:100-149','Moderate:50-99','Severe:20-49','Critical:<20','Thrombocytosis:>450'],
+ interp:function(r){var v=+r;if(v>=150&&v<=450)return rn('Normal Platelet Count',v+' \u00d710\u2079/L.');if(v<20)return rh('Critical Thrombocytopenia',v+' \u00d710\u2079/L. High spontaneous bleeding risk. Platelet transfusion threshold. Urgent haematology.');if(v<50)return rh('Severe Thrombocytopenia',v+' \u00d710\u2079/L. Avoid invasive procedures without transfusion. Investigate cause (ITP, marrow failure, DIC, drug-induced).');if(v<100)return rw('Moderate Thrombocytopenia',v+' \u00d710\u2079/L. Monitor closely. Avoid antiplatelets/NSAIDs.');if(v<150)return rl('Mild Thrombocytopenia',v+' \u00d710\u2079/L. Often benign; recheck and review medications.');return rw('Thrombocytosis',v+' \u00d710\u2079/L. Reactive (infection, inflammation, iron deficiency) vs primary (essential thrombocythaemia). Consider JAK2 if persistent.')}},
+
+{id:'bt_coag_panel',n:'Coagulation Panel Interpreter',a:'PT/INR + aPTT Pattern',c:'blood',d:'Differentiates coagulopathy patterns by which pathway (intrinsic/extrinsic/common) is affected.',f:'PT/INR + aPTT \u2192 pathway pattern',
+ F:[{i:'inr',l:'INR',p:'e.g. 1.8',u:['ratio'],cv:function(v){return v}},
+    {i:'aptt',l:'aPTT',p:'e.g. 55',u:['seconds'],cv:function(v){return v}},
+    {i:'aptt_ctrl',l:'aPTT Control (typical 30s)',p:'e.g. 30',u:['seconds'],cv:function(v){return v}}],
+ calc:function(v){var apttRatio=(v.aptt/v.aptt_ctrl).toFixed(2);var inrHigh=v.inr>1.2,apttHigh=apttRatio>1.2;return v.inr+','+apttRatio+','+(inrHigh?1:0)+(apttHigh?1:0)},
+ ru:'',
+ interp:function(r){var p=r.split(',');var inr=+p[0],ar=+p[1],pattern=p[2];
+  if(pattern==='00')return rn('Normal Coagulation','INR '+inr+', aPTT ratio '+ar+'. Both within normal limits.');
+  if(pattern==='10')return rw('Isolated INR/PT Elevation','INR '+inr+' (high), aPTT ratio '+ar+' (normal). Extrinsic/Factor VII pathway: warfarin, vitamin K deficiency, early liver disease, Factor VII deficiency.');
+  if(pattern==='01')return rw('Isolated aPTT Elevation','INR '+inr+' (normal), aPTT ratio '+ar+' (high). Intrinsic pathway: heparin, Factor VIII/IX/XI/XII deficiency (haemophilia), lupus anticoagulant, von Willebrand disease.');
+  return rh('Combined INR + aPTT Elevation','INR '+inr+' AND aPTT ratio '+ar+' both elevated. Common pathway: DIC, severe liver disease, Factor I/II/V/X deficiency, supratherapeutic anticoagulation, massive transfusion.')}},
+
+{id:'bt_esr_age',n:'ESR Age-Adjusted Normal',a:'Erythrocyte Sedimentation Rate',c:'blood',d:'Age-adjusted ESR upper limit (Miller formula). Non-specific inflammatory marker.',f:'M: Age\u00f72; F: (Age+10)\u00f72',
+ F:[{i:'esr',l:'ESR (measured)',p:'e.g. 35',u:['mm/hr'],cv:function(v){return v}},
+    {i:'esr_age',l:'Age',p:'e.g. 60',u:['years'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v,s){var uln=s==='F'?(v.esr_age+10)/2:v.esr_age/2;return v.esr.toFixed(0)+','+uln.toFixed(1)},
+ ru:'mm/hr',
+ interp:function(r){var p=r.split(',');var esr=+p[0],uln=+p[1];if(esr<=uln)return rn('Normal ESR for Age',esr+' mm/hr (age-adjusted ULN: '+uln+').');if(esr<=uln*2)return rw('Mildly Elevated ESR',esr+' mm/hr (ULN '+uln+'). Non-specific. Consider infection, inflammation, malignancy, anaemia.');return rh('Markedly Elevated ESR',esr+' mm/hr (ULN '+uln+'). >100 mm/hr classically associated with temporal arteritis, malignancy, severe infection, or multiple myeloma. Further workup indicated.')}},
+
+{id:'bt_dic_score',n:'DIC Score (ISTH)',a:'Disseminated Intravascular Coagulation',c:'blood',d:'ISTH overt DIC score. \u22655 = compatible with overt DIC. Requires underlying disorder.',f:'Platelets + D-dimer/FDP + PT prolongation + Fibrinogen',
+ F:[{i:'dic_plt',l:'Platelets: >100=0, 50-100=1, <50=2 (\u00d710\u2079/L)',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'dic_dd',l:'D-dimer/Fibrin markers: No increase=0, Moderate=2, Strong increase=3',p:'0/2/3',u:['pts'],cv:function(v){return v}},
+    {i:'dic_pt',l:'PT prolongation: <3s=0, 3-6s=1, >6s=2',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'dic_fib',l:'Fibrinogen: >1g/L=0, \u22641g/L=1',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.dic_plt+ +v.dic_dd+ +v.dic_pt+ +v.dic_fib)},
+ ru:'points',refs:['<5:Not overt DIC (repeat in 1-2 days)','\u22655:Compatible with overt DIC'],
+ interp:function(r){var v=+r;if(v<5)return rw('Not Overt DIC','ISTH score '+v+' \u2014 Suggestive but not confirmatory. Repeat in 24-48h if clinical suspicion persists.');return rh('Overt DIC','ISTH score '+v+' \u2014 Compatible with overt DIC. Treat underlying cause urgently. Supportive care: FFP, platelets, cryoprecipitate as indicated by bleeding/labs.')}},
+
+{id:'bt_smear_rdw',n:'RDW + MCV Combined Pattern',a:'Anaemia Morphology Classifier',c:'blood',d:'RDW (red cell distribution width) combined with MCV narrows differential diagnosis significantly.',f:'MCV category \u00d7 RDW (normal vs high)',
+ F:[{i:'rdw_mcv',l:'MCV',p:'e.g. 70',u:['fL'],cv:function(v){return v}},
+    {i:'rdw',l:'RDW',p:'e.g. 18',u:['%'],cv:function(v){return v}}],
+ calc:function(v){var mcvCat=v.rdw_mcv<80?'micro':v.rdw_mcv<=100?'normo':'macro';var rdwCat=v.rdw>14.5?'high':'normal';return mcvCat+','+rdwCat+','+v.rdw_mcv+','+v.rdw},
+ ru:'',
+ interp:function(r){var p=r.split(',');var mcvCat=p[0],rdwCat=p[1],mcv=p[2],rdw=p[3];
+  var msgs={
+   'micro,normal':'Microcytic, normal RDW: Thalassaemia trait, anaemia of chronic disease.',
+   'micro,high':'Microcytic, high RDW: Iron deficiency anaemia (classic pattern), mixed deficiency, sideroblastic anaemia.',
+   'normo,normal':'Normocytic, normal RDW: Acute blood loss, chronic disease, marrow failure, hereditary spherocytosis.',
+   'normo,high':'Normocytic, high RDW: Early iron deficiency, mixed nutritional deficiency, myelofibrosis, sickle cell disease.',
+   'macro,normal':'Macrocytic, normal RDW: Aplastic anaemia, some liver disease, myelodysplasia.',
+   'macro,high':'Macrocytic, high RDW: B12/folate deficiency (classic pattern), autoimmune haemolytic anaemia, cold agglutinin disease.'
+  };
+  var key=mcvCat+','+rdwCat;var msg=msgs[key]||'Pattern not classified.';
+  var risk=rdwCat==='high'?rw:rn;
+  return risk('MCV '+mcv+' fL / RDW '+rdw+'%',msg)}},
+
+{id:'bt_methb',n:'Methaemoglobin / COHb Toxicity',a:'Dyshaemoglobin Panel',c:'blood',d:'MetHb and carboxyhaemoglobin cause functional anaemia despite normal Hgb. Co-oximetry required (pulse ox unreliable).',f:'MetHb% + COHb% \u2192 toxicity grade',
+ F:[{i:'methb',l:'Methaemoglobin',p:'e.g. 8',u:['%'],cv:function(v){return v}},
+    {i:'cohb',l:'Carboxyhaemoglobin (COHb)',p:'e.g. 5',u:['%'],cv:function(v){return v}}],
+ calc:function(v){return v.methb.toFixed(1)+','+v.cohb.toFixed(1)},
+ ru:'',
+ interp:function(r){var p=r.split(',');var mhb=+p[0],cohb=+p[1]; var msgs=[];
+  if(mhb<3)msgs.push('MetHb normal ('+mhb+'%).');else if(mhb<15)msgs.push('MetHb '+mhb+'% \u2014 Mild methaemoglobinaemia; consider causative agent (dapsone, nitrites, local anaesthetics, benzocaine).');else if(mhb<30)msgs.push('MetHb '+mhb+'% \u2014 Moderate; cyanosis common. Consider methylene blue if symptomatic.');else msgs.push('MetHb '+mhb+'% \u2014 Severe, life-threatening. Methylene blue 1-2mg/kg IV. Exchange transfusion if refractory.');
+  if(cohb<3)msgs.push('COHb normal ('+cohb+'%, up to 10% in smokers).');else if(cohb<20)msgs.push('COHb '+cohb+'% \u2014 Mild-moderate CO exposure. 100% oxygen.');else if(cohb<40)msgs.push('COHb '+cohb+'% \u2014 Significant exposure. High-flow O2; consider hyperbaric oxygen.');else msgs.push('COHb '+cohb+'% \u2014 Severe, life-threatening CO poisoning. Hyperbaric oxygen indicated.');
+  var risk=(mhb>=15||cohb>=20)?rh:(mhb>=3||cohb>=3)?rw:rn;
+  return risk('MetHb '+mhb+'% / COHb '+cohb+'%',msgs.join(' '))}}
 ];
 // CONVERTERS
 var CV=[
@@ -701,9 +1652,78 @@ var CV=[
 {id:'conc',n:'Lab Concentration',em:'\u{1F9EA}',col:'#E65100',u:['mg/dL','g/dL','g/L','mg/L','\u00b5g/mL','ng/mL','pg/mL'],base:{'mg/dL':.01,'g/dL':1,'g/L':.1,'mg/L':1e-3,'\u00b5g/mL':1e-3,'ng/mL':1e-6,'pg/mL':1e-9},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
 {id:'time',n:'Time',em:'\u23F1\uFE0F',col:'#3949AB',u:['seconds','minutes','hours','days','weeks','months','years'],base:{seconds:1,minutes:60,hours:3600,days:86400,weeks:604800,months:2629800,years:31557600},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
 {id:'radiation',n:'Radiation Dose',em:'\u2622\uFE0F',col:'#C62828',u:['mGy','Gy','mSv','Sv','rad','rem'],base:{mGy:.001,Gy:1,mSv:.001,Sv:1,rad:.01,rem:.01},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
+{id:'potassium',n:'Potassium',em:'🧪',col:'#6A1B9A',u:['mEq/L','mmol/L'],conv:function(v,f,t){return f===t?v:v}},
+{id:'sodium',n:'Sodium / Osmolality',em:'🧂',col:'#1565C0',u:['mEq/L','mmol/L','mg/dL'],base:{'mEq/L':1,'mmol/L':1,'mg/dL':2.299},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
+{id:'albumin_conv',n:'Albumin',em:'🔬',col:'#2E7D32',u:['g/dL','g/L','µmol/L'],base:{'g/dL':1,'g/L':0.1,'µmol/L':0.0667},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
+{id:'pt_inr',n:'PT / INR Equivalents',em:'🩸',col:'#C62828',u:['seconds','ratio (INR)'],conv:function(v,f,t){if(f===t)return v;if(f==='seconds')return+(v/13).toFixed(2);return+(v*13).toFixed(1)}},
+{id:'osmol',n:'Osmolality / Osmolarity',em:'💧',col:'#0288D1',u:['mOsm/kg','mOsm/L','mmol/kg'],base:{'mOsm/kg':1,'mOsm/L':1,'mmol/kg':1},conv:function(v,f,t){return v}},
+{id:'pco2',n:'Blood Gas (pCO₂ / pO₂)',em:'🫁',col:'#00695C',u:['mmHg','kPa','cmH₂O'],base:{'mmHg':1,'kPa':7.5006,'cmH₂O':13.595},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
+
+{id:'magnesium',n:'Magnesium',em:'⚗️',col:'#558B2F',u:['mg/dL','mmol/L','mEq/L'],base:{'mg/dL':1,'mmol/L':0.4114,'mEq/L':0.8228},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'phosphate_conv',n:'Phosphate',em:'🧪',col:'#6A1B9A',u:['mg/dL','mmol/L','mEq/L'],base:{'mg/dL':1,'mmol/L':0.3229,'mEq/L':0.6458},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'tsh_conv',n:'TSH',em:'🫕',col:'#1B5E20',u:['µIU/mL','mIU/L','mU/L'],conv:function(v,f,t){return v}},
+{id:'t4_conv',n:'Thyroxine (T4 / Free T4)',em:'🫕',col:'#2E7D32',u:['ng/dL','pmol/L','nmol/L'],base:{'ng/dL':1,'pmol/L':12.87,'nmol/L':0.01287},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'t3_conv',n:'Triiodothyronine (T3)',em:'🫕',col:'#388E3C',u:['ng/dL','nmol/L','pmol/L'],base:{'ng/dL':1,'nmol/L':0.01536,'pmol/L':15.36},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'creatinine_kin',n:'Creatine Kinase (CK)',em:'🦴',col:'#E65100',u:['U/L','µkat/L','nkat/L'],base:{'U/L':1,'µkat/L':0.01667,'nkat/L':16.67},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'ntprobnp',n:'NT-proBNP / BNP',em:'❤️',col:'#C62828',u:['pg/mL','ng/L','pmol/L (BNP)','pmol/L (NT-proBNP)'],base:{'pg/mL':1,'ng/L':1,'pmol/L (BNP)':0.289,'pmol/L (NT-proBNP)':0.118},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}},
+{id:'lipase_conv',n:'Lipase / Amylase',em:'🫀',col:'#F4511E',u:['U/L','µkat/L'],base:{'U/L':1,'µkat/L':0.01667},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'oxygen_flow',n:'Oxygen Flow / FiO₂',em:'🫁',col:'#0288D1',u:['L/min (nasal cannula → FiO₂%)','FiO₂ (fraction)','FiO₂ (%)'],conv:function(v,f,t){
+  var frac;
+  if(f==='L/min (nasal cannula → FiO₂%)'){frac=Math.min(0.21+v*0.03,1)}
+  else if(f==='FiO₂ (%)'){frac=v/100}
+  else{frac=v}
+  if(t==='FiO₂ (fraction)')return+frac.toFixed(3);
+  if(t==='FiO₂ (%)')return+(frac*100).toFixed(1);
+  return+((frac-0.21)/0.03).toFixed(1)}},
+{id:'ptt_aptt',n:'aPTT / PT Seconds',em:'🩸',col:'#880E4F',u:['seconds','ratio (vs control 30s)','INR equivalent'],conv:function(v,f,t){
+  if(f===t)return v;
+  var sec=f==='seconds'?v:f==='ratio (vs control 30s)'?v*30:v*25;
+  if(t==='seconds')return+sec.toFixed(1);
+  if(t==='ratio (vs control 30s)')return+(sec/30).toFixed(2);
+  return+(sec/25).toFixed(2)}},
+{id:'fibrinogen',n:'Fibrinogen',em:'🩸',col:'#880E4F',u:['mg/dL','g/L','µmol/L'],base:{'mg/dL':1,'g/L':0.01,'µmol/L':0.0294},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'lactate_conv',n:'Lactate',em:'⚗️',col:'#4527A0',u:['mmol/L','mg/dL','mEq/L'],base:{'mmol/L':1,'mg/dL':0.111,'mEq/L':1},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'ammonia_conv',n:'Ammonia',em:'🧪',col:'#1B5E20',u:['µmol/L','µg/dL','mg/dL'],base:{'µmol/L':1,'µg/dL':1.703,'mg/dL':17.03},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'iron_conv',n:'Iron / TIBC / Ferritin',em:'🔩',col:'#BF360C',u:['µmol/L','µg/dL','mg/L'],base:{'µmol/L':1,'µg/dL':0.179,'mg/L':55.845},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'bnp_conv',n:'BNP Thresholds',em:'❤️',col:'#B71C1C',u:['pg/mL (BNP)','pg/mL (NT-proBNP)','pmol/L'],base:{'pg/mL (BNP)':1,'pg/mL (NT-proBNP)':4.6,'pmol/L':0.289},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}},
+{id:'ddi_conv',n:'D-dimer',em:'🩺',col:'#880E4F',u:['ng/mL FEU','µg/L FEU','mg/L FEU','nmol/L'],base:{'ng/mL FEU':1,'µg/L FEU':1,'mg/L FEU':0.001,'nmol/L':0.00185},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(4)}},
+{id:'procalc',n:'Procalcitonin',em:'🔬',col:'#01579B',u:['ng/mL','µg/L','pmol/L'],base:{'ng/mL':1,'µg/L':1,'pmol/L':23.2},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
+{id:'crp_conv',n:'C-Reactive Protein',em:'💊',col:'#E65100',u:['mg/L','mg/dL','nmol/L'],base:{'mg/L':1,'mg/dL':0.1,'nmol/L':9.524},conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(3)}},
 {id:'dose_calc',n:'Drug Dose Calculator',em:'\u{1F48A}',col:'#6A1B9A',conv:null},
 {id:'iv_calc',n:'IV Drip Rate Calculator',em:'\u{1F3E5}',col:'#283593',conv:null},
-{id:'bmi_ibw',n:'BMI + IBW + BSA',em:'\u{1F464}',col:'#E65100',conv:null}
+{id:'bmi_ibw',n:'BMI + IBW + BSA',em:'\u{1F464}',col:'#E65100',conv:null},
+{id:'pao2',n:'PaO₂ / SpO₂ Conversion',em:'\u{1FAC1}',col:'#00695C',u:['mmHg (PaO\u2082)','% SpO\u2082','kPa'],
+ conv:function(v,f,t){
+  if(f===t)return v;
+  var pao2;
+  if(f==='mmHg (PaO\u2082)'){pao2=v}else if(f==='% SpO\u2082'){
+    var lo=0,hi=700,mid=350;
+    for(var iter=0;iter<60;iter++){
+      mid=(lo+hi)/2;
+      var denom=mid*mid*mid+150*mid;
+      var sat=mid<=0?0:100/(23400/denom+1);
+      if(sat<v){lo=mid}else{hi=mid}
+    }
+    pao2=mid;
+  }else{pao2=v*7.5006}
+  if(t==='mmHg (PaO\u2082)')return+pao2.toFixed(1);
+  if(t==='kPa')return+(pao2/7.5006).toFixed(2);
+  if(pao2<=0)return 0;
+  var denom2=pao2*pao2*pao2+150*pao2;
+  return+(100/(23400/denom2+1)).toFixed(1)}},
+{id:'sodium_corr',n:'Corrected Sodium',em:'\u{1F9B4}',col:'#1565C0',u:['mEq/L (Na corrected)','mEq/L (measured Na)'],
+ conv:function(v,f,t){if(f===t)return v;return v}},
+{id:'dose_wt',n:'Weight-Based Dose',em:'\u{1F48A}',col:'#880E4F',u:['mg (from mg/kg)','mcg (from mcg/kg)','units'],
+ conv:function(v,f,t){return v}},
+{id:'inr_conv',n:'Warfarin INR Targets',em:'\u{1FA78}',col:'#C62828',u:['INR (standard 2-3)','INR (mechanical valve 2.5-3.5)'],
+ conv:function(v,f,t){if(f===t)return v;return f==='INR (standard 2-3)'?+(v*1.17).toFixed(2):+(v/1.17).toFixed(2)}},
+{id:'gg_corr',n:'Goldman-Galen Correction',em:'\u2697\uFE0F',col:'#4527A0',u:['corrected value','measured value'],
+ conv:function(v,f,t){return v}},
+{id:'cvp',n:'CVP / Venous Pressure',em:'\u{1FAA5}',col:'#0288D1',u:['mmHg','cmH\u2082O','kPa'],base:{'mmHg':1,'cmH\u2082O':0.7356,'kPa':7.5006},
+ conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}},
+{id:'speed',n:'Infusion Speed',em:'\u{1F4A7}',col:'#3949AB',u:['mL/hr','mL/min','drops/min (20gtts/mL)','L/hr'],
+ base:{'mL/hr':1,'mL/min':60,'drops/min (20gtts/mL)':3,'L/hr':1000},
+ conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}}
 ];
 
 // STATE
@@ -815,7 +1835,7 @@ function doCalc(id){
   if(!ok) return;
   var s=SX[id]||'M';
   var result=t.sex?t.calc(vals,s):t.calc(vals);
-  var interp=t.rawCalc?t.interp(String(result),vals):t.interp(String(result));
+  var interp=t.rawCalc?t.interp(String(result),vals):(t.sex?t.interp(String(result),s):t.interp(String(result)));
   var box=document.getElementById('res-'+id);
   // Result unit selector
   var ruSel='';
@@ -827,13 +1847,14 @@ function doCalc(id){
       +'</select></div>';
   }
   box.className='res show '+interp.cls;
+  var refsBlock=(t.refs&&t.refs.length)?('<div class="res-refs"><div class="refs-lbl">Reference Ranges</div>'
+    +'<div class="ref-tags">'+t.refs.map(function(r){return'<span class="rtag">'+r+'</span>'}).join('')+'</div></div>'):'';
   box.innerHTML='<div class="res-hd">'+interp.st+'</div>'
     +'<div class="res-val"><span class="res-n" id="rn-'+id+'">'+result+'</span>'
     +'<span class="res-u" id="ru-'+id+'">'+t.ru+'</span></div>'
     +'<div class="res-txt">'+interp.txt+'</div>'
     +ruSel
-    +'<div class="res-refs"><div class="refs-lbl">Reference Ranges</div>'
-    +'<div class="ref-tags">'+t.refs.map(function(r){return'<span class="rtag">'+r+'</span>'}).join('')+'</div></div>';
+    +refsBlock;
   box._raw=rawNum;
   box.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
