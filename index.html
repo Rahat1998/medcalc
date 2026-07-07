@@ -2,363 +2,737 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>MedCalc Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Roboto+Flex:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#006A60">
+<title>MedCalc Pro — Clinical Calculator Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════════════════════════════════
-   MEDCALC PRO — MATERIAL DESIGN 3 (Material You)
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   MEDCALC PRO — MATERIAL DESIGN 3  (Teal seed, light surface)
+   152 Clinical Calculators · 61 Unit Converters
+   ═══════════════════════════════════════════════════════════════════ */
 :root{
-  /* M3 color roles — Medical Teal seed */
-  --md-primary:#006A60;--md-on-primary:#FFFFFF;
-  --md-primary-container:#9FF2E3;--md-on-primary-container:#00201C;
-  --md-secondary:#4A635F;--md-secondary-container:#CCE8E2;--md-on-secondary-container:#06201C;
-  --md-tertiary:#456179;--md-tertiary-container:#CCE5FF;--md-on-tertiary-container:#001E2F;
-  --md-error:#BA1A1A;--md-error-container:#FFDAD6;--md-on-error-container:#410002;
-  --md-warn:#8A5300;--md-warn-container:#FFDDB3;--md-on-warn-container:#2B1700;
-  --md-surface:#FAFDFB;--md-surface-dim:#DAEAE5;--md-surface-bright:#FAFDFB;
-  --md-surface-container-lowest:#FFFFFF;--md-surface-container-low:#F3FBF8;
-  --md-surface-container:#EEF5F1;--md-surface-container-high:#E8EFEB;--md-surface-container-highest:#E2EAE6;
-  --md-on-surface:#161D1B;--md-on-surface-variant:#3F4946;
-  --md-outline:#6F7976;--md-outline-variant:#BEC9C5;
-  --md-inverse-surface:#2B3230;--md-inverse-on-surface:#ECF2EE;
-  --md-elev1:0px 1px 2px 0px rgba(0,0,0,0.3),0px 1px 3px 1px rgba(0,0,0,0.15);
-  --md-elev2:0px 1px 2px 0px rgba(0,0,0,0.3),0px 2px 6px 2px rgba(0,0,0,0.15);
-  --md-elev3:0px 1px 3px 0px rgba(0,0,0,0.3),0px 4px 8px 3px rgba(0,0,0,0.15);
-  --md-elev4:0px 2px 3px 0px rgba(0,0,0,0.3),0px 6px 10px 4px rgba(0,0,0,0.15);
-  --shape-xs:4px;--shape-sm:8px;--shape-md:12px;--shape-lg:16px;--shape-xl:28px;--shape-full:100px;
-  --font:'Roboto Flex','Roboto',system-ui,sans-serif;
-  --font-d:'Roboto','Roboto Flex',system-ui,sans-serif;
+  /* M3 Teal seed — full tonal palette */
+  --md-pri:#006A60;         --md-on-pri:#FFF;
+  --md-pri-c:#9FF2E3;       --md-on-pri-c:#00201C;
+  --md-sec:#4A635F;         --md-on-sec:#FFF;
+  --md-sec-c:#CCE8E2;       --md-on-sec-c:#06201C;
+  --md-ter:#456179;         --md-on-ter:#FFF;
+  --md-ter-c:#CCE5FF;       --md-on-ter-c:#001E2F;
+  --md-err:#BA1A1A;         --md-on-err:#FFF;
+  --md-err-c:#FFDAD6;       --md-on-err-c:#410002;
+  --md-warn:#7D5700;        --md-warn-c:#FFDDB3;--md-on-warn-c:#281900;
+
+  /* Surfaces */
+  --md-bg:#F4FAF8;
+  --md-surf:#F4FAF8;
+  --md-surf-var:#DAE5E1;
+  --md-surf-0:#FFFFFF;
+  --md-surf-1:#EEF5F2;
+  --md-surf-2:#E8EFEC;
+  --md-surf-3:#E2EAE7;
+  --md-surf-4:#E0E9E6;
+  --md-surf-5:#DBE4E1;
+
+  /* On-surface */
+  --md-on-surf:#161D1B;
+  --md-on-surf-var:#3F4946;
+  --md-outline:#6F7976;
+  --md-outline-var:#BEC9C5;
+
+  /* Inverse */
+  --md-inv-surf:#2B3230;
+  --md-inv-on-surf:#ECF2EE;
+  --md-inv-pri:#83D5C6;
+
+  /* Shape */
+  --shape-none:0px;
+  --shape-xs:4px;
+  --shape-sm:8px;
+  --shape-md:12px;
+  --shape-lg:16px;
+  --shape-xl:28px;
+  --shape-full:9999px;
+
+  /* Type */
+  --font:'Roboto',system-ui,sans-serif;
+  --font-d:'Google Sans','Roboto',system-ui,sans-serif;
   --mono:'Roboto Mono',monospace;
-  --motion-standard:cubic-bezier(0.2,0,0,1);
-  --motion-emphasized:cubic-bezier(0.3,0,0,1);
+
+  /* Elevation (M3 tonal overlay on surface) */
+  --elev1:0 1px 2px rgba(0,0,0,.12),0 1px 3px 1px rgba(0,0,0,.08);
+  --elev2:0 1px 2px rgba(0,0,0,.12),0 2px 6px 2px rgba(0,0,0,.08);
+  --elev3:0 4px 8px 3px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.12);
+
+  /* Motion */
+  --dur-short1:50ms;--dur-short2:100ms;--dur-short3:150ms;--dur-short4:200ms;
+  --dur-med1:250ms;--dur-med2:300ms;--dur-long1:350ms;--dur-long2:400ms;
+  --ease-std:cubic-bezier(0.2,0,0,1);
+  --ease-dec:cubic-bezier(0,0,0,1);
+  --ease-acc:cubic-bezier(0.3,0,1,1);
+  --ease-spring:cubic-bezier(0.34,1.4,0.64,1);
 }
+
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font);background:var(--md-surface);min-height:100vh;color:var(--md-on-surface)}
+body{font-family:var(--font);background:var(--md-bg);color:var(--md-on-surf);min-height:100vh;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--md-outline-var);border-radius:4px}
 
-/* ── M3 State Layer Utility (ripple-like hover/press) ── */
-@keyframes md-ripple{from{opacity:.16}to{opacity:0}}
-
-/* ── Top App Bar (M3 Center-aligned Small) ── */
-.bar{
-  position:sticky;top:0;z-index:200;
-  height:64px;display:flex;align-items:center;padding:0 8px 0 16px;gap:12px;
-  background:var(--md-surface-container);
-  box-shadow:var(--md-elev1)
+/* ══ TOP APP BAR (M3 Small) ═════════════════════════════════════ */
+.app-bar{
+  position:sticky;top:0;z-index:100;
+  height:64px;display:flex;align-items:center;
+  padding:0 16px;gap:12px;
+  background:var(--md-surf-2);
+  box-shadow:var(--elev1)
 }
-.bar-ico{
+.app-bar-logo{
   width:40px;height:40px;border-radius:var(--shape-md);
-  background:var(--md-primary-container);
-  display:flex;align-items:center;justify-content:center;font-size:20px;
-  flex-shrink:0;color:var(--md-on-primary-container)
+  background:var(--md-pri);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,106,96,.35)
 }
-.bar-title{font-size:18px;font-weight:500;color:var(--md-on-surface);letter-spacing:0;font-family:var(--font-d)}
-.bar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.bar-tag{
-  font-size:11px;font-weight:600;letter-spacing:.2px;
-  background:var(--md-secondary-container);color:var(--md-on-secondary-container);
-  padding:6px 12px;border-radius:var(--shape-full);white-space:nowrap
+.app-bar-logo svg{display:block}
+.app-bar-text{flex:1;min-width:0}
+.app-bar-title{
+  font-family:var(--font-d);font-size:22px;font-weight:500;
+  color:var(--md-on-surf);letter-spacing:0;line-height:1.2
+}
+.app-bar-sub{
+  font-size:11px;color:var(--md-on-surf-var);letter-spacing:.3px;margin-top:1px
+}
+.app-bar-badge{
+  font-family:var(--font-d);font-size:11px;font-weight:500;
+  padding:4px 12px;border-radius:var(--shape-full);
+  background:var(--md-pri-c);color:var(--md-on-pri-c);
+  white-space:nowrap;flex-shrink:0
 }
 
-/* ── Tabs (M3 Primary Tabs) ── */
+/* ══ TAB BAR (M3 Primary Tabs) ════════════════════════════════ */
 .tabs{
-  position:sticky;top:64px;z-index:199;
-  display:flex;background:var(--md-surface);
-  border-bottom:1px solid var(--md-surface-container-highest)
+  position:sticky;top:64px;z-index:99;
+  display:flex;background:var(--md-surf-0);
+  border-bottom:1px solid var(--md-outline-var)
 }
 .tab{
-  flex:1;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:14px;font-weight:600;letter-spacing:.1px;color:var(--md-on-surface-variant);
-  cursor:pointer;user-select:none;position:relative;transition:color .2s var(--motion-standard);
-  font-family:var(--font-d)
+  flex:1;height:48px;display:flex;align-items:center;
+  justify-content:center;gap:8px;
+  font-family:var(--font-d);font-size:14px;font-weight:500;
+  letter-spacing:.1px;color:var(--md-on-surf-var);
+  cursor:pointer;user-select:none;position:relative;
+  transition:color var(--dur-med1) var(--ease-std)
 }
-.tab.on{color:var(--md-primary)}
-.tab.on::after{
-  content:'';position:absolute;bottom:0;left:25%;width:50%;height:3px;
-  background:var(--md-primary);border-radius:3px 3px 0 0
+.tab-icon{font-size:20px;transition:transform var(--dur-short4) var(--ease-spring)}
+.tab.on{color:var(--md-pri)}
+.tab.on .tab-icon{transform:scale(1.12)}
+.tab-indicator{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--md-pri);border-radius:3px 3px 0 0;
+  transform:scaleX(0);transition:transform var(--dur-med1) var(--ease-std)
 }
-.tab:active{background:var(--md-surface-container-low)}
+.tab.on .tab-indicator{transform:scaleX(1)}
 
-/* ── Panels ── */
-.panel{display:none;padding:12px}
+/* Ripple state layer */
+.tab::before{
+  content:'';position:absolute;inset:0;
+  background:var(--md-pri);opacity:0;
+  transition:opacity var(--dur-short3)
+}
+.tab:active::before{opacity:.08}
+
+/* ══ PANELS ════════════════════════════════════════════════════ */
+.panel{display:none;padding:16px 12px;max-width:640px;margin:0 auto}
 .panel.on{display:block}
 
-/* ── Cards (M3 Elevated/Filled Card) ── */
+/* ══ M3 CARDS ════════════════════════════════════════════════ */
 .card{
-  background:var(--md-surface-container-low);border-radius:var(--shape-lg);
-  box-shadow:none;border:1px solid var(--md-surface-container-highest);
+  background:var(--md-surf-0);border-radius:var(--shape-lg);
+  border:1px solid var(--md-outline-var);
   margin-bottom:12px;overflow:hidden
 }
 
-/* ── Search Field (M3 Search Bar) ── */
-.sh{padding:16px 14px 0}
-.sh-lbl{
-  display:flex;align-items:center;gap:8px;margin-bottom:12px;
-  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  color:var(--md-on-surface-variant);font-family:var(--font-d)
+/* ══ SEARCH (M3 Search Bar) ══════════════════════════════════ */
+.search-wrap{padding:16px 16px 0}
+.search-label{
+  font-family:var(--font-d);font-size:11px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:var(--md-on-surf-var);
+  display:flex;align-items:center;gap:8px;margin-bottom:12px
 }
-.sh-lbl::before{
+.search-label::before{
   content:'';width:4px;height:14px;border-radius:2px;
-  background:var(--md-primary);display:inline-block
+  background:var(--md-pri);display:inline-block;flex-shrink:0
 }
-.sh-box{
-  display:flex;align-items:center;gap:10px;background:var(--md-surface-container-high);
-  border-radius:var(--shape-full);padding:12px 16px;
-  border:none;transition:all .2s var(--motion-standard)
+.search-bar{
+  display:flex;align-items:center;gap:10px;
+  height:52px;padding:0 16px;
+  background:var(--md-surf-3);
+  border-radius:var(--shape-full);
+  border:none;
+  transition:background var(--dur-short4) var(--ease-std),
+             box-shadow var(--dur-short4) var(--ease-std)
 }
-.sh-box:focus-within{
-  background:var(--md-surface-container-highest);
-  box-shadow:inset 0 0 0 2px var(--md-primary)
+.search-bar:focus-within{
+  background:var(--md-surf-0);
+  box-shadow:inset 0 0 0 2px var(--md-pri)
 }
-.sh-box input{
-  border:none;background:none;outline:none;font-size:14px;font-weight:400;
-  color:var(--md-on-surface);width:100%;font-family:var(--font)
+.search-bar input{
+  flex:1;border:none;background:none;outline:none;
+  font-size:16px;font-family:var(--font);color:var(--md-on-surf);
+  caret-color:var(--md-pri)
 }
-.sh-box input::placeholder{color:var(--md-on-surface-variant)}
+.search-bar input::placeholder{color:var(--md-on-surf-var)}
+.search-icon{color:var(--md-on-surf-var);font-size:22px;flex-shrink:0}
 
-/* ── Filter Chips (M3 Filter Chip) ── */
-.chips{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px 14px}
-.chip{
-  padding:7px 16px;border-radius:var(--shape-sm);font-size:13px;font-weight:500;
-  cursor:pointer;border:1px solid var(--md-outline-variant);color:var(--md-on-surface-variant);
-  background:transparent;white-space:nowrap;transition:all .16s var(--motion-standard);
-  user-select:none;font-family:var(--font-d)
+/* ══ FILTER CHIPS (M3 Filter Chip) ══════════════════════════ */
+.chips-scroll{
+  display:flex;gap:8px;padding:12px 16px 16px;
+  overflow-x:auto;scrollbar-width:none
 }
-.chip:active{transform:scale(.95)}
-.chip.on{
-  background:var(--md-secondary-container);border-color:transparent;
-  color:var(--md-on-secondary-container);font-weight:600
+.chips-scroll::-webkit-scrollbar{display:none}
+.m3-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  height:32px;padding:0 16px;
+  border-radius:var(--shape-sm);
+  border:1px solid var(--md-outline);
+  background:transparent;
+  font-family:var(--font-d);font-size:14px;font-weight:500;
+  color:var(--md-on-surf-var);
+  cursor:pointer;user-select:none;white-space:nowrap;
+  transition:all var(--dur-short3) var(--ease-std);
+  position:relative;overflow:hidden
+}
+.m3-chip::before{
+  content:'';position:absolute;inset:0;
+  background:var(--md-on-surf);opacity:0;
+  transition:opacity var(--dur-short3)
+}
+.m3-chip:active::before{opacity:.08}
+.m3-chip.on{
+  background:var(--md-sec-c);
+  border-color:var(--md-sec-c);
+  color:var(--md-on-sec-c)
+}
+.m3-chip .chip-check{
+  font-size:16px;width:0;overflow:hidden;
+  transition:width var(--dur-short4) var(--ease-std)
+}
+.m3-chip.on .chip-check{width:18px}
+
+/* ══ LIST (M3 List) ══════════════════════════════════════════ */
+.m3-list{padding:4px 0}
+.m3-li{
+  display:flex;align-items:center;gap:16px;
+  min-height:56px;padding:8px 16px;
+  cursor:pointer;user-select:none;position:relative;
+  border-bottom:1px solid var(--md-outline-var);
+  transition:background var(--dur-short2)
+}
+.m3-li:last-child{border-bottom:none}
+.m3-li::before{
+  content:'';position:absolute;inset:0;
+  background:var(--md-on-surf);opacity:0;
+  transition:opacity var(--dur-short2)
+}
+.m3-li:active::before{opacity:.08}
+.m3-li.on{background:rgba(0,106,96,.08)}
+.li-leading{
+  width:40px;height:40px;border-radius:var(--shape-sm);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:20px;position:relative;
+  background:var(--md-surf-2)
+}
+.li-content{flex:1;min-width:0}
+.li-headline{
+  font-family:var(--font-d);font-size:16px;font-weight:500;
+  color:var(--md-on-surf);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;line-height:1.4
+}
+.li-supporting{
+  font-size:13px;color:var(--md-on-surf-var);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+.li-trailing{
+  color:var(--md-outline);font-size:20px;flex-shrink:0;
+  display:flex;align-items:center
+}
+.m3-empty{
+  padding:40px 16px;text-align:center;
+  font-size:14px;color:var(--md-on-surf-var)
 }
 
-/* ── List Items (M3 List) ── */
-.lst{padding:4px 0}
-.li{
-  display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;
-  border-radius:0;transition:background .12s var(--motion-standard);user-select:none
+/* ══ MODAL ══════════════════════════════════════════════════ */
+.modal-scrim{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.5);
+  transition:opacity var(--dur-med1) var(--ease-std)
 }
-.li:active{background:var(--md-surface-container-high)}
-.li.on{background:var(--md-secondary-container)}
-.ico{
-  width:40px;height:40px;border-radius:var(--shape-md);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px
+.modal-scrim.open{display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:600px){
+  .modal-scrim.open{align-items:center}
 }
-.li-info{flex:1;min-width:0}
-.li-name{font-size:14px;font-weight:500;color:var(--md-on-surface);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-d)}
-.li-sub{font-size:12px;color:var(--md-on-surface-variant);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.li-arr{color:var(--md-outline);font-size:14px;flex-shrink:0}
-.empty{padding:32px;text-align:center;color:var(--md-on-surface-variant);font-size:14px;font-weight:400}
 
-/* ── Calculator Header (M3 Hero Surface) ── */
-.cc{display:none}
-.cc-head{padding:24px 16px 20px;color:var(--md-on-primary);position:relative;overflow:hidden;background:var(--md-primary)}
-.cc-close{
+.modal-sheet{
+  width:100%;max-width:560px;
+  max-height:92dvh;overflow-y:auto;
+  background:var(--md-surf-0);
+  border-radius:var(--shape-xl) var(--shape-xl) 0 0;
+  box-shadow:0 -4px 32px rgba(0,0,0,.18),0 -1px 0 rgba(0,0,0,.08);
+  animation:sheet-up var(--dur-long1) var(--ease-dec);
+  position:relative
+}
+@media(min-width:600px){
+  .modal-sheet{
+    border-radius:var(--shape-xl);
+    animation:dialog-in var(--dur-med2) var(--ease-dec)
+  }
+}
+@keyframes sheet-up{from{transform:translateY(100%)}to{transform:none}}
+@keyframes dialog-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+
+/* Drag handle (mobile) */
+.modal-handle{
+  width:32px;height:4px;border-radius:2px;
+  background:var(--md-outline-var);
+  margin:12px auto 4px;display:block
+}
+@media(min-width:600px){.modal-handle{display:none}}
+
+/* ══ MODAL CLOSE BUTTON (M3 Icon Button) ══════════════════ */
+.modal-close-btn{
   position:absolute;top:12px;right:12px;z-index:10;
   width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,.14);border:none;cursor:pointer;color:#fff;
-  font-size:18px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--font);transition:background .14s var(--motion-standard)
+  background:var(--md-surf-2);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--md-on-surf-var);
+  transition:background var(--dur-short3) var(--ease-std)
 }
-.cc-close:active{background:rgba(255,255,255,.28)}
-.cc-row{display:flex;align-items:flex-start;gap:14px;padding-right:40px;position:relative;z-index:1}
-.cc-ico{
-  width:48px;height:48px;border-radius:var(--shape-md);font-size:24px;
-  background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;
-  flex-shrink:0
+.modal-close-btn:hover{background:var(--md-surf-3)}
+.modal-close-btn:active{background:var(--md-surf-4)}
+.modal-close-btn .material-symbols-outlined{font-size:22px}
+
+/* ══ CALCULATOR HERO (inside modal) ═════════════════════════ */
+.calc-hero{
+  padding:20px 16px 18px;
+  color:var(--md-on-pri);
+  position:relative;overflow:hidden
 }
-.cc-name{font-size:18px;font-weight:500;line-height:1.3;letter-spacing:0;font-family:var(--font-d)}
-.cc-abbr{font-size:11px;opacity:.85;margin-top:4px;letter-spacing:.3px;font-weight:500}
-.cc-desc{font-size:13px;opacity:.92;margin-top:12px;line-height:1.7;position:relative;z-index:1}
-.cc-fml{
-  display:inline-flex;align-items:center;background:rgba(255,255,255,.16);border-radius:var(--shape-sm);
-  padding:6px 12px;font-size:12px;margin-top:10px;font-family:var(--mono);letter-spacing:.2px;
+.calc-hero::after{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:200px;height:200px;
+  border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none
+}
+.calc-hero-row{
+  display:flex;align-items:flex-start;gap:14px;
+  padding-right:48px;position:relative;z-index:1
+}
+.calc-hero-icon{
+  width:52px;height:52px;border-radius:var(--shape-lg);
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0
+}
+.calc-hero-name{
+  font-family:var(--font-d);font-size:20px;font-weight:500;
+  color:#fff;line-height:1.2;letter-spacing:.15px
+}
+.calc-hero-abbr{
+  font-size:11px;color:rgba(255,255,255,.75);margin-top:4px;
+  letter-spacing:.4px;font-weight:500;text-transform:uppercase
+}
+.calc-hero-desc{
+  font-size:13px;color:rgba(255,255,255,.88);
+  margin-top:12px;line-height:1.75;position:relative;z-index:1
+}
+.calc-hero-formula{
+  display:inline-flex;align-items:center;
+  background:rgba(0,0,0,.2);border-radius:var(--shape-xs);
+  padding:5px 12px;font-size:12px;margin-top:10px;
+  font-family:var(--mono);color:rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.15);
   position:relative;z-index:1
 }
-.cc-body{padding:18px 16px;background:var(--md-surface-container-low)}
 
-/* ── Form Fields (M3 Outlined Text Field) ── */
-.fld{margin-bottom:14px}
-.fld-lbl{
-  font-size:12px;font-weight:500;color:var(--md-on-surface-variant);
-  letter-spacing:.1px;display:block;margin-bottom:7px;font-family:var(--font-d)
-}
-.fld-row{
-  display:flex;border:1px solid var(--md-outline);border-radius:var(--shape-xs);
-  overflow:hidden;transition:all .18s var(--motion-standard);background:var(--md-surface-container-lowest)
-}
-.fld-row:focus-within{border:2px solid var(--md-primary)}
-.fld-row.err{border:2px solid var(--md-error)}
-.inp{
-  flex:1;border:none;outline:none;padding:13px 14px;font-size:15px;
-  font-family:var(--font);color:var(--md-on-surface);background:transparent;min-width:0;font-weight:400
-}
-.inp::placeholder{color:var(--md-outline)}
-.usel{
-  border:none;outline:none;background:var(--md-surface-container-high);padding:0 26px 0 12px;
-  font-size:12px;font-weight:600;color:var(--md-primary);font-family:var(--font-d);cursor:pointer;
-  border-left:1px solid var(--md-outline-variant);min-width:78px;-webkit-appearance:none;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23006A60' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 6px center;background-color:var(--md-surface-container-high)
-}
-.ubadge{
-  background:var(--md-surface-container-high);padding:0 13px;font-size:12px;font-weight:600;color:var(--md-on-surface-variant);
-  border-left:1px solid var(--md-outline-variant);display:flex;align-items:center;
-  white-space:nowrap;font-family:var(--mono)
+/* ══ CALC BODY (inside modal) ═══════════════════════════════ */
+.calc-body{
+  padding:20px 16px;
+  background:var(--md-surf-0)
 }
 
-/* ── Sex Toggle (M3 Segmented Button) ── */
-.sex-row{display:flex;gap:0;margin-bottom:14px;border:1px solid var(--md-outline);border-radius:var(--shape-full);overflow:hidden}
-.sx{
-  flex:1;padding:10px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;
-  color:var(--md-on-surface-variant);background:transparent;transition:all .14s var(--motion-standard);
-  user-select:none;font-family:var(--font-d);border-right:1px solid var(--md-outline)
+/* ══ M3 OUTLINED TEXT FIELD ═════════════════════════════════ */
+.m3-field{margin-bottom:16px}
+.m3-field-label{
+  font-size:12px;font-weight:500;color:var(--md-on-surf-var);
+  letter-spacing:.3px;display:block;margin-bottom:8px
 }
-.sx:last-child{border-right:none}
-.sx:active{background:var(--md-surface-container-high)}
-.sx.on{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.m3-field-box{
+  display:flex;align-items:stretch;
+  border:1px solid var(--md-outline);
+  border-radius:var(--shape-xs);
+  background:var(--md-surf-0);
+  transition:border-color var(--dur-short3),box-shadow var(--dur-short3)
+}
+.m3-field-box:focus-within{
+  border-color:var(--md-pri);border-width:2px;
+}
+.m3-field-box.err{border-color:var(--md-err);border-width:2px}
+.m3-input{
+  flex:1;border:none;outline:none;
+  padding:14px 16px;font-size:16px;
+  font-family:var(--font);color:var(--md-on-surf);
+  background:transparent;min-width:0;
+  caret-color:var(--md-pri)
+}
+.m3-input::placeholder{color:var(--md-outline)}
+.m3-unit-sel{
+  border:none;outline:none;
+  background:var(--md-surf-1);
+  padding:0 28px 0 12px;font-size:13px;font-weight:500;
+  color:var(--md-pri);font-family:var(--font-d);cursor:pointer;
+  border-left:1px solid var(--md-outline);
+  min-width:80px;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23006A60' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center
+}
+.m3-unit-badge{
+  background:var(--md-surf-1);padding:0 14px;
+  font-size:13px;font-weight:500;color:var(--md-on-surf-var);
+  border-left:1px solid var(--md-outline);
+  display:flex;align-items:center;white-space:nowrap;
+  font-family:var(--mono)
+}
 
-/* ── Buttons (M3 Filled + Outlined) ── */
+/* ══ M3 SEGMENTED BUTTON (Sex) ═════════════════════════════ */
+.m3-seg{
+  display:flex;border:1px solid var(--md-outline);
+  border-radius:var(--shape-full);overflow:hidden;margin-bottom:16px
+}
+.m3-seg-btn{
+  flex:1;height:40px;display:flex;align-items:center;justify-content:center;
+  gap:8px;font-family:var(--font-d);font-size:14px;font-weight:500;
+  color:var(--md-on-surf-var);cursor:pointer;user-select:none;
+  border-right:1px solid var(--md-outline);
+  position:relative;overflow:hidden;
+  transition:background var(--dur-short3),color var(--dur-short3)
+}
+.m3-seg-btn:last-child{border-right:none}
+.m3-seg-btn::before{
+  content:'';position:absolute;inset:0;
+  background:var(--md-pri);opacity:0;
+  transition:opacity var(--dur-short3)
+}
+.m3-seg-btn:active::before{opacity:.08}
+.m3-seg-btn.on{
+  background:var(--md-sec-c);color:var(--md-on-sec-c)
+}
+.m3-seg-check{font-size:16px;opacity:0;width:0;overflow:hidden;
+  transition:all var(--dur-short4) var(--ease-std)}
+.m3-seg-btn.on .m3-seg-check{opacity:1;width:20px}
+
+/* ══ M3 FILLED BUTTON + OUTLINED BUTTON ════════════════════ */
 .btns{display:flex;gap:10px;margin-top:20px}
-.btn{
-  padding:11px 24px;border-radius:var(--shape-full);font-size:14px;font-weight:600;
-  cursor:pointer;border:none;font-family:var(--font-d);
-  display:inline-flex;align-items:center;gap:8px;letter-spacing:.1px;
-  transition:all .16s var(--motion-standard);user-select:none
+.m3-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:40px;padding:0 24px;border-radius:var(--shape-full);
+  font-family:var(--font-d);font-size:14px;font-weight:500;
+  letter-spacing:.1px;cursor:pointer;border:none;
+  position:relative;overflow:hidden;
+  transition:box-shadow var(--dur-short3) var(--ease-std)
 }
-.btn-p{background:var(--md-primary);color:var(--md-on-primary);box-shadow:var(--md-elev1)}
-.btn-p:active{box-shadow:none;background:#005048}
-.btn-s{background:transparent;color:var(--md-primary);border:1px solid var(--md-outline)}
-.btn-s:active{background:var(--md-secondary-container)}
-
-/* ── Result Cards (M3 Tonal Surface) ── */
-.res{
-  margin-top:16px;border-radius:var(--shape-lg);overflow:hidden;
-  display:none;box-shadow:var(--md-elev1)
+.m3-btn::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity var(--dur-short3)
 }
-.res.show{display:block;animation:md-grow .28s var(--motion-emphasized)}
-@keyframes md-grow{from{opacity:0;transform:scaleY(.92) translateY(8px);transform-origin:top}to{opacity:1;transform:none}}
-.res-hd{
-  padding:12px 16px;font-size:11px;font-weight:700;
-  letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px;
-  font-family:var(--font-d)
+.m3-btn-filled{
+  background:var(--md-pri);color:var(--md-on-pri);
+  box-shadow:var(--elev1)
 }
-.res-hd::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.res-val{padding:14px 16px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.res-n{font-size:34px;font-weight:400;font-family:var(--mono);letter-spacing:-.5px}
-.res-u{font-size:13px;font-weight:500;opacity:.75}
-.res-txt{padding:11px 16px;font-size:13px;line-height:1.75;opacity:.92}
-.res-ru{display:flex;align-items:center;gap:8px;padding:9px 16px;background:rgba(0,0,0,.04)}
-.res-ru-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;opacity:.7}
-.res-ru-sel{
-  border:1px solid currentColor;border-radius:var(--shape-xs);padding:5px 24px 5px 10px;opacity:.85;
-  font-size:12px;font-weight:600;font-family:var(--font-d);background:transparent;cursor:pointer;
-  -webkit-appearance:none;appearance:none;color:inherit;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23161D1B' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 6px center;outline:none
+.m3-btn-filled::before{background:#fff}
+.m3-btn-filled:hover::before{opacity:.08}
+.m3-btn-filled:active{box-shadow:none}
+.m3-btn-filled:active::before{opacity:.12}
+.m3-btn-outlined{
+  background:transparent;color:var(--md-pri);
+  border:1px solid var(--md-outline)
 }
-.res-refs{padding:11px 16px 14px;background:rgba(0,0,0,.025)}
-.refs-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;opacity:.65}
-.ref-tags{display:flex;flex-wrap:wrap;gap:6px}
-.rtag{padding:4px 11px;border-radius:var(--shape-xs);font-size:11px;font-family:var(--mono);font-weight:500}
+.m3-btn-outlined::before{background:var(--md-pri)}
+.m3-btn-outlined:hover::before{opacity:.08}
+.m3-btn-outlined:active::before{opacity:.12}
 
-/* ── M3 Tonal Result Themes (using container/on-container pairs) ── */
-.rn{background:var(--md-surface-container-lowest)}
-.rn .res-hd{background:#2E7D32;color:#fff}.rn .res-hd::before{background:rgba(255,255,255,.7)}
-.rn .res-val,.rn .res-txt{color:#1B5E20}.rn .res-ru{color:#1B5E20}.rn .rtag{background:#C8E6C9;color:#1B5E20}
+/* ══ RESULT (M3 Tonal Surface) ══════════════════════════════ */
+.m3-result{
+  margin-top:16px;border-radius:var(--shape-lg);
+  overflow:hidden;display:none;
+  border:1px solid var(--md-outline-var)
+}
+.m3-result.show{
+  display:block;
+  animation:result-in var(--dur-long1) var(--ease-dec)
+}
+@keyframes result-in{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+.res-header{
+  padding:14px 16px;color:#fff;
+  font-family:var(--font-d);font-size:11px;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px
+}
+.res-header-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.7);flex-shrink:0
+}
+.res-value-row{
+  padding:16px 16px 12px;
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap
+}
+.res-number{
+  font-size:40px;font-weight:300;
+  font-family:var(--mono);letter-spacing:-2px;line-height:1
+}
+.res-unit{font-size:14px;font-weight:500;opacity:.7;letter-spacing:.2px}
+.res-interp{
+  padding:12px 16px;font-size:13px;line-height:1.8;
+  border-top:1px solid rgba(255,255,255,.1)
+}
+.res-unit-row{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 16px;
+  background:rgba(0,0,0,.06);
+  border-top:1px solid rgba(0,0,0,.08)
+}
+.res-unit-label{
+  font-size:11px;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;opacity:.65;flex-shrink:0
+}
+.res-unit-sel{
+  border:1px solid rgba(0,0,0,.2);border-radius:var(--shape-xs);
+  padding:5px 24px 5px 10px;font-size:12px;font-weight:600;
+  font-family:var(--font-d);background:rgba(255,255,255,.2);
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='white' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 6px center;
+  outline:none;color:#fff
+}
+.res-refs-wrap{
+  padding:12px 16px 16px;
+  background:rgba(0,0,0,.04);
+  border-top:1px solid rgba(0,0,0,.06)
+}
+.res-refs-label{
+  font-size:11px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;opacity:.55;margin-bottom:8px
+}
+.res-refs-tags{display:flex;flex-wrap:wrap;gap:6px}
+.res-ref-tag{
+  padding:4px 12px;border-radius:var(--shape-xs);
+  font-size:11px;font-family:var(--mono);font-weight:500
+}
 
-.rl{background:var(--md-surface-container-lowest)}
-.rl .res-hd{background:var(--md-primary);color:#fff}.rl .res-hd::before{background:rgba(255,255,255,.7)}
-.rl .res-val,.rl .res-txt{color:var(--md-on-primary-container)}.rl .res-ru{color:var(--md-on-primary-container)}.rl .rtag{background:var(--md-primary-container);color:var(--md-on-primary-container)}
+/* Result colour themes */
+.rn .res-header{background:linear-gradient(135deg,#1B6E3B,#2E7D32)}
+.rn .res-value-row{background:#F1F8E9;color:#1B5E20}
+.rn .res-interp{background:#F1F8E9;color:#2E7D32}
+.rn .res-refs-wrap{background:#E8F5E9}.rn .res-ref-tag{background:#C8E6C9;color:#1B5E20}
 
-.rh{background:var(--md-surface-container-lowest)}
-.rh .res-hd{background:var(--md-error);color:#fff}.rh .res-hd::before{background:rgba(255,255,255,.7)}
-.rh .res-val,.rh .res-txt{color:var(--md-on-error-container)}.rh .res-ru{color:var(--md-on-error-container)}.rh .rtag{background:var(--md-error-container);color:var(--md-on-error-container)}
+.rl .res-header{background:linear-gradient(135deg,var(--md-pri),#00897B)}
+.rl .res-value-row{background:var(--md-pri-c);color:var(--md-on-pri-c)}
+.rl .res-interp{background:var(--md-pri-c);color:var(--md-on-pri-c)}
+.rl .res-refs-wrap{background:#E0F2F1}.rl .res-ref-tag{background:#B2DFDB;color:#004D40}
 
-.rw{background:var(--md-surface-container-lowest)}
-.rw .res-hd{background:var(--md-warn);color:#fff}.rw .res-hd::before{background:rgba(255,255,255,.7)}
-.rw .res-val,.rw .res-txt{color:var(--md-on-warn-container)}.rw .res-ru{color:var(--md-on-warn-container)}.rw .rtag{background:var(--md-warn-container);color:var(--md-on-warn-container)}
+.rh .res-header{background:linear-gradient(135deg,#9F1010,#C62828)}
+.rh .res-value-row{background:#FFF5F5;color:#7F0000}
+.rh .res-interp{background:#FFF5F5;color:#C62828}
+.rh .res-refs-wrap{background:var(--md-err-c)}.rh .res-ref-tag{background:#FFCDD2;color:#7F0000}
 
-.ri{background:var(--md-surface-container-lowest)}
-.ri .res-hd{background:var(--md-tertiary);color:#fff}.ri .res-hd::before{background:rgba(255,255,255,.7)}
-.ri .res-val,.ri .res-txt{color:var(--md-on-tertiary-container)}.ri .res-ru{color:var(--md-on-tertiary-container)}.ri .rtag{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+.rw .res-header{background:linear-gradient(135deg,var(--md-warn),#BF6F00)}
+.rw .res-value-row{background:#FFFBF0;color:#4A3000}
+.rw .res-interp{background:#FFFBF0;color:#7D5700}
+.rw .res-refs-wrap{background:var(--md-warn-c)}.rw .res-ref-tag{background:#FFE0B2;color:#3E2800}
 
-/* ── Converter UI ── */
-.cv-hd{padding:24px 16px 20px;color:#fff;position:relative;overflow:hidden;background:var(--md-tertiary)}
-.cv-swap{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--md-surface-container-highest);
-  border:none;cursor:pointer;color:var(--md-primary);font-size:20px;
+.ri .res-header{background:linear-gradient(135deg,var(--md-ter),#1976D2)}
+.ri .res-value-row{background:var(--md-ter-c);color:var(--md-on-ter-c)}
+.ri .res-interp{background:var(--md-ter-c);color:var(--md-on-ter-c)}
+.ri .res-refs-wrap{background:#E3F2FD}.ri .res-ref-tag{background:#BBDEFB;color:#0D2F5A}
+
+/* ══ CONVERTER MODAL ════════════════════════════════════════ */
+.conv-hero{
+  padding:20px 16px 18px;
+  color:var(--md-on-pri);
+  position:relative;overflow:hidden
+}
+.conv-hero::after{
+  content:'';position:absolute;top:-50px;right:-50px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,.07);pointer-events:none
+}
+.conv-icon{font-size:28px;margin-bottom:6px;position:relative;z-index:1}
+.conv-name{
+  font-family:var(--font-d);font-size:20px;font-weight:500;
+  color:#fff;padding-right:48px;line-height:1.2;
+  position:relative;z-index:1
+}
+.conv-units{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px;position:relative;z-index:1}
+.conv-swap-btn{
   display:flex;align-items:center;justify-content:center;
-  margin:10px auto;box-shadow:var(--md-elev2);
-  transition:transform .24s var(--motion-emphasized);user-select:none
+  width:44px;height:44px;border-radius:50%;
+  background:var(--md-surf-0);
+  border:none;cursor:pointer;color:var(--md-pri);
+  font-size:24px;margin:10px auto;
+  box-shadow:var(--elev2);
+  transition:transform var(--dur-med1) var(--ease-spring),
+             box-shadow var(--dur-short3)
 }
-.cv-swap:active{transform:rotate(180deg) scale(.9)}
-.cv-out{
-  margin-top:12px;padding:14px 16px;
-  background:var(--md-primary-container);
-  border-radius:var(--shape-md);
-  font-size:17px;font-weight:600;color:var(--md-on-primary-container);
-  font-family:var(--mono);min-height:48px;word-break:break-all;letter-spacing:.1px
+.conv-swap-btn:active{transform:rotate(180deg);box-shadow:none}
+.conv-result{
+  margin-top:12px;padding:16px;
+  background:var(--md-sec-c);border-radius:var(--shape-md);
+  font-family:var(--mono);font-size:18px;font-weight:500;
+  color:var(--md-on-sec-c);min-height:52px;word-break:break-all
 }
 
-/* ── Biochem badge ── */
-.bcat{
-  display:inline-flex;align-items:center;gap:4px;
-  background:var(--md-tertiary-container);
-  border-radius:var(--shape-full);
-  padding:3px 10px;font-size:11px;font-weight:600;color:var(--md-on-tertiary-container);
-  letter-spacing:.2px;margin-top:6px
+/* ══ SPECIAL PAGES ══════════════════════════════════════════ */
+.sp-result{
+  margin-top:12px;padding:16px;border-radius:var(--shape-md);
+  background:var(--md-pri-c);color:var(--md-on-pri-c);
+  font-family:var(--mono);font-size:13px;line-height:2;min-height:46px
 }
+
+/* ══ FAB-STYLE CLEAR BUTTON ═════════════════════════════════ */
+.cc-close{display:none} /* legacy — replaced by modal-close-btn */
 </style>
 </head>
 <body>
-<div class="bar">
-  <div class="bar-ico">&#9877;&#65039;</div>
-  <span class="bar-title">MedCalc Pro</span>
-  <span class="bar-tag">125 Calcs · 61 Converters</span>
-</div>
-<div class="tabs">
-  <div class="tab on" id="t-med" onclick="switchTab('med')">&#128302; Medical Tests</div>
-  <div class="tab" id="t-conv" onclick="switchTab('conv')">&#128260; Unit Converter</div>
-</div>
-<div class="panel on" id="p-med">
+
+<!-- ══ APP BAR ══ -->
+<header class="app-bar">
+  <div class="app-bar-logo">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="9" y="2" width="6" height="20" rx="3" fill="white" opacity=".95"/>
+      <rect x="2" y="9" width="20" height="6" rx="3" fill="white" opacity=".95"/>
+      <polyline points="3,12 5.5,12 7,8.5 8.5,15 10,10 11.5,12 15,12"
+        stroke="#9FF2E3" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="app-bar-text">
+    <div class="app-bar-title">MedCalc Pro</div>
+    <div class="app-bar-sub">Clinical Decision Suite</div>
+  </div>
+  <div class="app-bar-badge">152 Calcs · 61 Conv</div>
+</header>
+
+<!-- ══ TABS ══ -->
+<nav class="tabs">
+  <div class="tab on" id="tab-med" onclick="switchTab('med',this)">
+    <span class="tab-icon material-symbols-outlined" style="font-variation-settings:'FILL' 1">calculate</span>
+    Calculators
+    <div class="tab-indicator"></div>
+  </div>
+  <div class="tab" id="tab-conv" onclick="switchTab('conv',this)">
+    <span class="tab-icon material-symbols-outlined" style="font-variation-settings:'FILL' 0">science</span>
+    Converters
+    <div class="tab-indicator"></div>
+  </div>
+</nav>
+
+<!-- ══ CALCULATORS ══ -->
+<main class="panel on" id="p-med">
   <div class="card">
-    <div class="sh">
-      <div class="sh-lbl">Calculators (125)</div>
-      <div class="sh-box">&#128269; <input id="med-q" placeholder="Search tests..." oninput="renderMed()"></div>
-      <div class="chips" id="chips">
-        <span class="chip on" onclick="setCat('all',this)">All</span>
-        <span class="chip" onclick="setCat('renal',this)">Renal</span>
-        <span class="chip" onclick="setCat('liver',this)">Liver</span>
-        <span class="chip" onclick="setCat('hema',this)">Hematology</span>
-        <span class="chip" onclick="setCat('meta',this)">Metabolic</span>
-        <span class="chip" onclick="setCat('cardiac',this)">Cardiac</span>
-        <span class="chip" onclick="setCat('resp',this)">Respiratory</span>
-        <span class="chip" onclick="setCat('neuro',this)">Neuro</span>
-        <span class="chip" onclick="setCat('endo',this)">Endocrine</span>
-        <span class="chip" onclick="setCat('obs',this)">OB/GYN</span>
-        <span class="chip" onclick="setCat('gi',this)">GI</span>
-        <span class="chip" onclick="setCat('infect',this)">Infection</span>
-        <span class="chip" onclick="setCat('ortho',this)">Ortho</span>
-        <span class="chip" onclick="setCat('biochem',this)">🧪 Biochem</span>
-        <span class="chip" onclick="setCat('blood',this)">🩸 Blood Tests</span>
+    <div class="search-wrap">
+      <div class="search-label">Calculators (152)</div>
+      <div class="search-bar">
+        <span class="search-icon material-symbols-outlined">search</span>
+        <input id="med-q" type="search" placeholder="Search 152 calculators…"
+               oninput="renderMed()" autocomplete="off">
       </div>
     </div>
-    <div class="lst" id="med-list"></div>
+    <div class="chips-scroll" id="med-chips">
+      <div class="m3-chip on" onclick="setCat('all',this)">
+        <span class="chip-check material-symbols-outlined">check</span>All
+      </div>
+      <div class="m3-chip" onclick="setCat('cardiac',this)">
+        <span class="chip-check material-symbols-outlined">check</span>❤️ Cardiac
+      </div>
+      <div class="m3-chip" onclick="setCat('renal',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🫘 Renal
+      </div>
+      <div class="m3-chip" onclick="setCat('neuro',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🧠 Neuro
+      </div>
+      <div class="m3-chip" onclick="setCat('resp',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🫁 Resp
+      </div>
+      <div class="m3-chip" onclick="setCat('hema',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🩸 Haem
+      </div>
+      <div class="m3-chip" onclick="setCat('liver',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🧪 Liver
+      </div>
+      <div class="m3-chip" onclick="setCat('gi',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🫙 GI
+      </div>
+      <div class="m3-chip" onclick="setCat('endo',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🦋 Endo
+      </div>
+      <div class="m3-chip" onclick="setCat('obs',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🤰 OB/GYN
+      </div>
+      <div class="m3-chip" onclick="setCat('infect',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🦠 Infect
+      </div>
+      <div class="m3-chip" onclick="setCat('meta',this)">
+        <span class="chip-check material-symbols-outlined">check</span>⚖️ Metabolic
+      </div>
+      <div class="m3-chip" onclick="setCat('ortho',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🦴 Ortho
+      </div>
+      <div class="m3-chip" onclick="setCat('biochem',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🔬 Biochem
+      </div>
+      <div class="m3-chip" onclick="setCat('blood',this)">
+        <span class="chip-check material-symbols-outlined">check</span>🧬 Blood
+      </div>
+    </div>
+    <div class="m3-list" id="med-list"></div>
   </div>
-  <div class="card cc" id="med-calc"></div>
-</div>
+</main>
+
+<!-- ══ CONVERTERS ══ -->
 <div class="panel" id="p-conv">
   <div class="card">
-    <div class="sh">
-      <div class="sh-lbl">Unit Categories (61)</div>
-      <div class="sh-box">&#128269; <input id="conv-q" placeholder="Search converters..." oninput="renderConv()"></div>
+    <div class="search-wrap">
+      <div class="search-label">Unit Converters (61)</div>
+      <div class="search-bar">
+        <span class="search-icon material-symbols-outlined">search</span>
+        <input id="conv-q" type="search" placeholder="Search converters…"
+               oninput="renderConv()" autocomplete="off">
+      </div>
     </div>
-    <div class="lst" id="conv-list"></div>
+    <div class="m3-list" id="conv-list"></div>
   </div>
-  <div class="card cc" id="conv-calc"></div>
 </div>
+
+<!-- ══ MODAL (Bottom Sheet on mobile, Dialog on tablet+) ══ -->
+<div class="modal-scrim" id="modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="modal-sheet" id="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <button class="modal-close-btn" onclick="closeCalc();closeConv()" aria-label="Close">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <!-- content injected here -->
+  </div>
+</div>
+
 <script>
+
+
+
 // Helpers
 function R(c,s,t){return{cls:c,st:s,txt:t}}
 var rn=function(s,t){return R('rn',s,t)};
@@ -406,6 +780,9 @@ var CCAT={
 };
 
 // TESTS
+
+
+
 var T=[
 {id:'egfr',n:'eGFR (CKD-EPI 2021)',a:'Estimated GFR',c:'renal',d:'CKD-EPI 2021 race-free equation.',f:'142\u00d7min(Scr/\u03ba,1)^\u03b1\u00d7max(Scr/\u03ba,1)^-1.2\u00d70.9938^Age',
  F:[{i:'cr',l:'Serum Creatinine',p:'e.g. 1.0',u:['mg/dL','\u00b5mol/L'],cv:function(v,u){return UC.cr(v,u)}},
@@ -604,12 +981,61 @@ var T=[
  refs:['Normal:8.5-10.5','Hypo:<8.5','Hyper:>10.5'],
  interp:function(r){var v=+r;if(v<8.5)return rl('Hypocalcemia','Corrected Ca '+v+'.');if(v<=10.5)return rn('Normal','Corrected Ca '+v+' mg/dL.');return rh('Hypercalcemia','Corrected Ca '+v+'.')}},
 
-{id:'hba1c',n:'HbA1c \u2192 Avg Glucose',a:'Estimated Average Glucose (eAG)',c:'meta',d:'ADAG formula. eAG over 2-3 months.',f:'eAG(mg/dL)=28.7\u00d7HbA1c(%)\u221246.7',
- F:[{i:'h',l:'HbA1c',p:'e.g. 6.5',u:['%','mmol/mol'],cv:function(v,u){return u=='mmol/mol'?v/10.929+2.15:v}}],
- calc:function(v){return((28.7*v.h)-46.7).toFixed(0)},
- ru:'mg/dL (eAG)',ruU:['mg/dL','mmol/L'],ruF:function(v,i){return i?+(v/18.02).toFixed(2):+v},
- refs:['Normal:<5.7%/eAG<117','Prediabetes:5.7-6.4%','Diabetes:\u22656.5%/eAG\u2265137'],
- interp:function(r){var v=+r;if(v<117)return rn('Non-Diabetic','eAG '+v+' \u2014 Normal.');if(v<137)return rw('Prediabetes','eAG '+v+' \u2014 Lifestyle interventions.');return rh('Diabetes Range','eAG '+v+'.')}},
+{id:'hba1c',n:'HbA1c ⇄ Glucose',a:'Bidirectional HbA1c / eAG / RBS',c:'meta',
+ d:'ADAG formula (ADA 2008). Fill HbA1c → get average glucose. Fill glucose (RBS/FBS/eAG) → get estimated HbA1c. Fill both to see full picture.',
+ f:'eAG=28.7×HbA1c−46.7   |   HbA1c=(Glucose+46.7)÷28.7',
+ rawCalc:1,allowEmpty:1,
+ F:[{i:'h',l:'HbA1c (leave blank if converting from glucose)',p:'e.g. 7.2',u:['%','mmol/mol'],
+     cv:function(v,u){if(v===''||v===null||v===undefined||isNaN(+v))return '';return u=='mmol/mol'?+(+v/10.929+2.15).toFixed(2):+v}},
+    {i:'g',l:'Glucose / RBS / FBS / eAG (leave blank if converting from HbA1c)',p:'e.g. 180',u:['mg/dL','mmol/L'],
+     cv:function(v,u){if(v===''||v===null||v===undefined||isNaN(+v))return '';return UC.glu(+v,u)}}],
+ calc:function(v){
+   var h=v.h===''?null:+v.h;
+   var g=v.g===''?null:+v.g;
+   var hasH=h!==null&&!isNaN(h)&&h>=3&&h<=20;
+   var hasG=g!==null&&!isNaN(g)&&g>=10;
+   if(!hasH&&!hasG)return 'none';
+   var parts=[];
+   if(hasH){
+     var eag=Math.round(28.7*h-46.7);
+     var eagM=+(eag/18.02).toFixed(1);
+     var hMmol=+((h-2.15)*10.929).toFixed(1);
+     parts.push('H|'+h+'|'+eag+'|'+eagM+'|'+hMmol);
+   }
+   if(hasG){
+     var hba=+((g+46.7)/28.7).toFixed(2);
+     var hbaMmol=+((hba-2.15)*10.929).toFixed(1);
+     parts.push('G|'+Math.round(g)+'|'+hba+'|'+hbaMmol);
+   }
+   return parts.join('~');
+ },
+ ru:'',
+ refs:['Normal:<5.7% / <39 mmol/mol / eAG<117 mg/dL',
+       'Prediabetes:5.7-6.4% / 39-47 mmol/mol',
+       'Diabetes diagnosis:≥6.5% / ≥48 mmol/mol',
+       'ADA treatment target:<7.0% / <53 mmol/mol',
+       'eAG at target:<154 mg/dL (8.6 mmol/L)'],
+ interp:function(r,vals){
+   if(r==='none')return rw('Enter at least one value','Fill HbA1c to get average glucose, or fill a glucose reading to get estimated HbA1c%.');
+   var blocks=r.split('~');
+   var lines=[];var topStatus='';var topFn=ri;
+   blocks.forEach(function(b){
+     var p=b.split('|');
+     if(p[0]==='H'){
+       var h=+p[1],eag=+p[2],eagM=+p[3],hMmol=+p[4];
+       var st=h<5.7?'Non-Diabetic':h<6.5?'Prediabetes':h<7?'At Target':h<8?'Above Target':'Poorly Controlled';
+       topStatus=st;
+       topFn=h<5.7?rn:h<6.5?rw:h<7?rl:h<8?rw:rh;
+       lines.push('▶ HbA1c '+h+'% (≈'+hMmol+' mmol/mol) → eAG '+eag+' mg/dL ('+eagM+' mmol/L). Status: '+st+'.');
+     } else {
+       var g=+p[1],hba=+p[2],hbaMmol=+p[3];
+       var st2=hba<5.7?'Non-Diabetic':hba<6.5?'Prediabetes':hba<7?'At Target':hba<8?'Above Target':'Poorly Controlled';
+       if(!topStatus){topStatus=st2;topFn=hba<5.7?rn:hba<6.5?rw:hba<7?rl:hba<8?rw:rh;}
+       lines.push('▶ Glucose '+g+' mg/dL → estimated HbA1c ≈'+hba+'% (≈'+hbaMmol+' mmol/mol). Status: '+st2+'. Single readings estimate only — confirm with lab.');
+     }
+   });
+   return topFn(topStatus,lines.join(' '));
+ }},
 
 {id:'ibw',n:'Ideal Body Weight',a:'IBW Devine Formula',c:'meta',d:'Used for drug dosing and ventilator TV.',f:'M:50+2.3\u00d7(Ht_in\u221260) F:45.5+2.3\u00d7(Ht_in\u221260)',
  F:[{i:'ht',l:'Height',p:'e.g. 170',u:['cm','in','ft'],cv:function(v,u){return UC.ht(v,u)}}],
@@ -1622,8 +2048,362 @@ var T=[
   if(cohb<3)msgs.push('COHb normal ('+cohb+'%, up to 10% in smokers).');else if(cohb<20)msgs.push('COHb '+cohb+'% \u2014 Mild-moderate CO exposure. 100% oxygen.');else if(cohb<40)msgs.push('COHb '+cohb+'% \u2014 Significant exposure. High-flow O2; consider hyperbaric oxygen.');else msgs.push('COHb '+cohb+'% \u2014 Severe, life-threatening CO poisoning. Hyperbaric oxygen indicated.');
   var risk=(mhb>=15||cohb>=20)?rh:(mhb>=3||cohb>=3)?rw:rn;
   return risk('MetHb '+mhb+'% / COHb '+cohb+'%',msgs.join(' '))}}
+,
+
+// ── BATCH 7 ────────────────────────────────────────────────────────────
+{id:'ottawa_ankle',n:'Ottawa Ankle Rules',a:'Ankle/Foot X-Ray Decision',c:'ortho',d:'Clinical decision rule to determine need for ankle/foot radiography. Highly sensitive for fracture exclusion.',f:'Pain in malleolar/midfoot zone + bony tenderness or inability to bear weight',
+ F:[{i:'mall_tender',l:'Bony tenderness posterior edge/tip lateral or medial malleolus (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'midfoot_tender',l:'Bony tenderness navicular or base of 5th metatarsal (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'cant_bear',l:'Unable to bear weight both immediately and in ED (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mall_tender+ +v.midfoot_tender+ +v.cant_bear)},
+ ru:'criteria positive',refs:['0:X-ray not required','≥1:X-ray indicated'],
+ interp:function(r){var v=+r;if(v===0)return rn('X-Ray Not Indicated','No Ottawa criteria met. Fracture highly unlikely. Conservative management with RICE.');return rh('X-Ray Indicated',v+' criteria met. Order ankle/foot series to exclude fracture.')}},
+
+{id:'centor',n:'Centor / McIsaac Score',a:'Strep Pharyngitis Probability',c:'infect',d:'Predicts likelihood of Group A Streptococcal pharyngitis. McIsaac modification adds age adjustment.',f:'Tonsillar exudate+Tender nodes+Fever+No cough±Age',
+ F:[{i:'exudate',l:'Tonsillar exudate/swelling (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'nodes',l:'Tender anterior cervical lymphadenopathy (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'fever',l:'History of fever >38°C (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'no_cough',l:'Absence of cough (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'centor_age',l:'Age: 3-14=1, 15-44=0, ≥45=-1',p:'-1/0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.exudate+ +v.nodes+ +v.fever+ +v.no_cough+ +v.centor_age)},
+ ru:'points',refs:['≤0:Low risk (1-2.5%)','1:5-10%','2:11-17%','3:28-35%','≥4:51-53%'],
+ interp:function(r){var v=+r;if(v<=0)return rn('Low Risk','Centor '+v+' — ~1-2.5% strep probability. No testing/antibiotics needed.');if(v<=1)return rl('Low-Moderate Risk','Centor '+v+' — ~5-10% probability. Consider rapid strep test.');if(v<=2)return rw('Moderate Risk','Centor '+v+' — ~11-17% probability. Rapid strep test recommended.');if(v===3)return rw('Moderate-High Risk','Centor '+v+' — ~28-35% probability. Test and treat if positive.');return rh('High Risk','Centor '+v+' — ~51-53% probability. Consider empiric antibiotics or test-and-treat.')}},
+
+{id:'bishop',n:'Modified Bishop Score',a:'Cervical Readiness for Induction',c:'obs',d:'Assesses cervix readiness for labour induction. Score ≥8 predicts successful vaginal delivery.',f:'Dilation+Effacement+Station+Consistency+Position',
+ F:[{i:'mb_dil',l:'Dilation (cm): 0=0, 1=1-2, 2=3-4, 3=≥5',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'mb_eff',l:'Effacement (%): 0=0-30, 1=40-50, 2=60-70, 3=≥80',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'mb_sta',l:'Station: 0=-3, 1=-2, 2=-1/0, 3=+1/+2',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'mb_con',l:'Consistency: 0=Firm, 1=Medium, 2=Soft',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'mb_pos',l:'Position: 0=Posterior, 1=Mid, 2=Anterior',p:'0-2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.mb_dil+ +v.mb_eff+ +v.mb_sta+ +v.mb_con+ +v.mb_pos)},
+ ru:'points',refs:['<6:Unfavourable cervix','6-7:Intermediate','≥8:Favourable (induction likely successful)'],
+ interp:function(r){var v=+r;if(v<6)return rh('Unfavourable Cervix','Bishop '+v+' — Low likelihood of successful induction. Consider cervical ripening agents (prostaglandins, mechanical dilators) first.');if(v<8)return rw('Intermediate','Bishop '+v+' — Moderate likelihood. May benefit from ripening before oxytocin.');return rn('Favourable Cervix','Bishop '+v+' — High likelihood of successful vaginal delivery with induction.')}},
+
+{id:'preeclampsia',n:'Pre-eclampsia Severity',a:'Hypertensive Disorder of Pregnancy',c:'obs',d:'Classifies pre-eclampsia severity based on BP and severe features. Guides delivery timing decisions.',f:'BP thresholds + severe feature criteria',
+ F:[{i:'pe_sbp',l:'Systolic BP',p:'e.g. 150',u:['mmHg'],cv:function(v){return v}},
+    {i:'pe_dbp',l:'Diastolic BP',p:'e.g. 95',u:['mmHg'],cv:function(v){return v}},
+    {i:'pe_severe',l:'Severe features present (BP≥160/110, low platelets, abnormal LFTs, renal insufficiency, pulmonary oedema, visual/cerebral symptoms) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return v.pe_sbp+','+v.pe_dbp+','+v.pe_severe},
+ ru:'',
+ interp:function(r){var p=r.split(',');var sbp=+p[0],dbp=+p[1],severe=+p[2];
+  if(severe===1||sbp>=160||dbp>=110)return rh('Pre-eclampsia with Severe Features','BP '+sbp+'/'+dbp+' mmHg with severe features. Urgent management: magnesium sulphate seizure prophylaxis, antihypertensives, delivery planning (often ≥34 weeks).');
+  if(sbp>=140||dbp>=90)return rw('Pre-eclampsia without Severe Features','BP '+sbp+'/'+dbp+' mmHg. Close monitoring, twice-weekly BP/labs, consider delivery at 37 weeks.');
+  return rn('Normotensive','BP '+sbp+'/'+dbp+' mmHg. No evidence of pre-eclampsia based on BP criteria.')}},
+
+{id:'apgar_full',n:'APGAR Score (Detailed)',a:'Neonatal Assessment',c:'obs',d:'Standardised assessment of newborn condition at 1 and 5 minutes. Score ≥7 = reassuring.',f:'Appearance+Pulse+Grimace+Activity+Respiration',
+ F:[{i:'ap_appear',l:'Appearance (colour): 0=Blue/pale, 1=Body pink/extremities blue, 2=Completely pink',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'ap_pulse',l:'Pulse: 0=Absent, 1=<100bpm, 2=≥100bpm',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'ap_grimace',l:'Grimace (reflex irritability): 0=None, 1=Grimace, 2=Cry/cough/sneeze',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'ap_activity',l:'Activity (muscle tone): 0=Limp, 1=Some flexion, 2=Active motion',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'ap_resp',l:'Respiration: 0=Absent, 1=Weak/irregular, 2=Strong cry',p:'0-2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.ap_appear+ +v.ap_pulse+ +v.ap_grimace+ +v.ap_activity+ +v.ap_resp)},
+ ru:'points',refs:['7-10:Normal/reassuring','4-6:Moderately abnormal','0-3:Low — needs resuscitation'],
+ interp:function(r){var v=+r;if(v>=7)return rn('Reassuring','APGAR '+v+'/10. Normal transition. Routine care.');if(v>=4)return rw('Moderately Abnormal','APGAR '+v+'/10. Stimulation, suction, oxygen as needed. Reassess at 5 and 10 min.');return rh('Low Score — Resuscitation Needed','APGAR '+v+'/10. Initiate neonatal resuscitation per NRP algorithm immediately.')}},
+
+{id:'free_water',n:'Free Water Deficit',a:'Hypernatraemia Correction',c:'renal',d:'Estimates free water deficit in hypernatraemia. Correct slowly (≤0.5 mEq/L/hr) to avoid cerebral oedema.',f:'TBW × [(Na−140)/140]',
+ F:[{i:'fwd_wt',l:'Weight',p:'e.g. 70',u:['kg','lb'],cv:function(v,u){return UC.wt(v,u)}},
+    {i:'fwd_na',l:'Current Sodium',p:'e.g. 158',u:['mEq/L'],cv:function(v){return v}},
+    {i:'fwd_sex',l:'Sex factor (TBW): M=0.6, F=0.5',p:'0.5/0.6',u:['factor'],cv:function(v){return v}}],
+ calc:function(v){var tbw=v.fwd_wt*v.fwd_sex;var deficit=tbw*((v.fwd_na-140)/140);return Math.max(0,deficit).toFixed(2)},
+ ru:'L',refs:['Correct over 48-72h','Max rate:0.5 mEq/L/hr (Na correction)','Use D5W or enteral free water'],
+ interp:function(r){var v=+r;if(v<=0)return rn('No Significant Deficit',v+' L. Sodium not elevated above normal threshold.');return rw('Free Water Deficit',v+' L. Replace slowly over 48-72h. Recheck sodium every 4-6h. Avoid rapid correction (risk of cerebral oedema).')}},
+
+{id:'transtubular_k',n:'Transtubular Potassium Gradient',a:'TTKG — Hypo/Hyperkalaemia Workup',c:'renal',d:'TTKG estimates renal vs extrarenal cause of potassium disorders. TTKG <3 in hyperkalaemia suggests hypoaldosteronism.',f:'TTKG = (Urine K ÷ Plasma K) ÷ (Urine Osm ÷ Plasma Osm)',
+ F:[{i:'ttkg_uk',l:'Urine Potassium',p:'e.g. 40',u:['mEq/L'],cv:function(v){return v}},
+    {i:'ttkg_pk',l:'Plasma Potassium',p:'e.g. 5.5',u:['mEq/L'],cv:function(v){return v}},
+    {i:'ttkg_uosm',l:'Urine Osmolality',p:'e.g. 450',u:['mOsm/kg'],cv:function(v){return v}},
+    {i:'ttkg_posm',l:'Plasma Osmolality',p:'e.g. 290',u:['mOsm/kg'],cv:function(v){return v}}],
+ calc:function(v){return((v.ttkg_uk/v.ttkg_pk)/(v.ttkg_uosm/v.ttkg_posm)).toFixed(2)},
+ ru:'',refs:['Hyperkalaemia: TTKG<7 suggests hypoaldosteronism/renal cause','Hypokalaemia: TTKG>4 suggests renal K wasting'],
+ interp:function(r){var v=+r;if(v<4)return rw('Low TTKG',v+'. In hyperkalaemia: suggests hypoaldosteronism or renal tubular defect. In hypokalaemia: suggests extrarenal loss (GI) or low intake.');if(v<=7)return rn('Intermediate TTKG',v+'. Borderline; correlate with clinical context and serum K.');return rw('High TTKG',v+'. In hypokalaemia: suggests renal potassium wasting (diuretics, hyperaldosteronism). In hyperkalaemia: appropriate renal response.')}},
+
+{id:'corrected_qt',n:'Corrected QT Interval (QTc)',a:'Bazett / Fridericia Formula',c:'cardiac',d:'Corrects QT for heart rate. QTc >450ms (M) / >470ms (F) is prolonged — torsades risk.',f:'Bazett: QT÷√RR; Fridericia: QT÷RR^(1/3)',
+ F:[{i:'qt_ms',l:'QT Interval',p:'e.g. 440',u:['ms'],cv:function(v){return v}},
+    {i:'qt_hr',l:'Heart Rate',p:'e.g. 75',u:['bpm'],cv:function(v){return v}}],
+ sex:1,
+ calc:function(v,s){var rr=60/v.qt_hr;var bazett=(v.qt_ms/Math.sqrt(rr)).toFixed(0);var frid=(v.qt_ms/Math.pow(rr,1/3)).toFixed(0);return bazett+','+frid},
+ ru:'ms',
+ interp:function(r,s){var p=r.split(',');var baz=+p[0],fr=+p[1];var thr=s==='F'?470:450;
+  var risk=baz>500||fr>500?rh:baz>thr||fr>thr?rw:rn;
+  return risk('Bazett QTc: '+baz+' ms / Fridericia QTc: '+fr+' ms','Threshold for '+s+': '+thr+' ms. '+(baz>500||fr>500?'Markedly prolonged — high torsades de pointes risk. Review QT-prolonging drugs, correct electrolytes (K, Mg, Ca).':baz>thr||fr>thr?'Prolonged QTc. Review medications and electrolytes.':'Normal QTc for sex.'))}},
+
+{id:'revised_cardiac',n:'Revised Cardiac Risk Index (RCRI)',a:'Perioperative Cardiac Risk',c:'cardiac',d:'Lee Revised Cardiac Risk Index predicts perioperative cardiac complications for non-cardiac surgery.',f:'6 independent risk factors',
+ F:[{i:'rcri_surg',l:'High-risk surgery (intraperitoneal/intrathoracic/suprainguinal vascular) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'rcri_ihd',l:'Ischaemic heart disease history (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'rcri_chf',l:'Congestive heart failure history (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'rcri_cva',l:'Cerebrovascular disease history (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'rcri_dm',l:'Insulin-treated diabetes (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'rcri_cr',l:'Creatinine >2.0 mg/dL (177 µmol/L) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.rcri_surg+ +v.rcri_ihd+ +v.rcri_chf+ +v.rcri_cva+ +v.rcri_dm+ +v.rcri_cr)},
+ ru:'points',refs:['0:Risk 3.9%','1:Risk 6.0%','2:Risk 10.1%','≥3:Risk 15%'],
+ interp:function(r){var v=+r;if(v===0)return rn('Low Risk','RCRI '+v+' — ~3.9% risk of major cardiac event. Proceed per standard pathway.');if(v===1)return rl('Low-Moderate Risk','RCRI '+v+' — ~6.0% risk.');if(v===2)return rw('Moderate Risk','RCRI '+v+' — ~10.1% risk. Consider cardiology input and further functional testing.');return rh('High Risk','RCRI '+v+' — ≥15% risk. Cardiology consultation, optimise medical therapy, consider biomarker surveillance.')}},
+
+{id:'fast_stroke',n:'FAST Stroke Screen',a:'Pre-hospital Stroke Recognition',c:'neuro',d:'Rapid bedside/field screening tool for acute stroke. Any positive finding warrants urgent stroke pathway activation.',f:'Face + Arm + Speech + Time',
+ F:[{i:'fast_face',l:'Facial droop (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'fast_arm',l:'Arm weakness/drift (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'fast_speech',l:'Speech difficulty/slurring (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.fast_face+ +v.fast_arm+ +v.fast_speech)},
+ ru:'positive findings',refs:['0:Stroke less likely (continue monitoring)','≥1:Activate stroke pathway — note time last known well'],
+ interp:function(r){var v=+r;if(v===0)return rn('No FAST Positive Findings','No classic stroke signs. Continue clinical assessment; stroke not excluded.');return rh('FAST Positive — Activate Stroke Pathway',v+' positive finding(s). Note time last known well. Urgent transfer/CT brain. Time is brain — thrombolysis window is time-critical.')}},
+
+{id:'child_pugh_detail',n:'MELD-Na Score',a:'Model for End-Stage Liver Disease (Sodium)',c:'liver',d:'MELD-Na incorporates sodium for improved waitlist mortality prediction in cirrhosis.',f:'MELD + sodium adjustment',
+ F:[{i:'mn_bili',l:'Bilirubin',p:'e.g. 2.5',u:['mg/dL','µmol/L'],cv:function(v,u){return UC.bili(v,u)}},
+    {i:'mn_inr',l:'INR',p:'e.g. 1.8',u:['ratio'],cv:function(v){return v}},
+    {i:'mn_cr',l:'Creatinine',p:'e.g. 1.5',u:['mg/dL','µmol/L'],cv:function(v,u){return UC.cr(v,u)}},
+    {i:'mn_na',l:'Sodium',p:'e.g. 130',u:['mEq/L'],cv:function(v){return v}}],
+ calc:function(v){
+  var bili=Math.max(1,v.mn_bili),inr=Math.max(1,v.mn_inr),cr=Math.min(4,Math.max(1,v.mn_cr));
+  var meld=Math.round(3.78*Math.log(bili)+11.2*Math.log(inr)+9.57*Math.log(cr)+6.43);
+  meld=Math.max(6,Math.min(40,meld));
+  var na=Math.min(137,Math.max(125,v.mn_na));
+  var meldNa=meld+1.32*(137-na)-(0.033*meld*(137-na));
+  return Math.round(Math.max(6,Math.min(40,meldNa)))},
+ ru:'points',refs:['<10:Low mortality risk','10-19:Moderate','20-29:High','≥30:Very high (>50% 3-month mortality)'],
+ interp:function(r){var v=+r;if(v<10)return rn('Low Risk','MELD-Na '+v+' — Lower waitlist priority. Low short-term mortality.');if(v<20)return rw('Moderate Risk','MELD-Na '+v+' — Monitor closely. Hepatology follow-up.');if(v<30)return rh('High Risk','MELD-Na '+v+' — Significant 3-month mortality risk. Transplant evaluation priority.');return rh('Very High Risk','MELD-Na '+v+' — >50% 3-month mortality without transplant. Urgent transplant listing.')}},
+
+{id:'curb65_detail',n:'SMART-COP Score',a:'Pneumonia Severity (ICU Prediction)',c:'resp',d:'Predicts need for intensive respiratory or vasopressor support in CAP. Complements CURB-65/PSI.',f:'Systolic BP+Multilobar+Albumin+RR+Tachycardia+Confusion+Oxygen+pH',
+ F:[{i:'sc_sbp',l:'SBP <90 mmHg (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'sc_multi',l:'Multilobar CXR involvement (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sc_alb',l:'Albumin <35 g/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sc_rr',l:'RR elevated for age (age-adjusted high) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sc_hr',l:'HR ≥125 bpm (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sc_confusion',l:'New confusion (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sc_o2',l:'Hypoxaemia (age-adjusted, e.g. PaO₂<70 if ≤50yr) (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'sc_ph',l:'Arterial pH <7.35 (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.sc_sbp+ +v.sc_multi+ +v.sc_alb+ +v.sc_rr+ +v.sc_hr+ +v.sc_confusion+ +v.sc_o2+ +v.sc_ph)},
+ ru:'points',refs:['0-2:Low risk of needing IRVS','3-4:Moderate (1 in 8)','5-6:High (1 in 3)','≥7:Very high (2 in 3)'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low Risk','SMART-COP '+v+' — Low risk of needing intensive respiratory/vasopressor support.');if(v<=4)return rw('Moderate Risk','SMART-COP '+v+' — ~1 in 8 risk of needing IRVS. Close monitoring, consider HDU.');if(v<=6)return rh('High Risk','SMART-COP '+v+' — ~1 in 3 risk. Strongly consider ICU/HDU admission.');return rh('Very High Risk','SMART-COP '+v+' — ~2 in 3 risk of needing IRVS. ICU admission indicated.')}},
+
+// ── BATCH 8: Targeted additions across thin categories ────────────────────
+{id:'corrected_ca',n:'Corrected Calcium',a:'Albumin-Adjusted Calcium',c:'renal',
+ d:'Corrects total calcium for hypoalbuminaemia. Add 0.8 mg/dL per 1 g/dL albumin below 4.0.',
+ f:'CaCorrected = CaMeasured + 0.8×(4−Albumin)',
+ F:[{i:'ca',l:'Total Calcium',p:'e.g. 8.0',u:['mg/dL','mmol/L'],cv:function(v,u){return u==='mmol/L'?v*4.008:+v}},
+    {i:'alb',l:'Albumin',p:'e.g. 2.5',u:['g/dL','g/L'],cv:function(v,u){return UC.alb(v,u)}}],
+ calc:function(v){return(+v.ca+0.8*(4-v.alb)).toFixed(2)},
+ ru:'mg/dL',ruU:['mg/dL','mmol/L'],ruF:function(v,i){return i?+(v/4.008).toFixed(3):+v},
+ refs:['Normal:8.5-10.5 mg/dL','Hypocalcaemia:<8.5','Hypercalcaemia:>10.5','Severe hyper:>14'],
+ interp:function(r){var v=+r;if(v<7)return rh('Severe Hypocalcaemia',v+' mg/dL. Risk of tetany, seizures, laryngospasm. IV calcium gluconate. Urgent ECG (prolonged QT).');if(v<8.5)return rw('Hypocalcaemia',v+' mg/dL. Check PTH, vitamin D, Mg. Oral/IV calcium replacement.');if(v<=10.5)return rn('Normal Corrected Calcium',v+' mg/dL.');if(v<=14)return rw('Hypercalcaemia',v+' mg/dL. Malignancy, hyperparathyroidism. IV fluids, bisphosphonates. Investigate.');return rh('Severe Hypercalcaemia',v+' mg/dL. Emergency: IV saline, bisphosphonate, calcitonin. Renal replacement if refractory.')}},
+
+{id:'serum_k',n:'Potassium Interpretation',a:'Serum K⁺ Clinical Assessment',c:'renal',
+ d:'Potassium normal range 3.5-5.0 mEq/L. Abnormalities cause cardiac arrhythmias and neuromuscular dysfunction.',
+ f:'K⁺ level → severity grading + ECG risk',
+ F:[{i:'k',l:'Serum Potassium',p:'e.g. 3.0',u:['mEq/L','mmol/L'],cv:function(v){return +v}}],
+ calc:function(v){return v.k.toFixed(1)},
+ ru:'mEq/L',
+ refs:['Hypokalaemia:<3.5','Mild hypo:3.0-3.5','Moderate hypo:2.5-3.0','Severe hypo:<2.5','Hyperkalaemia:>5.0','Dangerous:>6.5'],
+ interp:function(r){var v=+r;
+  if(v<2.5)return rh('Severe Hypokalaemia',v+' mEq/L. ECG monitoring mandatory (U waves, flat T, VT risk). IV KCl replacement. Correct Mg concomitantly. Avoid digoxin.');
+  if(v<3.0)return rh('Moderate Hypokalaemia',v+' mEq/L. IV/oral KCl replacement. Identify cause (diuretics, vomiting, alkalosis). ECG review.');
+  if(v<3.5)return rw('Mild Hypokalaemia',v+' mEq/L. Oral K⁺ supplement. Dietary optimisation. Review medications.');
+  if(v<=5.0)return rn('Normal Potassium',v+' mEq/L.');
+  if(v<6.0)return rw('Hyperkalaemia',v+' mEq/L. Repeat urgently (haemolysis?). ECG. Identify cause (CKD, ACE-I, spironolactone). Low K⁺ diet. Resonium/patiromer.');
+  return rh('Dangerous Hyperkalaemia',v+' mEq/L. Immediate ECG. IV calcium gluconate if ECG changes. Insulin-dextrose, salbutamol, sodium bicarbonate. Emergency dialysis consideration.')}},
+
+{id:'gfr_protein',n:'Protein-Based Nutritional Score',a:'Modified Prognostic Nutritional Index',c:'meta',
+ d:'PNI uses albumin and total lymphocyte count to predict surgical/oncology outcomes. PNI<40 = high nutritional risk.',
+ f:'PNI = 10×Albumin(g/dL) + 0.005×TLC',
+ F:[{i:'pni_alb',l:'Albumin',p:'e.g. 3.5',u:['g/dL','g/L'],cv:function(v,u){return UC.alb(v,u)}},
+    {i:'pni_tlc',l:'Total Lymphocyte Count',p:'e.g. 1500',u:['×cells/µL','×10⁹/L ×1000'],cv:function(v,u){return u==='×10⁹/L ×1000'?v*1000:+v}}],
+ calc:function(v){return(10*v.pni_alb+0.005*v.pni_tlc).toFixed(1)},
+ ru:'PNI score',
+ refs:['≥45:Low risk','≥40:Intermediate','<40:High nutritional risk','<35:Severe risk'],
+ interp:function(r){var v=+r;if(v>=45)return rn('Low Nutritional Risk','PNI '+v+'. Good nutritional status.');if(v>=40)return rw('Intermediate Risk','PNI '+v+'. Pre-operative nutritional support may be beneficial.');if(v>=35)return rh('High Nutritional Risk','PNI '+v+'. Nutritional intervention recommended before elective surgery. Dietitian referral.');return rh('Severe Nutritional Risk','PNI '+v+'. Significant morbidity/mortality risk. Intensive nutritional support.')}},
+
+{id:'dxi_10yr',n:'DEXA-Based Fracture Risk (Simplified)',a:'Bone Mineral Density T-score',c:'ortho',
+ d:'WHO T-score classification. T≤-2.5 = osteoporosis. FRAX required for full 10-year fracture risk.',
+ f:'T-score = (BMD−Young Adult Mean) ÷ SD',
+ F:[{i:'tscore',l:'T-score (from DEXA report)',p:'e.g. -2.1',u:['SD'],cv:function(v){return +v}},
+    {i:'age_dxa',l:'Age',p:'e.g. 65',u:['years'],cv:function(v){return +v}}],
+ calc:function(v){return v.tscore.toFixed(1)+','+v.age_dxa},
+ ru:'',
+ refs:['Normal:T-score≥-1.0','Osteopenia:-1.0 to -2.5','Osteoporosis:≤-2.5','Severe:≤-2.5 + fragility fracture'],
+ interp:function(r){var p=r.split(',');var ts=+p[0],age=+p[1];
+  var ageNote=age>65?' Age >65 increases fracture risk independently.':age>50?' Post-menopausal or androgen-deficient patients at higher risk.':'';
+  if(ts>=-1.0)return rn('Normal Bone Density','T-score '+ts+'. Reassess in 5-10 years.'+ageNote);
+  if(ts>-2.5)return rw('Osteopenia','T-score '+ts+'. Calcium + vitamin D. Weight-bearing exercise. Consider FRAX for 10-yr fracture probability.'+ageNote);
+  return rh('Osteoporosis','T-score '+ts+'. Bisphosphonate therapy (alendronate, risedronate). Falls prevention. FRAX calculation. Endocrine/rheumatology referral.'+ageNote)}},
+
+{id:'vbg_phco2',n:'Venous Blood Gas Interpreter',a:'VBG pH + pCO₂ Pattern',c:'resp',
+ d:'Rapid acid-base assessment from VBG (venous pH typically 0.03-0.05 lower than arterial). Identifies primary disorder and compensation.',
+ f:'Henderson-Hasselbalch: pH=6.1+log([HCO₃]/0.03×pCO₂)',
+ F:[{i:'vbg_ph',l:'pH',p:'e.g. 7.28',u:['pH units'],cv:function(v){return +v}},
+    {i:'vbg_co2',l:'pCO₂',p:'e.g. 55',u:['mmHg','kPa'],cv:function(v,u){return u==='kPa'?+(v*7.5006).toFixed(1):+v}},
+    {i:'vbg_hco3',l:'HCO₃ (bicarbonate)',p:'e.g. 22',u:['mEq/L'],cv:function(v){return +v}}],
+ calc:function(v){
+  var ph=v.vbg_ph,co2=v.vbg_co2,hco3=v.vbg_hco3;
+  var acid=ph<7.35,alk=ph>7.45;
+  var respAcid=co2>45,respAlk=co2<35,metAcid=hco3<22,metAlk=hco3>26;
+  var primary='';
+  if(acid&&respAcid&&!metAcid)primary='RA';
+  else if(acid&&metAcid&&!respAcid)primary='MA';
+  else if(acid&&respAcid&&metAcid)primary='RA+MA';
+  else if(alk&&respAlk&&!metAlk)primary='RAlk';
+  else if(alk&&metAlk&&!respAlk)primary='MAlk';
+  else if(!acid&&!alk)primary='Normal';
+  else primary='Mixed';
+  return ph+'|'+co2+'|'+hco3+'|'+primary;
+ },
+ ru:'',
+ refs:['Normal pH:7.35-7.45','Normal pCO₂:35-45 mmHg','Normal HCO₃:22-26 mEq/L'],
+ interp:function(r){var p=r.split('|');var ph=p[0],co2=p[1],hco3=p[2],type=p[3];
+  var msgs={
+   'Normal':rn('Normal Acid-Base','pH '+ph+', pCO₂ '+co2+', HCO₃ '+hco3+'. No primary disorder.'),
+   'RA':rw('Respiratory Acidosis','pH '+ph+' (low), pCO₂ '+co2+' (high). Causes: hypoventilation, COPD, opioids, NMJ disease. Expected HCO₃ compensation: +1 mEq/L per 10 mmHg acute, +3.5 chronic.'),
+   'MA':rw('Metabolic Acidosis','pH '+ph+' (low), HCO₃ '+hco3+' (low). Check anion gap. Causes: DKA, lactic acidosis, renal failure, diarrhoea. Expected pCO₂: 1.5×HCO₃+8 (Winter’s).'),
+   'RA+MA':rh('Combined Resp + Metabolic Acidosis','pH '+ph+', pCO₂ '+co2+', HCO₃ '+hco3+'. Severe mixed disorder. Urgent management.'),
+   'RAlk':rw('Respiratory Alkalosis','pH '+ph+' (high), pCO₂ '+co2+' (low). Causes: hyperventilation, anxiety, PE, sepsis, liver failure, pregnancy.'),
+   'MAlk':rw('Metabolic Alkalosis','pH '+ph+' (high), HCO₃ '+hco3+' (high). Causes: vomiting, diuretics, antacids, Conn’s. Check Cl⁻ and K⁺.'),
+   'Mixed':ri('Mixed/Complex Disorder','pH '+ph+', pCO₂ '+co2+', HCO₃ '+hco3+'. Does not fit single primary disorder. Check compensation equations and anion gap.')
+  };
+  return msgs[type]||ri('Pattern: '+type,'pH '+ph+', pCO₂ '+co2+', HCO₃ '+hco3+'.')}},
+
+{id:'asa_class',n:'ASA Physical Status',a:'Preoperative Risk Classification',c:'meta',
+ d:'ASA classification guides perioperative risk assessment. Higher class = higher anaesthetic and surgical risk.',
+ f:'ASA I–VI based on systemic disease severity',
+ F:[{i:'asa',l:'ASA Class: 1=Healthy, 2=Mild systemic, 3=Severe systemic, 4=Life-threatening, 5=Moribund, 6=Brain-dead/donation',p:'1-6',u:['class'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.asa},
+ ru:'ASA Class',
+ refs:['I:Healthy patient','II:Mild disease','III:Severe disease','IV:Life-threatening','V:Moribund','VI:Brain death'],
+ interp:function(r){var v=+r;
+  var desc=['','Healthy. No systemic disease. Normal BMI, non-smoker.','Mild systemic disease. Well-controlled HTN/DM, BMI 30-40, smoker, mild lung disease, social alcohol.','Severe systemic disease. Poorly controlled HTN/DM/COPD, BMI>40, active hepatitis, ESRD, history of MI >3 months, CVA, TIA.','Life-threatening systemic disease. Recent MI/CVA/TIA (<3 months), severe valvular dysfunction, severe sepsis, DIC, ARD.','Moribund, not expected to survive without operation. Ruptured aortic aneurysm, massive trauma, intracranial bleed with herniation.','Brain-dead organ donor.'];
+  var fn=[rn,rn,rw,rw,rh,rh,ri];
+  return(fn[v]||ri)('ASA Class '+v,desc[v]||'');}},
+
+{id:'moca_screen',n:'MoCA Simplified Screen',a:'Montreal Cognitive Assessment — 3-item',c:'neuro',
+ d:'Ultra-brief 3-item cognitive screen derived from MoCA. Score <3 warrants full MoCA/neuropsychological assessment.',
+ f:'Orientation + Recall + Clock draw = 0-5',
+ F:[{i:'moca_yr',l:'Correct year (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'moca_mo',l:'Correct month (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'moca_recall',l:'Recall 2 words after 5 min (0-2)',p:'0-2',u:['pts'],cv:function(v){return +v}},
+    {i:'moca_clock',l:'Clock draw (normal=1)',p:'0/1',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.moca_yr+ +v.moca_mo+ +v.moca_recall+ +v.moca_clock)},
+ ru:'/ 5',
+ refs:['5:Normal screen','3-4:Possible mild impairment','0-2:Significant impairment — full assessment'],
+ interp:function(r){var v=+r;if(v>=5)return rn('Normal Screen','3-item MoCA '+v+'/5. Full MoCA recommended if clinical concern persists.');if(v>=3)return rw('Possible Mild Impairment','3-item MoCA '+v+'/5. Full MoCA assessment recommended. Review medications, thyroid, B12, depression.');return rh('Significant Impairment','3-item MoCA '+v+'/5. Formal neuropsychological assessment. Dementia workup: MRI, B12, folate, TFT, glucose, syphilis.')}},
+
+{id:'alvarado',n:'Alvarado Score',a:'Acute Appendicitis Probability',c:'gi',
+ d:'Alvarado (MANTRELS) score for acute appendicitis. Score ≥7 = highly likely. Helps guide CT vs surgical consult decision.',
+ f:'Migration+Anorexia+Nausea+RIF tenderness+Rebound+Elevated temp+Leucocytosis+Left shift',
+ F:[{i:'al_migration',l:'Migration of pain to RIF (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'al_anorexia',l:'Anorexia (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'al_nausea',l:'Nausea/vomiting (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'al_rif',l:'RIF tenderness (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return +v}},
+    {i:'al_rebound',l:'Rebound tenderness (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'al_temp',l:'Elevated temperature >37.3°C (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'al_wbc',l:'Leucocytosis >10,000 (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return +v}},
+    {i:'al_shift',l:'Left shift on differential (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.al_migration+ +v.al_anorexia+ +v.al_nausea+ +v.al_rif+ +v.al_rebound+ +v.al_temp+ +v.al_wbc+ +v.al_shift)},
+ ru:'points',
+ refs:['1-4:Low probability','5-6:Equivocal','7-8:Probable appendicitis','9-10:Very likely appendicitis'],
+ interp:function(r){var v=+r;if(v<=4)return rn('Low Probability','Alvarado '+v+'. Appendicitis unlikely. Discharge with safety netting vs observation.');if(v<=6)return rw('Equivocal','Alvarado '+v+'. CT abdomen/pelvis or diagnostic laparoscopy consideration.');if(v<=8)return rh('Probable Appendicitis','Alvarado '+v+'. Surgical consult. CT to confirm if needed before theatre.');return rh('Very Likely Appendicitis','Alvarado '+v+'. Urgent surgical consult. Consider proceeding without CT if clinical picture clear.')}},
+
+{id:'pews',n:'Paediatric Early Warning Score',a:'PEWS — Paediatric Deterioration',c:'meta',
+ d:'Identifies hospitalised children at risk of deterioration. Score ≥4 triggers escalation.',
+ f:'Behaviour + Cardiovascular + Respiratory ± Nebuliser/Vomiting factors',
+ F:[{i:'pews_beh',l:'Behaviour: 0=Playing/appropriate, 1=Sleeping, 2=Irritable, 3=Lethargic/confused, 4=Reduced response',p:'0-4',u:['pts'],cv:function(v){return +v}},
+    {i:'pews_cv',l:'Cardiovascular: 0=Pink+CRT 1-2s, 1=Pale+CRT 3s, 2=Grey+CRT 4s/Tachy+20 above, 3=Grey+CRT≥5/Tachy+30 above',p:'0-3',u:['pts'],cv:function(v){return +v}},
+    {i:'pews_resp',l:'Respiratory: 0=Normal, 1=RR>10 above normal+mod recession, 2=RR>20 above+severe/≥40% FiO₂, 3=≥5 below normal+severe recession',p:'0-3',u:['pts'],cv:function(v){return +v}},
+    {i:'pews_neb',l:'Nebuliser every 15min or persistent vomiting post-op (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.pews_beh+ +v.pews_cv+ +v.pews_resp+ +v.pews_neb)},
+ ru:'points',
+ refs:['0-2:Low risk','3:Increased vigilance','≥4:Escalate — contact senior immediately'],
+ interp:function(r){var v=+r;if(v<=2)return rn('Low Risk','PEWS '+v+'. Continue routine monitoring.');if(v===3)return rw('Increased Vigilance','PEWS '+v+'. Increase monitoring frequency. Nurse-in-charge review.');return rh('Escalation Required','PEWS '+v+'. Immediate medical review. Senior/registrar assessment. Consider PICU review.')}},
+
+{id:'cage',n:'CAGE Questionnaire',a:'Alcohol Dependence Screen',c:'meta',
+ d:'4-item validated screen for alcohol dependence. Score ≥2 is a positive screen (sensitivity ~93%, specificity ~76%).',
+ f:'Cut-down + Annoyed + Guilty + Eye-opener',
+ F:[{i:'cage_c',l:'Cut: Ever felt you should cut down drinking? (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'cage_a',l:'Annoyed: Annoyed by criticism of drinking? (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'cage_g',l:'Guilty: Felt guilty about drinking? (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'cage_e',l:'Eye-opener: Ever needed a drink first thing in morning? (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.cage_c+ +v.cage_a+ +v.cage_g+ +v.cage_e)},
+ ru:'points',
+ refs:['0-1:Negative screen','≥2:Positive screen — dependence likely','≥3:Strong indicator of dependence'],
+ interp:function(r){var v=+r;if(v<=1)return rn('Negative Screen','CAGE '+v+'. Alcohol dependence unlikely. Brief advice if relevant.');if(v===2)return rh('Positive Screen','CAGE '+v+'. Alcohol dependence likely. Full AUDIT. Brief intervention. Specialist alcohol services referral.');return rh('Strong Positive','CAGE '+v+'. High probability of alcohol dependence. Assess withdrawal risk (CIWA). Specialist referral urgently.')}},
+
+{id:'pain_dn4',n:'DN4 Neuropathic Pain Screen',a:'Douleur Neuropathique 4',c:'neuro',
+ d:'DN4 is a validated 10-item screen for neuropathic pain. Score ≥4 is a positive screen (sensitivity 83%, specificity 90%).',
+ f:'7 interview items + 3 physical examination items = 0-10',
+ F:[{i:'dn4_burn',l:'Burning quality (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_cold',l:'Painful cold sensation (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_shock',l:'Electric shock sensation (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_tingle',l:'Tingling (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_pin',l:'Pins and needles (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_numb',l:'Numbness (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_itch',l:'Itching (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_hypo',l:'Hypoaesthesia to touch in pain area (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_pin2',l:'Hypoaesthesia to pinprick in pain area (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}},
+    {i:'dn4_brush',l:'Pain caused or increased by brushing (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.dn4_burn+ +v.dn4_cold+ +v.dn4_shock+ +v.dn4_tingle+ +v.dn4_pin+ +v.dn4_numb+ +v.dn4_itch+ +v.dn4_hypo+ +v.dn4_pin2+ +v.dn4_brush)},
+ ru:'points',
+ refs:['<4:Neuropathic pain unlikely','≥4:Neuropathic pain likely'],
+ interp:function(r){var v=+r;if(v<4)return rn('Neuropathic Pain Unlikely','DN4 '+v+'/10. Nociceptive pain pattern. Review other pain mechanisms.');return rh('Neuropathic Pain Likely','DN4 '+v+'/10. Positive screen. Consider: gabapentinoids (pregabalin/gabapentin), TCAs (amitriptyline), SNRIs (duloxetine). Pain medicine referral for refractory cases.')}},
+
+{id:'phenylke',n:'Phenylketonuria Diet Phe Load',a:'PKU Phenylalanine Tolerance',c:'meta',
+ d:'Estimates daily phenylalanine tolerance for PKU dietary management. Values are approximate; individual titration required.',
+ f:'Estimated tolerance based on age/classic PKU',
+ F:[{i:'pku_age',l:'Age',p:'e.g. 5',u:['years','months'],cv:function(v,u){return u==='months'?+(v/12).toFixed(2):+v}},
+    {i:'pku_phe',l:'Current daily Phe intake',p:'e.g. 300',u:['mg/day'],cv:function(v){return +v}},
+    {i:'pku_blood',l:'Recent blood Phe level',p:'e.g. 350',u:['µmol/L'],cv:function(v){return +v}}],
+ calc:function(v){
+  var target=v.pku_age<1?60:v.pku_age<4?150:v.pku_age<10?250:v.pku_age<16?350:400;
+  return v.pku_phe+','+v.pku_blood+','+target;
+ },
+ ru:'mg Phe/day',
+ refs:['Target blood Phe: <360 µmol/L (UK), <120 (strict)','<4yr:120-360 µmol/L target','≥16yr:<600 µmol/L (general guidance)'],
+ interp:function(r){var p=r.split(',');var phe=+p[0],blood=+p[1],target=+p[2];
+  var ctrl=blood<120?'Excellent':blood<360?'Acceptable':blood<600?'Above target':'Poorly controlled';
+  var fn=blood<360?rn:blood<600?rw:rh;
+  return fn('Blood Phe '+blood+' µmol/L — '+ctrl,'Current intake '+phe+' mg/day. Estimated age-appropriate tolerance ~'+target+' mg/day. Adjust based on blood levels. Specialist metabolic team guidance essential.')}},
+
+{id:'apacheii_simple',n:'APACHE II (Simplified)',a:'ICU Severity Score',c:'infect',
+ d:'APACHE II predicts ICU mortality. Full score requires 12 physiological variables. Enter pre-calculated physiology score + age + chronic health.',
+ f:'Physiology score + Age points + Chronic health points',
+ F:[{i:'ap_phys',l:'Acute Physiology Score (sum of 12 APS variables, 0-60)',p:'e.g. 12',u:['pts'],cv:function(v){return +v}},
+    {i:'ap_age',l:'Age points: <44=0, 45-54=2, 55-64=3, 65-74=5, ≥75=6',p:'0-6',u:['pts'],cv:function(v){return +v}},
+    {i:'ap_ch',l:'Chronic health: None=0, Elective post-op=2, Emergency/non-op=5',p:'0/2/5',u:['pts'],cv:function(v){return +v}}],
+ calc:function(v){return Math.round(+v.ap_phys+ +v.ap_age+ +v.ap_ch)},
+ ru:'points',
+ refs:['0-9:~4% ICU mortality','10-19:~15%','20-29:~25%','30-34:~40%','≥35:~70-85%'],
+ interp:function(r){var v=+r;
+  var mort=v<=9?'~4%':v<=19?'~15%':v<=29?'~25%':v<=34?'~40%':'~70-85%';
+  var fn=v<=9?rn:v<=19?rw:rh;
+  return fn('APACHE II '+v+' — Predicted ICU Mortality '+mort,'Score '+v+'. Predicted ICU mortality '+mort+'. Use for cohort comparison and prognostication, not individual treatment decisions.')}},
+
+{id:'six_min_walk',n:'6-Minute Walk Test (% Predicted)',a:'6MWT Reference Percentage',c:'resp',
+ d:'Compares achieved 6MWT distance to predicted value based on age, sex, height and weight. <80% predicted is abnormal.',
+ f:'Predicted 6MWT (m) varies by sex. % = Achieved/Predicted × 100',
+ F:[{i:'smw_dist',l:'Achieved 6MWT distance',p:'e.g. 420',u:['metres'],cv:function(v){return +v}},
+    {i:'smw_age',l:'Age',p:'e.g. 65',u:['years'],cv:function(v){return +v}},
+    {i:'smw_ht',l:'Height',p:'e.g. 170',u:['cm','in'],cv:function(v,u){return UC.ht(v,u)}},
+    {i:'smw_wt',l:'Weight',p:'e.g. 70',u:['kg','lb'],cv:function(v,u){return UC.wt(v,u)}}],
+ sex:1,
+ calc:function(v,s){
+  var pred=s==='M'?
+    7.57*v.smw_ht-5.02*v.smw_age-1.76*v.smw_wt-309:
+    2.11*v.smw_ht-2.29*v.smw_wt-5.78*v.smw_age+667;
+  pred=Math.max(100,pred);
+  var pct=(v.smw_dist/pred*100).toFixed(0);
+  return pct+','+Math.round(pred);
+ },
+ ru:'% predicted',
+ refs:['Normal:≥80% predicted','Mildly reduced:60-79%','Moderately reduced:40-59%','Severely reduced:<40%'],
+ interp:function(r){var p=r.split(',');var pct=+p[0],pred=+p[1];
+  if(pct>=80)return rn('Normal Exercise Capacity',pct+'% of predicted '+pred+' m. Functional capacity preserved.');
+  if(pct>=60)return rw('Mildly Reduced',pct+'% of predicted '+pred+' m. Pulmonary rehabilitation assessment. Optimise medical therapy.');
+  if(pct>=40)return rh('Moderately Reduced',pct+'% of predicted '+pred+' m. Significant functional impairment. Cardiopulmonary evaluation. Rehab referral.');
+  return rh('Severely Reduced',pct+'% of predicted '+pred+' m. Severe functional limitation. Transplant evaluation if appropriate. Palliative care discussion.')}},
+
+{id:'ecog_ps',n:'ECOG Performance Status',a:'Eastern Cooperative Oncology Group',c:'meta',
+ d:'ECOG PS grades functional status in oncology patients. Used to guide chemotherapy eligibility and prognosis.',
+ f:'Graded 0-5 based on self-care ability and activity level',
+ F:[{i:'ecog',l:'Grade: 0=Fully active, 1=Restricted vigorous, 2=Ambulatory >50% day, 3=Limited self-care, 4=Fully disabled, 5=Dead',p:'0-5',u:['grade'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.ecog},
+ ru:'ECOG grade',
+ refs:['0:Fully active','1:Restricted but ambulatory','2:Ambulatory, light work only','3:Limited self-care','4:Completely disabled','5:Dead'],
+ interp:function(r){var v=+r;var msgs=['Fully active. No restriction. Standard chemotherapy regimens appropriate.','Restricted in strenuous activity but ambulatory. Light sedentary work. Standard chemotherapy generally appropriate.','Ambulatory and capable of self-care. Unable to work. Up and about >50% waking hours. Consider dose modifications.','Capable of limited self-care. Confined to bed/chair >50% waking hours. Reduced-intensity or palliative intent treatment.','Completely disabled. Cannot carry on self-care. Totally confined. Best supportive care consideration.','Dead.'];var fn=[rn,rn,rw,rw,rh,rh];return(fn[v]||ri)('ECOG PS '+v,msgs[v]||'')}}
 ];
-// CONVERTERS
 var CV=[
 {id:'temp',n:'Temperature',em:'\u{1F321}\uFE0F',col:'#FF8F00',u:['\u00b0C','\u00b0F','K'],conv:function(v,f,t){var c=f=='\u00b0C'?v:f=='\u00b0F'?(v-32)*5/9:v-273.15;return t=='\u00b0C'?c:t=='\u00b0F'?c*9/5+32:c+273.15}},
 {id:'weight',n:'Weight / Mass',em:'\u2696\uFE0F',col:'#2E7D32',u:['kg','g','mg','lb','oz','stone'],base:{kg:1,g:1e-3,mg:1e-6,lb:.4536,oz:.02835,stone:6.35},conv:function(v,f,t){return v*this.base[f]/this.base[t]}},
@@ -1726,6 +2506,9 @@ var CV=[
  conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}}
 ];
 
+
+
+
 // STATE
 var cat='all',activeMed=null,activeConv=null,SX={};
 
@@ -1776,8 +2559,9 @@ function openTest(id){
   var t=T.filter(function(x){return x.id===id})[0];
   var cc=CCAT[t.c]||{em:'',bg:'#E3F2FD',fg:'#1565C0',gr:'linear-gradient(135deg,#1565C0,#1976D2)'};
   if(!SX[id]) SX[id]='M';
-  var card=document.getElementById('med-calc');
-  card.style.display='block';
+  var card=document.getElementById('modal-box');
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow='hidden';
   var sxH=t.sex
     ?'<div class="fld"><label class="fld-lbl">Biological Sex</label><div class="sex-row">'
      +'<div class="sx on" id="sx-M-'+id+'" onclick="pickSex(\''+id+'\',\'M\')">&#9794; Male</div>'
@@ -1809,7 +2593,8 @@ function openTest(id){
     +'<button class="btn btn-s" onclick="clearCalc(\''+id+'\')">Clear</button>'
     +'</div>'
     +'<div id="res-'+id+'" class="res"></div></div>';
-  card.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('modal-box').scrollTop=0;
+  document.getElementById('modal-backdrop').scrollTop=0;
 }
 
 function pickSex(id,s){
@@ -1828,7 +2613,10 @@ function doCalc(id){
     var el=document.getElementById('f-'+id+'-'+f.i);
     var fr=document.getElementById('fr-'+id+'-'+f.i);
     if(fr) fr.classList.remove('err');
-    if(el.value===''||isNaN(+el.value)){if(fr)fr.classList.add('err');el.focus();ok=false;break}
+    if(el.value===''||isNaN(+el.value)){
+      if(t.allowEmpty){vals[f.i]=f.cv('',f.u?f.u[0]:'');continue;}
+      if(fr)fr.classList.add('err');el.focus();ok=false;break;
+    }
     var uSel=document.getElementById('u-'+id+'-'+f.i);
     vals[f.i]=f.cv(+el.value,uSel?uSel.value:f.u[0]);
   }
@@ -1885,21 +2673,20 @@ function clearCalc(id){
   var b=document.getElementById('res-'+id);if(b)b.className='res';
 }
 
-function closeCalc(){
-  document.getElementById('med-calc').style.display='none';
-  activeMed=null; renderMed();
-}
+function closeCalc(){ closeModal(); activeMed=null; renderMed(); }
 
 function openConv(id){
   activeConv=id; renderConv();
   var c=CV.filter(function(x){return x.id===id})[0];
-  var card=document.getElementById('conv-calc');
-  card.style.display='block';
+  var card=document.getElementById('modal-box');
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow='hidden';
   if(!c.conv){
     if(id==='dose_calc') card.innerHTML=buildDose(c.col);
     else if(id==='iv_calc') card.innerHTML=buildIV(c.col);
     else card.innerHTML=buildBMI(c.col);
-    card.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('modal-box').scrollTop=0;
+  document.getElementById('modal-backdrop').scrollTop=0;
     return;
   }
   var o0=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===0?' selected':'')+'>'+u+'</option>'}).join('');
@@ -1920,7 +2707,8 @@ function openConv(id){
     +'<select class="usel" id="cv-to-'+id+'" onchange="doConv(\''+id+'\')">'+o1+'</select></div></div>'
     +'<div class="cv-out" id="cv-res-'+id+'">Enter a value above to convert</div>'
     +'</div>';
-  card.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('modal-box').scrollTop=0;
+  document.getElementById('modal-backdrop').scrollTop=0;
 }
 
 function doConv(id){
@@ -1943,10 +2731,10 @@ function swapConv(id){
   doConv(id);
 }
 
-function closeConv(){
-  document.getElementById('conv-calc').style.display='none';
-  activeConv=null; renderConv();
+function handleBackdropClick(e){
+  if(e.target===document.getElementById('modal-backdrop')){ closeCalc(); closeConv(); }
 }
+function closeConv(){ closeModal(); activeConv=null; renderConv(); }
 
 var bmiSex='M';
 function buildDose(col){
@@ -2066,6 +2854,310 @@ function clrBMI(){['bmi-wt','bmi-ht'].forEach(function(i){var e=document.getElem
 
 renderMed();
 renderConv();
+
+
+
+
+
+
+/* ── Modal helpers ── */
+function openModal(){
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal-backdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+function modal_scrollTop(){
+  var b=document.getElementById('modal-box');
+  if(b){b.scrollTop=0;}
+  var s=document.getElementById('modal-backdrop');
+  if(s){s.scrollTop=0;}
+}
+function handleBackdropClick(e){
+  if(e.target===document.getElementById('modal-backdrop')){
+    closeCalc();closeConv();
+  }
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var bd=document.getElementById('modal-backdrop');
+    if(bd&&bd.classList.contains('open')){closeCalc();closeConv();}
+  }
+});
+
+/* ── Patch renderMed / renderConv to use M3 classes ── */
+renderMed=function(){
+  var q=(document.getElementById('med-q')||{}).value||'';
+  q=q.toLowerCase();
+  var list=T.filter(function(t){
+    return(cat==='all'||t.c===cat)&&(!q||t.n.toLowerCase().includes(q)||t.a.toLowerCase().includes(q));
+  });
+  var el=document.getElementById('med-list');
+  if(!el)return;
+  if(!list.length){el.innerHTML='<div class="m3-empty">No calculators found</div>';return;}
+  var out='';
+  list.forEach(function(t){
+    var cc=CCAT[t.c]||{em:'🔬',bg:'#E8EAF6',gr:'linear-gradient(135deg,#3949AB,#5C6BC0)'};
+    var on=activeMed===t.id?' on':'';
+    out+='<div class="m3-li'+on+'" data-tid="'+t.id+'">'
+      +'<div class="li-leading" style="background:'+cc.bg+'"><span style="font-size:20px">'+cc.em+'</span></div>'
+      +'<div class="li-content"><div class="li-headline">'+t.n+'</div>'
+      +'<div class="li-supporting">'+t.a+'</div></div>'
+      +'<div class="li-trailing"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div></div>';
+  });
+  el.innerHTML=out;
+  el.querySelectorAll('[data-tid]').forEach(function(d){
+    d.addEventListener('click',function(){openTest(d.getAttribute('data-tid'));});
+  });
+};
+
+renderConv=function(){
+  var q=(document.getElementById('conv-q')||{}).value||'';
+  q=q.toLowerCase();
+  var list=CV.filter(function(c){return !q||c.n.toLowerCase().includes(q);});
+  var el=document.getElementById('conv-list');
+  if(!el)return;
+  if(!list.length){el.innerHTML='<div class="m3-empty">No converters found</div>';return;}
+  var out='';
+  list.forEach(function(c){
+    var on=activeConv===c.id?' on':'';
+    var units=c.u?c.u.slice(0,3).join(' · '):'';
+    out+='<div class="m3-li'+on+'" data-cid="'+c.id+'">'
+      +'<div class="li-leading" style="background:'+c.col+'22"><span style="font-size:20px">'+c.em+'</span></div>'
+      +'<div class="li-content"><div class="li-headline">'+c.n+'</div>'
+      +'<div class="li-supporting">'+units+'</div></div>'
+      +'<div class="li-trailing"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div></div>';
+  });
+  el.innerHTML=out;
+  el.querySelectorAll('[data-cid]').forEach(function(d){
+    d.addEventListener('click',function(){openConv(d.getAttribute('data-cid'));});
+  });
+};
+
+/* ── Patch openTest to use M3 field classes ── */
+openTest=function(id){
+  activeMed=id; renderMed();
+  var t=T.filter(function(x){return x.id===id;})[0];
+  if(!t)return;
+  var cc=CCAT[t.c]||{em:'🔬',bg:'#E8EAF6',gr:'linear-gradient(135deg,#3949AB,#5C6BC0)'};
+  if(!SX[id])SX[id]='M';
+  var card=document.getElementById('modal-box');
+  openModal();
+
+  var sxH='';
+  if(t.sex){
+    sxH='<div class="m3-field"><label class="m3-field-label">Biological Sex</label>'
+      +'<div class="m3-seg">'
+      +'<div class="m3-seg-btn on" id="sx-M-'+id+'" data-sex="M" data-tid="'+id+'">'
+      +'<span class="m3-seg-check material-symbols-outlined">check</span>♂ Male</div>'
+      +'<div class="m3-seg-btn" id="sx-F-'+id+'" data-sex="F" data-tid="'+id+'">'
+      +'<span class="m3-seg-check material-symbols-outlined">check</span>♀ Female</div>'
+      +'</div></div>';
+  }
+
+  var fH=t.F.map(function(f){
+    var multi=f.u&&f.u.length>1;
+    var uCtrl=multi
+      ?'<select class="m3-unit-sel" id="u-'+id+'-'+f.i+'">'
+        +f.u.map(function(u,k){return'<option value="'+u+'"'+(k===0?' selected':'')+'>'+u+'</option>';}).join('')
+        +'</select>'
+      :(f.u?'<div class="m3-unit-badge">'+f.u[0]+'</div>':'');
+    return '<div class="m3-field"><label class="m3-field-label">'+f.l+'</label>'
+      +'<div class="m3-field-box" id="fr-'+id+'-'+f.i+'">'
+      +'<input class="m3-input" type="number" id="f-'+id+'-'+f.i+'" placeholder="'+f.p+'" step="any" data-fid="'+id+'">'
+      +uCtrl+'</div></div>';
+  }).join('');
+
+  card.innerHTML=
+    '<div class="modal-handle"></div>'
+    +'<button class="modal-close-btn" data-close="calc" aria-label="Close">'
+    +'<span class="material-symbols-outlined">close</span></button>'
+    +'<div class="calc-hero" style="background:'+cc.gr+'">'
+    +'<div class="calc-hero-row">'
+    +'<div class="calc-hero-icon">'+cc.em+'</div>'
+    +'<div><div class="calc-hero-name">'+t.n+'</div>'
+    +'<div class="calc-hero-abbr">'+t.a+'</div></div></div>'
+    +'<div class="calc-hero-desc">'+t.d+'</div>'
+    +'<div class="calc-hero-formula">ƒ '+t.f+'</div></div>'
+    +'<div class="calc-body">'+sxH+fH
+    +'<div class="btns">'
+    +'<button class="m3-btn m3-btn-filled" data-calc="'+id+'">'
+    +'<span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>Calculate</button>'
+    +'<button class="m3-btn m3-btn-outlined" data-clear="'+id+'">'
+    +'<span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>Clear</button>'
+    +'</div>'
+    +'<div id="res-'+id+'" class="m3-result"></div></div>';
+
+  // Wire events via data attrs
+  card.querySelectorAll('[data-sex]').forEach(function(el){
+    el.addEventListener('click',function(){pickSex(el.getAttribute('data-tid'),el.getAttribute('data-sex'));});
+  });
+  card.querySelectorAll('[data-fid]').forEach(function(el){
+    el.addEventListener('input',function(){
+      var fr=document.getElementById('fr-'+id+'-'+el.id.replace('f-'+id+'-',''));
+      if(fr)fr.classList.remove('err');
+    });
+  });
+  card.querySelector('[data-calc]').addEventListener('click',function(){doCalc(id);});
+  card.querySelector('[data-clear]').addEventListener('click',function(){clearCalc(id);});
+  card.querySelector('[data-close]').addEventListener('click',function(){closeCalc();});
+
+  modal_scrollTop();
+};
+
+/* ── Patch openConv to use M3 field classes ── */
+openConv=function(id){
+  activeConv=id; renderConv();
+  var c=CV.filter(function(x){return x.id===id;})[0];
+  if(!c)return;
+  var card=document.getElementById('modal-box');
+  openModal();
+
+  if(!c.conv){
+    var specialHTML;
+    if(id==='dose_calc') specialHTML=buildDose(c.col);
+    else if(id==='iv_calc') specialHTML=buildIV(c.col);
+    else specialHTML=buildBMI(c.col);
+    card.innerHTML='<div class="modal-handle"></div>'
+      +'<button class="modal-close-btn" data-close="conv" aria-label="Close">'
+      +'<span class="material-symbols-outlined">close</span></button>'+specialHTML;
+    card.querySelector('[data-close]').addEventListener('click',function(){closeConv();});
+    modal_scrollTop();return;
+  }
+
+  var o0=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===0?' selected':'')+'>'+u+'</option>';}).join('');
+  var o1=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===1?' selected':'')+'>'+u+'</option>';}).join('');
+
+  card.innerHTML=
+    '<div class="modal-handle"></div>'
+    +'<button class="modal-close-btn" data-close="conv" aria-label="Close">'
+    +'<span class="material-symbols-outlined">close</span></button>'
+    +'<div class="conv-hero" style="background:linear-gradient(135deg,'+c.col+','+c.col+'BB)">'
+    +'<div class="conv-icon">'+c.em+'</div>'
+    +'<div class="conv-name">'+c.n+'</div>'
+    +'<div class="conv-units">'+c.u.length+' unit types</div></div>'
+    +'<div class="calc-body">'
+    +'<div class="m3-field"><label class="m3-field-label">From</label>'
+    +'<div class="m3-field-box"><input class="m3-input" type="number" id="cv-in-'+id+'" placeholder="Enter value" step="any">'
+    +'<select class="m3-unit-sel" id="cv-from-'+id+'">'+o0+'</select></div></div>'
+    +'<div style="text-align:center">'
+    +'<button class="conv-swap-btn" data-swap="'+id+'">'
+    +'<span class="material-symbols-outlined">swap_vert</span></button></div>'
+    +'<div class="m3-field"><label class="m3-field-label">To</label>'
+    +'<div class="m3-field-box"><input class="m3-input" type="number" id="cv-out-'+id+'" placeholder="Result" readonly>'
+    +'<select class="m3-unit-sel" id="cv-to-'+id+'">'+o1+'</select></div></div>'
+    +'<div class="conv-result" id="cv-res-'+id+'">Enter a value to convert</div></div>';
+
+  var inp=card.querySelector('#cv-in-'+id);
+  var from=card.querySelector('#cv-from-'+id);
+  var to=card.querySelector('#cv-to-'+id);
+  if(inp)inp.addEventListener('input',function(){doConv(id);});
+  if(from)from.addEventListener('change',function(){doConv(id);});
+  if(to)to.addEventListener('change',function(){doConv(id);});
+  var swapBtn=card.querySelector('[data-swap]');
+  if(swapBtn)swapBtn.addEventListener('click',function(){swapConv(id);});
+  card.querySelector('[data-close]').addEventListener('click',function(){closeConv();});
+
+  modal_scrollTop();
+};
+
+/* ── Patch doCalc result rendering to use M3 result classes ── */
+doCalc=function(id){
+  var t=T.filter(function(x){return x.id===id;})[0];
+  if(!t)return;
+  var s=SX[id]||'M';
+  var vals={};var ok=true;
+  for(var i=0;i<t.F.length;i++){
+    var f=t.F[i];
+    var el=document.getElementById('f-'+id+'-'+f.i);
+    var fr=document.getElementById('fr-'+id+'-'+f.i);
+    if(!el)continue;
+    if(el.value===''||isNaN(+el.value)){
+      if(t.allowEmpty){vals[f.i]=f.cv('',f.u?f.u[0]:'');continue;}
+      if(fr)fr.classList.add('err');el.focus();ok=false;break;
+    }
+    var uSel=document.getElementById('u-'+id+'-'+f.i);
+    vals[f.i]=f.cv(+el.value,uSel?uSel.value:(f.u?f.u[0]:''));
+  }
+  if(!ok)return;
+  var result=t.sex?t.calc(vals,s):t.calc(vals);
+  var rawNum=parseFloat(result);
+  var interp=t.rawCalc?t.interp(String(result),vals):(t.sex?t.interp(String(result),s):t.interp(String(result)));
+  if(!interp)return;
+
+  var ruSel='';
+  if(t.ruU&&t.ruU.length>1){
+    ruSel='<div class="res-unit-row"><span class="res-unit-label">Convert to</span>'
+      +'<select class="res-unit-sel" id="ru-sel-'+id+'">'
+      +t.ruU.map(function(u,k){return'<option value="'+k+'">'+u+'</option>';}).join('')
+      +'</select></div>';
+  }
+
+  var refsBlock='';
+  if(t.refs&&t.refs.length){
+    refsBlock='<div class="res-refs-wrap"><div class="res-refs-label">Reference Ranges</div>'
+      +'<div class="res-refs-tags">'
+      +t.refs.map(function(r){return'<div class="res-ref-tag">'+r+'</div>';}).join('')
+      +'</div></div>';
+  }
+
+  var box=document.getElementById('res-'+id);
+  if(!box)return;
+  box.className='m3-result show '+interp.cls;
+  box.innerHTML=
+    '<div class="res-header"><div class="res-header-dot"></div>'+interp.st+'</div>'
+    +'<div class="res-value-row">'
+    +'<span class="res-number" id="rn-'+id+'">'+result+'</span>'
+    +'<span class="res-unit" id="ru-'+id+'">'+t.ru+'</span></div>'
+    +'<div class="res-interp">'+interp.txt+'</div>'
+    +ruSel+refsBlock;
+  box._raw=rawNum;
+
+  if(ruSel){
+    var ruSelEl=document.getElementById('ru-sel-'+id);
+    if(ruSelEl){
+      ruSelEl.addEventListener('change',function(){convertResult(id,this.selectedIndex);});
+    }
+  }
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+
+/* ── Patch pickSex to use M3 seg classes ── */
+var _origPickSex=pickSex;
+pickSex=function(id,s){
+  SX[id]=s;
+  ['M','F'].forEach(function(x){
+    var el=document.getElementById('sx-'+x+'-'+id);
+    if(el)el.className='m3-seg-btn'+(x===s?' on':'');
+  });
+};
+
+/* ── Patch setCat to use m3-chip classes ── */
+var _origSetCat=setCat;
+setCat=function(c,el){
+  cat=c;
+  document.querySelectorAll('.m3-chip').forEach(function(ch){
+    ch.classList.remove('on');
+  });
+  if(el)el.classList.add('on');
+  renderMed();
+};
+
+/* ── Patch switchTab ── */
+var _origSwitchTab=switchTab;
+switchTab=function(t,el){
+  ['med','conv'].forEach(function(p){
+    document.getElementById('p-'+p).classList.remove('on');
+    document.getElementById('tab-'+p).classList.remove('on');
+  });
+  document.getElementById('p-'+t).classList.add('on');
+  if(el)el.classList.add('on');
+};
+
+/* ── Init ── */
+renderMed(); renderConv();
 </script>
 </body>
 </html>
