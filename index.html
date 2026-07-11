@@ -3,51 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#006A60">
+<meta name="theme-color" content="#4F46E5">
 <title>MedCalc Pro — Clinical Calculator Suite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════════════════════
-   MEDCALC PRO — MATERIAL DESIGN 3  (Teal seed, light surface)
-   152 Clinical Calculators · 61 Unit Converters
-   ═══════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   MEDCALC PRO — INDIGO/VIOLET CLINICAL THEME  (Light scheme)
+   ══════════════════════════════════════════════════════════════════ */
 :root{
-  /* M3 Teal seed — full tonal palette */
-  --md-pri:#006A60;         --md-on-pri:#FFF;
-  --md-pri-c:#9FF2E3;       --md-on-pri-c:#00201C;
-  --md-sec:#4A635F;         --md-on-sec:#FFF;
-  --md-sec-c:#CCE8E2;       --md-on-sec-c:#06201C;
-  --md-ter:#456179;         --md-on-ter:#FFF;
-  --md-ter-c:#CCE5FF;       --md-on-ter-c:#001E2F;
-  --md-err:#BA1A1A;         --md-on-err:#FFF;
-  --md-err-c:#FFDAD6;       --md-on-err-c:#410002;
-  --md-warn:#7D5700;        --md-warn-c:#FFDDB3;--md-on-warn-c:#281900;
+  /* ── Indigo/Violet colour roles ── */
+  --md-primary:#4F46E5;
+  --md-on-primary:#FFFFFF;
+  --md-primary-container:#E0E1FF;
+  --md-on-primary-container:#1B1470;
+  --md-secondary:#6D28D9;
+  --md-on-secondary:#FFFFFF;
+  --md-secondary-container:#EDE4FF;
+  --md-on-secondary-container:#2A1064;
+  --md-tertiary:#0891B2;
+  --md-on-tertiary:#FFFFFF;
+  --md-tertiary-container:#D2F3FA;
+  --md-on-tertiary-container:#04303D;
+  --md-error:#DC2626;
+  --md-on-error:#FFFFFF;
+  --md-error-container:#FEE2E2;
+  --md-on-error-container:#5C0A0A;
+  --md-warning:#B45309;
+  --md-warning-container:#FEF0D5;
+  --md-on-warning-container:#4A2A00;
 
-  /* Surfaces */
-  --md-bg:#F4FAF8;
-  --md-surf:#F4FAF8;
-  --md-surf-var:#DAE5E1;
-  --md-surf-0:#FFFFFF;
-  --md-surf-1:#EEF5F2;
-  --md-surf-2:#E8EFEC;
-  --md-surf-3:#E2EAE7;
-  --md-surf-4:#E0E9E6;
-  --md-surf-5:#DBE4E1;
+  /* ── Surfaces ── */
+  --md-background:#F5F5FC;
+  --md-on-background:#1A1A2E;
+  --md-surface:#F5F5FC;
+  --md-surface-dim:#DEDEF0;
+  --md-surface-bright:#FBFBFF;
+  --md-surface-container-lowest:#FFFFFF;
+  --md-surface-container-low:#F0F0FA;
+  --md-surface-container:#EBEBF7;
+  --md-surface-container-high:#E4E4F3;
+  --md-surface-container-highest:#DCDCEE;
+  --md-on-surface:#1A1A2E;
+  --md-on-surface-variant:#47455F;
+  --md-outline:#78768F;
+  --md-outline-variant:#C7C5DD;
+  --md-inverse-surface:#2C2A42;
+  --md-inverse-on-surface:#EEEDFB;
+  --md-inverse-primary:#BCC0FF;
+  --md-scrim:rgba(20,17,50,0.32);
 
-  /* On-surface */
-  --md-on-surf:#161D1B;
-  --md-on-surf-var:#3F4946;
-  --md-outline:#6F7976;
-  --md-outline-var:#BEC9C5;
+  /* ── Elevation (tonal surface overlay) ── */
+  --md-elev1:0px 1px 2px rgba(0,0,0,0.3),0px 1px 3px 1px rgba(0,0,0,0.15);
+  --md-elev2:0px 1px 2px rgba(0,0,0,0.3),0px 2px 6px 2px rgba(0,0,0,0.15);
+  --md-elev3:0px 4px 8px 3px rgba(0,0,0,0.15),0px 1px 3px rgba(0,0,0,0.3);
+  --md-elev4:0px 6px 10px 4px rgba(0,0,0,0.15),0px 2px 3px rgba(0,0,0,0.3);
 
-  /* Inverse */
-  --md-inv-surf:#2B3230;
-  --md-inv-on-surf:#ECF2EE;
-  --md-inv-pri:#83D5C6;
-
-  /* Shape */
+  /* ── Shape ── */
   --shape-none:0px;
   --shape-xs:4px;
   --shape-sm:8px;
@@ -56,683 +69,734 @@
   --shape-xl:28px;
   --shape-full:9999px;
 
-  /* Type */
-  --font:'Roboto',system-ui,sans-serif;
-  --font-d:'Google Sans','Roboto',system-ui,sans-serif;
-  --mono:'Roboto Mono',monospace;
+  /* ── Type ── */
+  --font-display:'Roboto',system-ui,sans-serif;
+  --font-body:'Roboto',system-ui,sans-serif;
+  --font-mono:'Roboto Mono',monospace;
 
-  /* Elevation (M3 tonal overlay on surface) */
-  --elev1:0 1px 2px rgba(0,0,0,.12),0 1px 3px 1px rgba(0,0,0,.08);
-  --elev2:0 1px 2px rgba(0,0,0,.12),0 2px 6px 2px rgba(0,0,0,.08);
-  --elev3:0 4px 8px 3px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.12);
-
-  /* Motion */
-  --dur-short1:50ms;--dur-short2:100ms;--dur-short3:150ms;--dur-short4:200ms;
-  --dur-med1:250ms;--dur-med2:300ms;--dur-long1:350ms;--dur-long2:400ms;
-  --ease-std:cubic-bezier(0.2,0,0,1);
-  --ease-dec:cubic-bezier(0,0,0,1);
-  --ease-acc:cubic-bezier(0.3,0,1,1);
-  --ease-spring:cubic-bezier(0.34,1.4,0.64,1);
+  /* ── Motion (M3 durations + easing) ── */
+  --motion-short1:50ms;
+  --motion-short2:100ms;
+  --motion-short3:150ms;
+  --motion-short4:200ms;
+  --motion-medium1:250ms;
+  --motion-medium2:300ms;
+  --motion-long1:350ms;
+  --motion-long2:400ms;
+  --easing-standard:cubic-bezier(0.2,0,0,1);
+  --easing-decelerate:cubic-bezier(0,0,0,1);
+  --easing-accelerate:cubic-bezier(0.3,0,1,1);
+  --easing-spring:cubic-bezier(0.34,1.4,0.64,1);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font);background:var(--md-bg);color:var(--md-on-surf);min-height:100vh;-webkit-font-smoothing:antialiased}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:
+    radial-gradient(900px 480px at 8% -8%, rgba(79,70,229,0.16), transparent 60%),
+    radial-gradient(700px 420px at 100% 0%, rgba(8,145,178,0.14), transparent 55%),
+    var(--md-background);
+  background-attachment:fixed;
+  color:var(--md-on-background);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased
+}
 ::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-thumb{background:var(--md-outline-var);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--md-outline-variant);border-radius:var(--shape-full)}
 
 /* ══ TOP APP BAR (M3 Small) ═════════════════════════════════════ */
-.app-bar{
-  position:sticky;top:0;z-index:100;
-  height:64px;display:flex;align-items:center;
-  padding:0 16px;gap:12px;
-  background:var(--md-surf-2);
-  box-shadow:var(--elev1)
+.topbar{
+  position:sticky;top:0;z-index:200;
+  height:64px;display:flex;align-items:center;padding:0 16px;gap:12px;
+  background:rgba(235,235,247,0.62);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,0.5);
+  box-shadow:0 1px 24px rgba(79,70,229,0.08)
 }
-.app-bar-logo{
+.topbar-logo{
   width:40px;height:40px;border-radius:var(--shape-md);
-  background:var(--md-pri);
+  background:linear-gradient(135deg,#4F46E5,#6D28D9);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(79,70,229,0.4)
+}
+.topbar-logo svg{display:block}
+.topbar-info{flex:1;min-width:0}
+.topbar-title{
+  font-family:var(--font-display);font-size:22px;font-weight:500;
+  color:var(--md-on-surface);letter-spacing:0;line-height:1.2
+}
+.topbar-sub{
+  font-family:var(--font-body);font-size:11px;
+  color:var(--md-on-surface-variant);letter-spacing:0.3px;margin-top:1px
+}
+.topbar-count{
   flex-shrink:0;
-  box-shadow:0 2px 8px rgba(0,106,96,.35)
-}
-.app-bar-logo svg{display:block}
-.app-bar-text{flex:1;min-width:0}
-.app-bar-title{
-  font-family:var(--font-d);font-size:22px;font-weight:500;
-  color:var(--md-on-surf);letter-spacing:0;line-height:1.2
-}
-.app-bar-sub{
-  font-size:11px;color:var(--md-on-surf-var);letter-spacing:.3px;margin-top:1px
-}
-.app-bar-badge{
-  font-family:var(--font-d);font-size:11px;font-weight:500;
-  padding:4px 12px;border-radius:var(--shape-full);
-  background:var(--md-pri-c);color:var(--md-on-pri-c);
-  white-space:nowrap;flex-shrink:0
+  font-family:var(--font-display);font-size:11px;font-weight:500;
+  padding:5px 12px;border-radius:var(--shape-full);
+  background:var(--md-primary-container);
+  color:var(--md-on-primary-container);
+  white-space:nowrap
 }
 
-/* ══ TAB BAR (M3 Primary Tabs) ════════════════════════════════ */
-.tabs{
-  position:sticky;top:64px;z-index:99;
-  display:flex;background:var(--md-surf-0);
-  border-bottom:1px solid var(--md-outline-var)
+/* ══ TAB BAR (M3 Primary Tabs) ══════════════════════════════════ */
+.tabbar{
+  position:sticky;top:64px;z-index:199;
+  display:flex;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--md-outline-variant)
 }
-.tab{
+.tabbar-tab{
   flex:1;height:48px;display:flex;align-items:center;
   justify-content:center;gap:8px;
-  font-family:var(--font-d);font-size:14px;font-weight:500;
-  letter-spacing:.1px;color:var(--md-on-surf-var);
+  font-family:var(--font-display);font-size:14px;font-weight:500;
+  letter-spacing:0.1px;color:var(--md-on-surface-variant);
   cursor:pointer;user-select:none;position:relative;
-  transition:color var(--dur-med1) var(--ease-std)
+  transition:color var(--motion-medium1) var(--easing-standard)
 }
-.tab-icon{font-size:20px;transition:transform var(--dur-short4) var(--ease-spring)}
-.tab.on{color:var(--md-pri)}
-.tab.on .tab-icon{transform:scale(1.12)}
+.tabbar-tab svg{transition:transform var(--motion-short4) var(--easing-spring)}
+.tabbar-tab.active{color:var(--md-primary)}
+.tabbar-tab.active svg{transform:scale(1.1)}
+.tabbar-tab::before{
+  content:'';position:absolute;inset:0;
+  background:currentColor;opacity:0;
+  transition:opacity var(--motion-short3)
+}
+.tabbar-tab:active::before{opacity:0.08}
 .tab-indicator{
   position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--md-pri);border-radius:3px 3px 0 0;
-  transform:scaleX(0);transition:transform var(--dur-med1) var(--ease-std)
+  border-radius:3px 3px 0 0;
+  background:var(--md-primary);
+  transform:scaleX(0);
+  transition:transform var(--motion-medium1) var(--easing-standard)
 }
-.tab.on .tab-indicator{transform:scaleX(1)}
+.tabbar-tab.active .tab-indicator{transform:scaleX(1)}
 
-/* Ripple state layer */
-.tab::before{
-  content:'';position:absolute;inset:0;
-  background:var(--md-pri);opacity:0;
-  transition:opacity var(--dur-short3)
-}
-.tab:active::before{opacity:.08}
-
-/* ══ PANELS ════════════════════════════════════════════════════ */
+/* ══ PANELS ══════════════════════════════════════════════════════ */
 .panel{display:none;padding:16px 12px;max-width:640px;margin:0 auto}
-.panel.on{display:block}
+.panel.active{display:block}
 
-/* ══ M3 CARDS ════════════════════════════════════════════════ */
-.card{
-  background:var(--md-surf-0);border-radius:var(--shape-lg);
-  border:1px solid var(--md-outline-var);
-  margin-bottom:12px;overflow:hidden
+/* ══ SECTION HEAD ════════════════════════════════════════════════ */
+.section-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.section-title{
+  font-family:var(--font-display);font-size:12px;font-weight:600;
+  letter-spacing:0.8px;text-transform:uppercase;
+  color:var(--md-on-surface-variant);
+  display:flex;align-items:center;gap:6px
 }
-
-/* ══ SEARCH (M3 Search Bar) ══════════════════════════════════ */
-.search-wrap{padding:16px 16px 0}
-.search-label{
-  font-family:var(--font-d);font-size:11px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;color:var(--md-on-surf-var);
-  display:flex;align-items:center;gap:8px;margin-bottom:12px
-}
-.search-label::before{
+.section-title::before{
   content:'';width:4px;height:14px;border-radius:2px;
-  background:var(--md-pri);display:inline-block;flex-shrink:0
+  background:var(--md-primary);display:inline-block;flex-shrink:0
 }
-.search-bar{
-  display:flex;align-items:center;gap:10px;
-  height:52px;padding:0 16px;
-  background:var(--md-surf-3);
-  border-radius:var(--shape-full);
-  border:none;
-  transition:background var(--dur-short4) var(--ease-std),
-             box-shadow var(--dur-short4) var(--ease-std)
+.section-badge{
+  font-family:var(--font-display);font-size:11px;font-weight:500;
+  color:var(--md-primary);
+  background:var(--md-primary-container);
+  padding:2px 10px;border-radius:var(--shape-full)
 }
-.search-bar:focus-within{
-  background:var(--md-surf-0);
-  box-shadow:inset 0 0 0 2px var(--md-pri)
-}
-.search-bar input{
-  flex:1;border:none;background:none;outline:none;
-  font-size:16px;font-family:var(--font);color:var(--md-on-surf);
-  caret-color:var(--md-pri)
-}
-.search-bar input::placeholder{color:var(--md-on-surf-var)}
-.search-icon{color:var(--md-on-surf-var);font-size:22px;flex-shrink:0}
 
-/* ══ FILTER CHIPS (M3 Filter Chip) ══════════════════════════ */
-.chips-scroll{
-  display:flex;gap:8px;padding:12px 16px 16px;
-  overflow-x:auto;scrollbar-width:none
+/* ══ SEARCH BAR (M3) ═════════════════════════════════════════════ */
+.search-box{position:relative;margin-bottom:14px}
+.search-icon{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  color:var(--md-on-surface-variant);pointer-events:none;
+  width:16px;height:16px
 }
-.chips-scroll::-webkit-scrollbar{display:none}
-.m3-chip{
-  display:inline-flex;align-items:center;gap:4px;
-  height:32px;padding:0 16px;
+.search-input{
+  width:100%;height:52px;padding:0 16px 0 40px;
+  border:none;border-radius:var(--shape-full);
+  background:var(--md-surface-container-high);
+  font-family:var(--font-body);font-size:16px;
+  color:var(--md-on-surface);outline:none;
+  transition:background var(--motion-short4) var(--easing-standard),
+             box-shadow var(--motion-short4) var(--easing-standard)
+}
+.search-input:focus{
+  background:var(--md-surface-container-highest);
+  box-shadow:inset 0 0 0 2px var(--md-primary)
+}
+.search-input::placeholder{color:var(--md-on-surface-variant)}
+
+/* ══ FILTER CHIPS (M3 Filter Chip) ══════════════════════════════ */
+.chips-row{
+  display:flex;gap:8px;overflow-x:auto;
+  padding-bottom:4px;margin-bottom:14px;
+  scrollbar-width:none
+}
+.chips-row::-webkit-scrollbar{display:none}
+.cat-chip{
+  flex-shrink:0;height:32px;padding:0 16px;
   border-radius:var(--shape-sm);
   border:1px solid var(--md-outline);
   background:transparent;
-  font-family:var(--font-d);font-size:14px;font-weight:500;
-  color:var(--md-on-surf-var);
+  font-family:var(--font-body);font-size:14px;font-weight:500;
+  color:var(--md-on-surface-variant);
   cursor:pointer;user-select:none;white-space:nowrap;
-  transition:all var(--dur-short3) var(--ease-std);
-  position:relative;overflow:hidden
+  display:inline-flex;align-items:center;gap:6px;
+  position:relative;overflow:hidden;
+  transition:background var(--motion-short3) var(--easing-standard),
+             border-color var(--motion-short3) var(--easing-standard),
+             color var(--motion-short3) var(--easing-standard)
 }
-.m3-chip::before{
+.cat-chip::before{
   content:'';position:absolute;inset:0;
-  background:var(--md-on-surf);opacity:0;
-  transition:opacity var(--dur-short3)
+  background:currentColor;opacity:0;
+  transition:opacity var(--motion-short3)
 }
-.m3-chip:active::before{opacity:.08}
-.m3-chip.on{
-  background:var(--md-sec-c);
-  border-color:var(--md-sec-c);
-  color:var(--md-on-sec-c)
+.cat-chip:active::before{opacity:0.08}
+.cat-chip-check{
+  width:0;overflow:hidden;font-size:16px;
+  transition:width var(--motion-short4) var(--easing-spring)
 }
-.m3-chip .chip-check{
-  font-size:16px;width:0;overflow:hidden;
-  transition:width var(--dur-short4) var(--ease-std)
+.cat-chip.active{
+  background:var(--md-secondary-container);
+  border-color:var(--md-secondary-container);
+  color:var(--md-on-secondary-container)
 }
-.m3-chip.on .chip-check{width:18px}
+.cat-chip.active .cat-chip-check{width:20px}
 
-/* ══ LIST (M3 List) ══════════════════════════════════════════ */
-.m3-list{padding:4px 0}
-.m3-li{
+/* ══ M3 CARD ═════════════════════════════════════════════════════ */
+.card{
+  background:var(--md-surface-container-lowest);
+  border-radius:var(--shape-lg);
+  border:1px solid var(--md-outline-variant);
+  overflow:hidden;margin-bottom:12px
+}
+
+/* ══ LIST ITEMS (M3 List) ════════════════════════════════════════ */
+.calc-list{}
+.calc-item{
   display:flex;align-items:center;gap:16px;
   min-height:56px;padding:8px 16px;
-  cursor:pointer;user-select:none;position:relative;
-  border-bottom:1px solid var(--md-outline-var);
-  transition:background var(--dur-short2)
+  cursor:pointer;user-select:none;
+  border-bottom:1px solid var(--md-outline-variant);
+  position:relative;overflow:hidden;
+  transition:background var(--motion-short2) var(--easing-standard)
 }
-.m3-li:last-child{border-bottom:none}
-.m3-li::before{
+.calc-item:last-child{border-bottom:none}
+.calc-item::before{
   content:'';position:absolute;inset:0;
-  background:var(--md-on-surf);opacity:0;
-  transition:opacity var(--dur-short2)
+  background:var(--md-on-surface);opacity:0;
+  transition:opacity var(--motion-short2)
 }
-.m3-li:active::before{opacity:.08}
-.m3-li.on{background:rgba(0,106,96,.08)}
-.li-leading{
-  width:40px;height:40px;border-radius:var(--shape-sm);
+.calc-item:active::before{opacity:0.08}
+.ci-icon{
+  width:40px;height:40px;border-radius:var(--shape-md);
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:20px;position:relative;
-  background:var(--md-surf-2)
+  font-size:20px;flex-shrink:0
 }
-.li-content{flex:1;min-width:0}
-.li-headline{
-  font-family:var(--font-d);font-size:16px;font-weight:500;
-  color:var(--md-on-surf);overflow:hidden;text-overflow:ellipsis;
-  white-space:nowrap;line-height:1.4
-}
-.li-supporting{
-  font-size:13px;color:var(--md-on-surf-var);margin-top:2px;
+.ci-body{flex:1;min-width:0;position:relative;z-index:1}
+.ci-name{
+  font-family:var(--font-display);font-size:16px;font-weight:500;
+  color:var(--md-on-surface);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap
 }
-.li-trailing{
-  color:var(--md-outline);font-size:20px;flex-shrink:0;
+.ci-sub{
+  font-family:var(--font-body);font-size:13px;
+  color:var(--md-on-surface-variant);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+.ci-arr{
+  color:var(--md-on-surface-variant);flex-shrink:0;
+  position:relative;z-index:1;
   display:flex;align-items:center
 }
-.m3-empty{
-  padding:40px 16px;text-align:center;
-  font-size:14px;color:var(--md-on-surf-var)
+.ci-arr svg{width:18px;height:18px}
+
+/* ══ EMPTY STATE ═════════════════════════════════════════════════ */
+.empty-state{
+  padding:48px 20px;text-align:center
+}
+.empty-icon{font-size:48px;margin-bottom:12px;opacity:0.6}
+.empty-text{
+  font-family:var(--font-display);font-size:16px;font-weight:500;
+  color:var(--md-on-surface-variant)
 }
 
-/* ══ MODAL ══════════════════════════════════════════════════ */
-.modal-scrim{
+/* ══ PAGINATION ══════════════════════════════════════════════════ */
+.pagination{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;
+  background:var(--md-surface-container-lowest);
+  border-top:1px solid var(--md-outline-variant);
+  border-radius:0 0 var(--shape-lg) var(--shape-lg)
+}
+.page-info{
+  font-family:var(--font-body);font-size:12px;font-weight:500;
+  color:var(--md-on-surface-variant);white-space:nowrap
+}
+.page-info span{color:var(--md-primary);font-weight:700}
+.page-controls{display:flex;align-items:center;gap:4px}
+.page-nums{display:flex;gap:4px}
+.page-btn{
+  min-width:32px;height:32px;padding:0 4px;
+  border-radius:var(--shape-full);
+  border:none;background:transparent;
+  font-family:var(--font-display);font-size:13px;font-weight:500;
+  color:var(--md-on-surface-variant);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  transition:background var(--motion-short3) var(--easing-standard),
+             color var(--motion-short3) var(--easing-standard)
+}
+.page-btn::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:currentColor;opacity:0;
+  transition:opacity var(--motion-short3)
+}
+.page-btn:hover:not(:disabled)::before{opacity:0.08}
+.page-btn:active:not(:disabled)::before{opacity:0.12}
+.page-btn:disabled{opacity:0.38;cursor:not-allowed}
+.page-btn.active{
+  background:var(--md-primary);color:var(--md-on-primary)
+}
+.page-btn svg{width:18px;height:18px}
+.page-sep{
+  color:var(--md-on-surface-variant);
+  font-size:12px;padding:0 2px;line-height:32px;user-select:none
+}
+
+/* ══ MODAL SCRIM ═════════════════════════════════════════════════ */
+.modal-overlay{
   display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.5);
-  transition:opacity var(--dur-med1) var(--ease-std)
+  background:rgba(0,0,0,0);
+  transition:background var(--motion-medium1) var(--easing-standard)
 }
-.modal-scrim.open{display:flex;align-items:flex-end;justify-content:center}
-@media(min-width:600px){
-  .modal-scrim.open{align-items:center}
-}
+.modal-overlay.open{display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0.5)}
+@media(min-width:600px){.modal-overlay.open{align-items:center;background:rgba(0,0,0,0.5)}}
 
-.modal-sheet{
+/* ══ MODAL PANEL (Bottom sheet → Dialog) ════════════════════════ */
+.modal-panel{
   width:100%;max-width:560px;
   max-height:92dvh;overflow-y:auto;
-  background:var(--md-surf-0);
+  background:var(--md-surface-container-lowest);
   border-radius:var(--shape-xl) var(--shape-xl) 0 0;
-  box-shadow:0 -4px 32px rgba(0,0,0,.18),0 -1px 0 rgba(0,0,0,.08);
-  animation:sheet-up var(--dur-long1) var(--ease-dec);
-  position:relative
+  box-shadow:var(--md-elev4);
+  position:relative;
+  animation:sheet-rise var(--motion-long1) var(--easing-decelerate)
 }
+@keyframes sheet-rise{from{transform:translateY(100%)}to{transform:none}}
 @media(min-width:600px){
-  .modal-sheet{
+  .modal-panel{
     border-radius:var(--shape-xl);
-    animation:dialog-in var(--dur-med2) var(--ease-dec)
+    animation:dialog-enter var(--motion-medium2) var(--easing-decelerate)
   }
+  @keyframes dialog-enter{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:none}}
 }
-@keyframes sheet-up{from{transform:translateY(100%)}to{transform:none}}
-@keyframes dialog-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
 
-/* Drag handle (mobile) */
-.modal-handle{
+/* ── Drag handle ── */
+.modal-pill{
   width:32px;height:4px;border-radius:2px;
-  background:var(--md-outline-var);
-  margin:12px auto 4px;display:block
+  background:var(--md-outline-variant);
+  margin:12px auto 0;display:block
 }
-@media(min-width:600px){.modal-handle{display:none}}
+@media(min-width:600px){.modal-pill{display:none}}
 
-/* ══ MODAL CLOSE BUTTON (M3 Icon Button) ══════════════════ */
-.modal-close-btn{
+/* ── M3 Icon Button (close) ── */
+.modal-close{
   position:absolute;top:12px;right:12px;z-index:10;
   width:40px;height:40px;border-radius:50%;
-  background:var(--md-surf-2);
-  border:none;cursor:pointer;
+  border:none;background:var(--md-surface-container-high);
+  cursor:pointer;color:var(--md-on-surface-variant);
   display:flex;align-items:center;justify-content:center;
-  color:var(--md-on-surf-var);
-  transition:background var(--dur-short3) var(--ease-std)
+  position:absolute;
+  transition:background var(--motion-short3) var(--easing-standard)
 }
-.modal-close-btn:hover{background:var(--md-surf-3)}
-.modal-close-btn:active{background:var(--md-surf-4)}
-.modal-close-btn .material-symbols-outlined{font-size:22px}
+.modal-close svg{width:20px;height:20px}
+.modal-close:hover{background:var(--md-surface-container-highest)}
+.modal-close:active{background:var(--md-surface-dim)}
 
-/* ══ CALCULATOR HERO (inside modal) ═════════════════════════ */
+/* ══ CALC HERO ═══════════════════════════════════════════════════ */
 .calc-hero{
-  padding:20px 16px 18px;
-  color:var(--md-on-pri);
-  position:relative;overflow:hidden
+  padding:24px 16px 20px;position:relative;overflow:hidden
+}
+.calc-hero::before{
+  content:'';position:absolute;top:-70px;right:-60px;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(255,255,255,0.06);pointer-events:none
 }
 .calc-hero::after{
-  content:'';position:absolute;
-  top:-60px;right:-60px;width:200px;height:200px;
-  border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none
+  content:'';position:absolute;bottom:-40px;left:-20px;
+  width:140px;height:140px;border-radius:50%;
+  background:rgba(255,255,255,0.04);pointer-events:none
 }
-.calc-hero-row{
+.hero-row{
   display:flex;align-items:flex-start;gap:14px;
   padding-right:48px;position:relative;z-index:1
 }
-.calc-hero-icon{
+.hero-icon{
   width:52px;height:52px;border-radius:var(--shape-lg);
-  background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,0.18);
+  border:1.5px solid rgba(255,255,255,0.25);
   display:flex;align-items:center;justify-content:center;
   font-size:26px;flex-shrink:0
 }
-.calc-hero-name{
-  font-family:var(--font-d);font-size:20px;font-weight:500;
-  color:#fff;line-height:1.2;letter-spacing:.15px
+.hero-name{
+  font-family:var(--font-display);font-size:20px;font-weight:500;
+  color:#fff;line-height:1.2;letter-spacing:0.15px
 }
-.calc-hero-abbr{
-  font-size:11px;color:rgba(255,255,255,.75);margin-top:4px;
-  letter-spacing:.4px;font-weight:500;text-transform:uppercase
+.hero-abbr{
+  font-size:11px;color:rgba(255,255,255,0.75);
+  font-weight:500;letter-spacing:0.4px;
+  text-transform:uppercase;margin-top:4px
 }
-.calc-hero-desc{
-  font-size:13px;color:rgba(255,255,255,.88);
+.hero-desc{
+  font-family:var(--font-body);font-size:13px;
+  color:rgba(255,255,255,0.88);
   margin-top:12px;line-height:1.75;position:relative;z-index:1
 }
-.calc-hero-formula{
-  display:inline-flex;align-items:center;
-  background:rgba(0,0,0,.2);border-radius:var(--shape-xs);
-  padding:5px 12px;font-size:12px;margin-top:10px;
-  font-family:var(--mono);color:rgba(255,255,255,.85);
-  border:1px solid rgba(255,255,255,.15);
+.hero-formula{
+  display:inline-block;margin-top:10px;
+  background:rgba(0,0,0,0.2);border-radius:var(--shape-xs);
+  padding:5px 12px;font-family:var(--font-mono);font-size:12px;
+  color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.15);
   position:relative;z-index:1
 }
 
-/* ══ CALC BODY (inside modal) ═══════════════════════════════ */
-.calc-body{
-  padding:20px 16px;
-  background:var(--md-surf-0)
-}
+/* ══ CALC BODY ═══════════════════════════════════════════════════ */
+.calc-body{padding:20px 16px;background:var(--md-surface-container-low)}
 
-/* ══ M3 OUTLINED TEXT FIELD ═════════════════════════════════ */
-.m3-field{margin-bottom:16px}
-.m3-field-label{
-  font-size:12px;font-weight:500;color:var(--md-on-surf-var);
-  letter-spacing:.3px;display:block;margin-bottom:8px
+/* ── M3 Outlined Text Field ── */
+.field{margin-bottom:16px}
+.field-label{
+  font-family:var(--font-body);font-size:12px;font-weight:500;
+  color:var(--md-on-surface-variant);letter-spacing:0.4px;
+  display:block;margin-bottom:8px
 }
-.m3-field-box{
-  display:flex;align-items:stretch;
+.field-row{
+  display:flex;
   border:1px solid var(--md-outline);
   border-radius:var(--shape-xs);
-  background:var(--md-surf-0);
-  transition:border-color var(--dur-short3),box-shadow var(--dur-short3)
+  background:var(--md-surface-container-lowest);
+  transition:border-color var(--motion-short3) var(--easing-standard),
+             border-width var(--motion-short3)
 }
-.m3-field-box:focus-within{
-  border-color:var(--md-pri);border-width:2px;
-}
-.m3-field-box.err{border-color:var(--md-err);border-width:2px}
-.m3-input{
+.field-row:focus-within{border-color:var(--md-primary);border-width:2px}
+.field-row.error{border-color:var(--md-error);border-width:2px}
+.field-input{
   flex:1;border:none;outline:none;
   padding:14px 16px;font-size:16px;
-  font-family:var(--font);color:var(--md-on-surf);
+  font-family:var(--font-body);color:var(--md-on-surface);
   background:transparent;min-width:0;
-  caret-color:var(--md-pri)
+  caret-color:var(--md-primary)
 }
-.m3-input::placeholder{color:var(--md-outline)}
-.m3-unit-sel{
+.field-input::placeholder{color:var(--md-outline)}
+.field-unit-sel{
   border:none;outline:none;
-  background:var(--md-surf-1);
-  padding:0 28px 0 12px;font-size:13px;font-weight:500;
-  color:var(--md-pri);font-family:var(--font-d);cursor:pointer;
+  background:var(--md-surface-container);
+  padding:0 28px 0 12px;
+  font-family:var(--font-display);font-size:13px;font-weight:500;
+  color:var(--md-primary);cursor:pointer;
   border-left:1px solid var(--md-outline);
-  min-width:80px;-webkit-appearance:none;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23006A60' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 8px center
+  min-width:82px;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 24 24'%3E%3Cpath fill='%234F46E5' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 4px center
 }
-.m3-unit-badge{
-  background:var(--md-surf-1);padding:0 14px;
-  font-size:13px;font-weight:500;color:var(--md-on-surf-var);
+.field-unit-badge{
+  background:var(--md-surface-container);padding:0 14px;
+  font-family:var(--font-mono);font-size:13px;font-weight:500;
+  color:var(--md-on-surface-variant);
   border-left:1px solid var(--md-outline);
-  display:flex;align-items:center;white-space:nowrap;
-  font-family:var(--mono)
+  display:flex;align-items:center;white-space:nowrap
 }
 
-/* ══ M3 SEGMENTED BUTTON (Sex) ═════════════════════════════ */
-.m3-seg{
+/* ── M3 Segmented Button (sex toggle) ── */
+.sex-toggle{
   display:flex;border:1px solid var(--md-outline);
   border-radius:var(--shape-full);overflow:hidden;margin-bottom:16px
 }
-.m3-seg-btn{
-  flex:1;height:40px;display:flex;align-items:center;justify-content:center;
-  gap:8px;font-family:var(--font-d);font-size:14px;font-weight:500;
-  color:var(--md-on-surf-var);cursor:pointer;user-select:none;
+.sex-btn{
+  flex:1;height:40px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-display);font-size:14px;font-weight:500;
+  color:var(--md-on-surface-variant);cursor:pointer;user-select:none;
   border-right:1px solid var(--md-outline);
   position:relative;overflow:hidden;
-  transition:background var(--dur-short3),color var(--dur-short3)
+  transition:background var(--motion-short3),color var(--motion-short3)
 }
-.m3-seg-btn:last-child{border-right:none}
-.m3-seg-btn::before{
+.sex-btn:last-child{border-right:none}
+.sex-btn::before{
   content:'';position:absolute;inset:0;
-  background:var(--md-pri);opacity:0;
-  transition:opacity var(--dur-short3)
+  background:var(--md-primary);opacity:0;
+  transition:opacity var(--motion-short3)
 }
-.m3-seg-btn:active::before{opacity:.08}
-.m3-seg-btn.on{
-  background:var(--md-sec-c);color:var(--md-on-sec-c)
-}
-.m3-seg-check{font-size:16px;opacity:0;width:0;overflow:hidden;
-  transition:all var(--dur-short4) var(--ease-std)}
-.m3-seg-btn.on .m3-seg-check{opacity:1;width:20px}
+.sex-btn:active::before{opacity:0.08}
+.sex-btn.active{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.sex-check{width:0;overflow:hidden;font-size:16px;transition:width var(--motion-short4) var(--easing-spring)}
+.sex-btn.active .sex-check{width:22px}
 
-/* ══ M3 FILLED BUTTON + OUTLINED BUTTON ════════════════════ */
-.btns{display:flex;gap:10px;margin-top:20px}
-.m3-btn{
+/* ── M3 Filled + Outlined Buttons ── */
+.btn-row{display:flex;gap:10px;margin-top:20px}
+.btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   height:40px;padding:0 24px;border-radius:var(--shape-full);
-  font-family:var(--font-d);font-size:14px;font-weight:500;
-  letter-spacing:.1px;cursor:pointer;border:none;
-  position:relative;overflow:hidden;
-  transition:box-shadow var(--dur-short3) var(--ease-std)
+  border:none;font-family:var(--font-display);font-size:14px;font-weight:500;
+  letter-spacing:0.1px;cursor:pointer;position:relative;overflow:hidden;
+  transition:box-shadow var(--motion-short3) var(--easing-standard)
 }
-.m3-btn::before{
-  content:'';position:absolute;inset:0;opacity:0;
-  transition:opacity var(--dur-short3)
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:currentColor;opacity:0;
+  transition:opacity var(--motion-short3)
 }
-.m3-btn-filled{
-  background:var(--md-pri);color:var(--md-on-pri);
-  box-shadow:var(--elev1)
+.btn-primary{
+  background:var(--md-primary);color:var(--md-on-primary);
+  box-shadow:var(--md-elev1)
 }
-.m3-btn-filled::before{background:#fff}
-.m3-btn-filled:hover::before{opacity:.08}
-.m3-btn-filled:active{box-shadow:none}
-.m3-btn-filled:active::before{opacity:.12}
-.m3-btn-outlined{
-  background:transparent;color:var(--md-pri);
+.btn-primary:hover::before{opacity:0.08}
+.btn-primary:active{box-shadow:none}
+.btn-primary:active::before{opacity:0.12}
+.btn-secondary{
+  background:transparent;color:var(--md-primary);
   border:1px solid var(--md-outline)
 }
-.m3-btn-outlined::before{background:var(--md-pri)}
-.m3-btn-outlined:hover::before{opacity:.08}
-.m3-btn-outlined:active::before{opacity:.12}
+.btn-secondary:hover::before{opacity:0.08}
+.btn-secondary:active::before{opacity:0.12}
+.btn svg{width:18px;height:18px;position:relative;z-index:1}
+.btn span{position:relative;z-index:1}
 
-/* ══ RESULT (M3 Tonal Surface) ══════════════════════════════ */
-.m3-result{
+/* ══ RESULT CARD ═════════════════════════════════════════════════ */
+.result-card{
   margin-top:16px;border-radius:var(--shape-lg);
   overflow:hidden;display:none;
-  border:1px solid var(--md-outline-var)
+  border:1px solid var(--md-outline-variant);
+  animation:result-in var(--motion-long1) var(--easing-decelerate)
 }
-.m3-result.show{
-  display:block;
-  animation:result-in var(--dur-long1) var(--ease-dec)
+.result-card.show{display:block}
+@keyframes result-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.result-hd{
+  padding:13px 16px;color:#fff;
+  font-family:var(--font-display);font-size:11px;font-weight:700;
+  letter-spacing:0.8px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px
 }
-@keyframes result-in{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:none}
+.result-hd-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.7);flex-shrink:0}
+.result-value{padding:16px 16px 12px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.result-num{font-size:42px;font-weight:300;font-family:var(--font-mono);letter-spacing:-2px;line-height:1}
+.result-unit{font-size:14px;font-weight:500;opacity:0.7}
+.result-text{
+  padding:11px 16px;font-family:var(--font-body);font-size:13px;
+  line-height:1.8;border-top:1px solid rgba(0,0,0,0.06)
 }
-.res-header{
-  padding:14px 16px;color:#fff;
-  font-family:var(--font-d);font-size:11px;font-weight:700;
-  letter-spacing:.8px;text-transform:uppercase;
-  display:flex;align-items:center;gap:10px
+.result-unit-row{
+  display:flex;align-items:center;gap:8px;padding:10px 16px;
+  background:rgba(0,0,0,0.04);border-top:1px solid rgba(0,0,0,0.06)
 }
-.res-header-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(255,255,255,.7);flex-shrink:0
+.result-unit-label{
+  font-family:var(--font-display);font-size:10px;font-weight:700;
+  opacity:0.6;text-transform:uppercase;letter-spacing:0.6px;flex-shrink:0
 }
-.res-value-row{
-  padding:16px 16px 12px;
-  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap
+.result-unit-sel{
+  border:1px solid rgba(0,0,0,0.18);border-radius:var(--shape-xs);
+  padding:4px 24px 4px 9px;font-family:var(--font-display);
+  font-size:12px;font-weight:600;
+  background:rgba(255,255,255,0.55);cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='16' width='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23555555' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 4px center;
+  outline:none;color:inherit
 }
-.res-number{
-  font-size:40px;font-weight:300;
-  font-family:var(--mono);letter-spacing:-2px;line-height:1
+.result-refs{
+  padding:11px 16px 14px;
+  border-top:1px solid rgba(0,0,0,0.06)
 }
-.res-unit{font-size:14px;font-weight:500;opacity:.7;letter-spacing:.2px}
-.res-interp{
-  padding:12px 16px;font-size:13px;line-height:1.8;
-  border-top:1px solid rgba(255,255,255,.1)
+.result-refs-label{
+  font-family:var(--font-display);font-size:10px;font-weight:700;
+  opacity:0.55;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px
 }
-.res-unit-row{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 16px;
-  background:rgba(0,0,0,.06);
-  border-top:1px solid rgba(0,0,0,.08)
-}
-.res-unit-label{
-  font-size:11px;font-weight:700;letter-spacing:.6px;
-  text-transform:uppercase;opacity:.65;flex-shrink:0
-}
-.res-unit-sel{
-  border:1px solid rgba(0,0,0,.2);border-radius:var(--shape-xs);
-  padding:5px 24px 5px 10px;font-size:12px;font-weight:600;
-  font-family:var(--font-d);background:rgba(255,255,255,.2);
-  cursor:pointer;-webkit-appearance:none;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='white' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 6px center;
-  outline:none;color:#fff
-}
-.res-refs-wrap{
-  padding:12px 16px 16px;
-  background:rgba(0,0,0,.04);
-  border-top:1px solid rgba(0,0,0,.06)
-}
-.res-refs-label{
-  font-size:11px;font-weight:700;letter-spacing:.8px;
-  text-transform:uppercase;opacity:.55;margin-bottom:8px
-}
-.res-refs-tags{display:flex;flex-wrap:wrap;gap:6px}
-.res-ref-tag{
+.result-refs-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ref-tag{
   padding:4px 12px;border-radius:var(--shape-xs);
-  font-size:11px;font-family:var(--mono);font-weight:500
+  font-family:var(--font-mono);font-size:11px;font-weight:500
 }
 
-/* Result colour themes */
-.rn .res-header{background:linear-gradient(135deg,#1B6E3B,#2E7D32)}
-.rn .res-value-row{background:#F1F8E9;color:#1B5E20}
-.rn .res-interp{background:#F1F8E9;color:#2E7D32}
-.rn .res-refs-wrap{background:#E8F5E9}.rn .res-ref-tag{background:#C8E6C9;color:#1B5E20}
+/* ── Result tonal themes ── */
+.rn .result-hd  {background:linear-gradient(135deg,#1B5E20,#2E7D32)}
+.rn .result-value,.rn .result-text{background:#F1F8E9;color:#1B5E20}
+.rn .result-refs{background:#E8F5E9}.rn .ref-tag{background:#C8E6C9;color:#1B5E20}
+.rn .result-unit-row{color:#1B5E20}
 
-.rl .res-header{background:linear-gradient(135deg,var(--md-pri),#00897B)}
-.rl .res-value-row{background:var(--md-pri-c);color:var(--md-on-pri-c)}
-.rl .res-interp{background:var(--md-pri-c);color:var(--md-on-pri-c)}
-.rl .res-refs-wrap{background:#E0F2F1}.rl .res-ref-tag{background:#B2DFDB;color:#004D40}
+.rl .result-hd  {background:linear-gradient(135deg,#005244,var(--md-primary))}
+.rl .result-value,.rl .result-text{background:var(--md-primary-container);color:var(--md-on-primary-container)}
+.rl .result-refs{background:#D0F5ED}.rl .ref-tag{background:#A2E9D8;color:#003829}
+.rl .result-unit-row{color:var(--md-on-primary-container)}
 
-.rh .res-header{background:linear-gradient(135deg,#9F1010,#C62828)}
-.rh .res-value-row{background:#FFF5F5;color:#7F0000}
-.rh .res-interp{background:#FFF5F5;color:#C62828}
-.rh .res-refs-wrap{background:var(--md-err-c)}.rh .res-ref-tag{background:#FFCDD2;color:#7F0000}
+.rh .result-hd  {background:linear-gradient(135deg,#93000A,#BA1A1A)}
+.rh .result-value,.rh .result-text{background:var(--md-error-container);color:var(--md-on-error-container)}
+.rh .result-refs{background:#FFDAD6}.rh .ref-tag{background:#FFBAB1;color:#690005}
+.rh .result-unit-row{color:var(--md-on-error-container)}
 
-.rw .res-header{background:linear-gradient(135deg,var(--md-warn),#BF6F00)}
-.rw .res-value-row{background:#FFFBF0;color:#4A3000}
-.rw .res-interp{background:#FFFBF0;color:#7D5700}
-.rw .res-refs-wrap{background:var(--md-warn-c)}.rw .res-ref-tag{background:#FFE0B2;color:#3E2800}
+.rw .result-hd  {background:linear-gradient(135deg,#5C3B00,var(--md-warning))}
+.rw .result-value,.rw .result-text{background:var(--md-warning-container);color:var(--md-on-warning-container)}
+.rw .result-refs{background:#FFDDB3}.rw .ref-tag{background:#F0BF6A;color:#3A2000}
+.rw .result-unit-row{color:var(--md-on-warning-container)}
 
-.ri .res-header{background:linear-gradient(135deg,var(--md-ter),#1976D2)}
-.ri .res-value-row{background:var(--md-ter-c);color:var(--md-on-ter-c)}
-.ri .res-interp{background:var(--md-ter-c);color:var(--md-on-ter-c)}
-.ri .res-refs-wrap{background:#E3F2FD}.ri .res-ref-tag{background:#BBDEFB;color:#0D2F5A}
+.ri .result-hd  {background:linear-gradient(135deg,var(--md-tertiary),#1C86C0)}
+.ri .result-value,.ri .result-text{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+.ri .result-refs{background:#D1ECFF}.ri .ref-tag{background:#A8D4FF;color:#001D32}
+.ri .result-unit-row{color:var(--md-on-tertiary-container)}
 
-/* ══ CONVERTER MODAL ════════════════════════════════════════ */
-.conv-hero{
-  padding:20px 16px 18px;
-  color:var(--md-on-pri);
-  position:relative;overflow:hidden
-}
+/* ══ CONVERTER ═══════════════════════════════════════════════════ */
+.conv-hero{padding:22px 16px 18px;position:relative;overflow:hidden}
 .conv-hero::after{
-  content:'';position:absolute;top:-50px;right:-50px;
+  content:'';position:absolute;top:-40px;right:-40px;
   width:160px;height:160px;border-radius:50%;
-  background:rgba(255,255,255,.07);pointer-events:none
+  background:rgba(255,255,255,0.07);pointer-events:none
 }
-.conv-icon{font-size:28px;margin-bottom:6px;position:relative;z-index:1}
-.conv-name{
-  font-family:var(--font-d);font-size:20px;font-weight:500;
-  color:#fff;padding-right:48px;line-height:1.2;
-  position:relative;z-index:1
+.conv-hero-icon{font-size:28px;margin-bottom:6px;position:relative;z-index:1}
+.conv-hero-name{
+  font-family:var(--font-display);font-size:20px;font-weight:500;
+  color:#fff;padding-right:48px;line-height:1.2;position:relative;z-index:1
 }
-.conv-units{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px;position:relative;z-index:1}
-.conv-swap-btn{
+.conv-hero-sub{
+  font-size:12px;color:rgba(255,255,255,0.7);
+  margin-top:4px;position:relative;z-index:1
+}
+.swap-btn{
   display:flex;align-items:center;justify-content:center;
   width:44px;height:44px;border-radius:50%;
-  background:var(--md-surf-0);
-  border:none;cursor:pointer;color:var(--md-pri);
-  font-size:24px;margin:10px auto;
-  box-shadow:var(--elev2);
-  transition:transform var(--dur-med1) var(--ease-spring),
-             box-shadow var(--dur-short3)
+  background:var(--md-surface-container-lowest);
+  border:none;cursor:pointer;color:var(--md-primary);
+  box-shadow:var(--md-elev2);margin:10px auto;
+  transition:transform var(--motion-medium1) var(--easing-spring),
+             box-shadow var(--motion-short3)
 }
-.conv-swap-btn:active{transform:rotate(180deg);box-shadow:none}
+.swap-btn:active{transform:rotate(180deg);box-shadow:none}
+.swap-btn svg{width:22px;height:22px}
 .conv-result{
   margin-top:12px;padding:16px;
-  background:var(--md-sec-c);border-radius:var(--shape-md);
-  font-family:var(--mono);font-size:18px;font-weight:500;
-  color:var(--md-on-sec-c);min-height:52px;word-break:break-all
+  background:var(--md-secondary-container);
+  border-radius:var(--shape-md);
+  font-family:var(--font-mono);font-size:18px;font-weight:500;
+  color:var(--md-on-secondary-container);
+  min-height:54px;word-break:break-all
 }
 
-/* ══ SPECIAL PAGES ══════════════════════════════════════════ */
+/* ══ SPECIAL PAGES ═══════════════════════════════════════════════ */
 .sp-result{
   margin-top:12px;padding:16px;border-radius:var(--shape-md);
-  background:var(--md-pri-c);color:var(--md-on-pri-c);
-  font-family:var(--mono);font-size:13px;line-height:2;min-height:46px
+  background:var(--md-primary-container);
+  color:var(--md-on-primary-container);
+  font-family:var(--font-mono);font-size:13px;line-height:2;min-height:48px
 }
+.cc-close{display:none}
 
-/* ══ FAB-STYLE CLEAR BUTTON ═════════════════════════════════ */
-.cc-close{display:none} /* legacy — replaced by modal-close-btn */
+/* ══ FOOTER ══════════════════════════════════════════════════════ */
+.app-footer{
+  padding:24px 16px 32px;text-align:center;
+  font-family:var(--font-body);font-size:12px;
+  color:var(--md-on-surface-variant);
+  letter-spacing:0.2px
+}
 </style>
 </head>
 <body>
-
-<!-- ══ APP BAR ══ -->
-<header class="app-bar">
-  <div class="app-bar-logo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="9" y="2" width="6" height="20" rx="3" fill="white" opacity=".95"/>
-      <rect x="2" y="9" width="20" height="6" rx="3" fill="white" opacity=".95"/>
-      <polyline points="3,12 5.5,12 7,8.5 8.5,15 10,10 11.5,12 15,12"
-        stroke="#9FF2E3" stroke-width="1.8" stroke-linecap="round"
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <rect x="8.5" y="1.5" width="5" height="19" rx="2.5" fill="white" opacity=".95"/>
+      <rect x="1.5" y="8.5" width="19" height="5" rx="2.5" fill="white" opacity=".95"/>
+      <polyline points="2.5,11 5,11 6.5,7.5 8,14.5 9.5,9.5 11,11 14,11"
+        stroke="#C7C4FF" stroke-width="1.8" stroke-linecap="round"
         stroke-linejoin="round" fill="none"/>
     </svg>
   </div>
-  <div class="app-bar-text">
-    <div class="app-bar-title">MedCalc Pro</div>
-    <div class="app-bar-sub">Clinical Decision Suite</div>
+  <div class="topbar-info">
+    <div class="topbar-title">MedCalc Pro</div>
+    <div class="topbar-sub">Clinical Decision Suite</div>
   </div>
-  <div class="app-bar-badge">152 Calcs · 61 Conv</div>
+  <div class="topbar-count">162 Calcs · 61 Conv</div>
 </header>
 
-<!-- ══ TABS ══ -->
-<nav class="tabs">
-  <div class="tab on" id="tab-med" onclick="switchTab('med',this)">
-    <span class="tab-icon material-symbols-outlined" style="font-variation-settings:'FILL' 1">calculate</span>
+<!-- TAB BAR -->
+<nav class="tabbar">
+  <div class="tabbar-tab active" id="tab-med" onclick="switchTab('med',this)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
     Calculators
-    <div class="tab-indicator"></div>
   </div>
-  <div class="tab" id="tab-conv" onclick="switchTab('conv',this)">
-    <span class="tab-icon material-symbols-outlined" style="font-variation-settings:'FILL' 0">science</span>
+  <div class="tabbar-tab" id="tab-conv" onclick="switchTab('conv',this)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 11c-.45-4.05-3.85-7.19-8.05-7.19C9.35 3.81 6.9 5.4 5.6 7.77l.04-.27L4.23 9l2.11.38.38-2.12-1.36.24C6.45 5.32 8.69 3.81 11.35 3.81c3.74 0 6.84 2.79 7.24 6.42l.24-.04L20.4 11zM3.6 13c.45 4.05 3.85 7.19 8.05 7.19 2.99 0 5.44-1.59 6.74-3.96l-.04.27L19.77 15l-2.11-.38-.38 2.12 1.36-.24c-1.08 2.61-3.32 4.31-5.99 4.31-3.74 0-6.84-2.79-7.24-6.42l-.24.04L3.6 13z"/></svg>
     Converters
-    <div class="tab-indicator"></div>
   </div>
 </nav>
 
-<!-- ══ CALCULATORS ══ -->
-<main class="panel on" id="p-med">
+<!-- CALCULATORS PANEL -->
+<main class="panel active" id="p-med">
+  <div class="section-head">
+    <div class="section-title">Calculators</div>
+    <div class="section-badge" id="med-count">152</div>
+  </div>
+  <div class="search-box">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input class="search-input" id="med-q" type="search"
+           placeholder="Search calculators…"
+           oninput="medPage=1;renderMed()" autocomplete="off">
+  </div>
+  <div class="chips-row" id="med-chips">
+    <div class="cat-chip active" onclick="setCat('all',this)"><span class="cat-chip-check">✓</span>All</div>
+    <div class="cat-chip" onclick="setCat('cardiac',this)"><span class="cat-chip-check">✓</span>❤️ Cardiac</div>
+    <div class="cat-chip" onclick="setCat('renal',this)"><span class="cat-chip-check">✓</span>🫘 Renal</div>
+    <div class="cat-chip" onclick="setCat('neuro',this)"><span class="cat-chip-check">✓</span>🧠 Neuro</div>
+    <div class="cat-chip" onclick="setCat('resp',this)"><span class="cat-chip-check">✓</span>🫁 Resp</div>
+    <div class="cat-chip" onclick="setCat('hema',this)"><span class="cat-chip-check">✓</span>🩸 Haem</div>
+    <div class="cat-chip" onclick="setCat('liver',this)"><span class="cat-chip-check">✓</span>🫀 Liver</div>
+    <div class="cat-chip" onclick="setCat('gi',this)"><span class="cat-chip-check">✓</span>🫙 GI</div>
+    <div class="cat-chip" onclick="setCat('endo',this)"><span class="cat-chip-check">✓</span>🦋 Endo</div>
+    <div class="cat-chip" onclick="setCat('obs',this)"><span class="cat-chip-check">✓</span>🤰 OB</div>
+    <div class="cat-chip" onclick="setCat('infect',this)"><span class="cat-chip-check">✓</span>🦠 Infect</div>
+    <div class="cat-chip" onclick="setCat('meta',this)"><span class="cat-chip-check">✓</span>⚖️ Metabolic</div>
+    <div class="cat-chip" onclick="setCat('ortho',this)"><span class="cat-chip-check">✓</span>🦴 Ortho</div>
+    <div class="cat-chip" onclick="setCat('biochem',this)"><span class="cat-chip-check">✓</span>🔬 Biochem</div>
+    <div class="cat-chip" onclick="setCat('blood',this)"><span class="cat-chip-check">✓</span>🧬 Blood</div>
+  </div>
   <div class="card">
-    <div class="search-wrap">
-      <div class="search-label">Calculators (152)</div>
-      <div class="search-bar">
-        <span class="search-icon material-symbols-outlined">search</span>
-        <input id="med-q" type="search" placeholder="Search 152 calculators…"
-               oninput="renderMed()" autocomplete="off">
-      </div>
-    </div>
-    <div class="chips-scroll" id="med-chips">
-      <div class="m3-chip on" onclick="setCat('all',this)">
-        <span class="chip-check material-symbols-outlined">check</span>All
-      </div>
-      <div class="m3-chip" onclick="setCat('cardiac',this)">
-        <span class="chip-check material-symbols-outlined">check</span>❤️ Cardiac
-      </div>
-      <div class="m3-chip" onclick="setCat('renal',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🫘 Renal
-      </div>
-      <div class="m3-chip" onclick="setCat('neuro',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🧠 Neuro
-      </div>
-      <div class="m3-chip" onclick="setCat('resp',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🫁 Resp
-      </div>
-      <div class="m3-chip" onclick="setCat('hema',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🩸 Haem
-      </div>
-      <div class="m3-chip" onclick="setCat('liver',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🧪 Liver
-      </div>
-      <div class="m3-chip" onclick="setCat('gi',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🫙 GI
-      </div>
-      <div class="m3-chip" onclick="setCat('endo',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🦋 Endo
-      </div>
-      <div class="m3-chip" onclick="setCat('obs',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🤰 OB/GYN
-      </div>
-      <div class="m3-chip" onclick="setCat('infect',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🦠 Infect
-      </div>
-      <div class="m3-chip" onclick="setCat('meta',this)">
-        <span class="chip-check material-symbols-outlined">check</span>⚖️ Metabolic
-      </div>
-      <div class="m3-chip" onclick="setCat('ortho',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🦴 Ortho
-      </div>
-      <div class="m3-chip" onclick="setCat('biochem',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🔬 Biochem
-      </div>
-      <div class="m3-chip" onclick="setCat('blood',this)">
-        <span class="chip-check material-symbols-outlined">check</span>🧬 Blood
-      </div>
-    </div>
-    <div class="m3-list" id="med-list"></div>
+    <div class="calc-list" id="med-list"></div>
+    <div class="pagination" id="med-pagination"></div>
   </div>
 </main>
 
-<!-- ══ CONVERTERS ══ -->
+<!-- CONVERTERS PANEL -->
 <div class="panel" id="p-conv">
+  <div class="section-head">
+    <div class="section-title">Unit Converters</div>
+    <div class="section-badge" id="conv-count">61</div>
+  </div>
+  <div class="search-box">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input class="search-input" id="conv-q" type="search"
+           placeholder="Search converters…"
+           oninput="convPage=1;renderConv()" autocomplete="off">
+  </div>
   <div class="card">
-    <div class="search-wrap">
-      <div class="search-label">Unit Converters (61)</div>
-      <div class="search-bar">
-        <span class="search-icon material-symbols-outlined">search</span>
-        <input id="conv-q" type="search" placeholder="Search converters…"
-               oninput="renderConv()" autocomplete="off">
-      </div>
-    </div>
-    <div class="m3-list" id="conv-list"></div>
+    <div class="calc-list" id="conv-list"></div>
+    <div class="pagination" id="conv-pagination"></div>
   </div>
 </div>
 
-<!-- ══ MODAL (Bottom Sheet on mobile, Dialog on tablet+) ══ -->
-<div class="modal-scrim" id="modal-backdrop" onclick="handleBackdropClick(event)">
-  <div class="modal-sheet" id="modal-box" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <button class="modal-close-btn" onclick="closeCalc();closeConv()" aria-label="Close">
-      <span class="material-symbols-outlined">close</span>
+<footer class="app-footer">© <span id="footer-year"></span> MedCalc Pro · Made by Rahat Ibne Momen</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal-panel" id="modal-panel" onclick="event.stopPropagation()">
+    <div class="modal-pill"></div>
+    <button class="modal-close" id="modal-close-btn" onclick="closeModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
     </button>
     <!-- content injected here -->
   </div>
 </div>
 
 <script>
-
-
-
 // Helpers
 function R(c,s,t){return{cls:c,st:s,txt:t}}
 var rn=function(s,t){return R('rn',s,t)};
@@ -763,26 +827,23 @@ var UC={
 
 // Category emoji + colors
 var CCAT={
-  renal:{em:'\u{1FAD8}',bg:'#E3F2FD',fg:'#1565C0',gr:'linear-gradient(135deg,#1565C0,#1976D2)'},
-  liver:{em:'\u{1F9EA}',bg:'#E8F5E9',fg:'#2E7D32',gr:'linear-gradient(135deg,#2E7D32,#43A047)'},
-  hema:{em:'\u{1FA78}',bg:'#FFEBEE',fg:'#C62828',gr:'linear-gradient(135deg,#C62828,#E53935)'},
-  meta:{em:'\u2696\uFE0F',bg:'#FFF8E1',fg:'#E65100',gr:'linear-gradient(135deg,#E65100,#F4511E)'},
-  cardiac:{em:'\u2764\uFE0F',bg:'#FCE4EC',fg:'#880E4F',gr:'linear-gradient(135deg,#880E4F,#AD1457)'},
-  resp:{em:'\u{1FAC1}',bg:'#E0F7FA',fg:'#006064',gr:'linear-gradient(135deg,#006064,#00838F)'},
-  neuro:{em:'\u{1F9E0}',bg:'#EDE7F6',fg:'#4527A0',gr:'linear-gradient(135deg,#4527A0,#5E35B1)'},
-  endo:{em:'\u{1F98B}',bg:'#F3E5F5',fg:'#6A1B9A',gr:'linear-gradient(135deg,#6A1B9A,#8E24AA)'},
-  obs:{em:'\u{1F930}',bg:'#FBE9E7',fg:'#BF360C',gr:'linear-gradient(135deg,#BF360C,#D84315)'},
-  gi:{em:'\u{1FAD9}',bg:'#FFFDE7',fg:'#F57F17',gr:'linear-gradient(135deg,#E65100,#F57C00)'},
-  infect:{em:'\u{1F9AB}',bg:'#E8F5E9',fg:'#1B5E20',gr:'linear-gradient(135deg,#1B5E20,#2E7D32)'},
-  ortho:{em:'\u{1F9B4}',bg:'#E8EAF6',fg:'#283593',gr:'linear-gradient(135deg,#283593,#3949AB)'},
-  biochem:{em:'\u{1F9EA}',bg:'#ECFDF5',fg:'#065F46',gr:'linear-gradient(135deg,#065F46,#0D9488)'},
-  blood:{em:'\u{1FA78}',bg:'#FFEBEE',fg:'#B71C1C',gr:'linear-gradient(135deg,#B71C1C,#D32F2F)'}
+  cardiac:{em:'❤️',  bg:'#FCE4EC',fg:'#880E4F',gr:'linear-gradient(135deg,#880E4F,#C2185B)'},
+  renal:  {em:'🫘',  bg:'#E3F2FD',fg:'#1565C0',gr:'linear-gradient(135deg,#1565C0,#1976D2)'},
+  neuro:  {em:'🧠',  bg:'#EDE7F6',fg:'#4527A0',gr:'linear-gradient(135deg,#4527A0,#5E35B1)'},
+  resp:   {em:'🫁',  bg:'#E0F7FA',fg:'#006064',gr:'linear-gradient(135deg,#006064,#00838F)'},
+  hema:   {em:'🩸',  bg:'#FFEBEE',fg:'#B71C1C',gr:'linear-gradient(135deg,#B71C1C,#E53935)'},
+  liver:  {em:'🫀',  bg:'#E8F5E9',fg:'#2E7D32',gr:'linear-gradient(135deg,#2E7D32,#43A047)'},
+  gi:     {em:'🫙',  bg:'#FFFDE7',fg:'#E65100',gr:'linear-gradient(135deg,#E65100,#F57C00)'},
+  endo:   {em:'🦋',  bg:'#F3E5F5',fg:'#6A1B9A',gr:'linear-gradient(135deg,#6A1B9A,#8E24AA)'},
+  obs:    {em:'🤰',  bg:'#FBE9E7',fg:'#BF360C',gr:'linear-gradient(135deg,#BF360C,#D84315)'},
+  infect: {em:'🦠',  bg:'#E8F5E9',fg:'#1B5E20',gr:'linear-gradient(135deg,#1B5E20,#2E7D32)'},
+  meta:   {em:'⚖️',  bg:'#FFF8E1',fg:'#E65100',gr:'linear-gradient(135deg,#E65100,#F4511E)'},
+  ortho:  {em:'🦴',  bg:'#E8EAF6',fg:'#283593',gr:'linear-gradient(135deg,#283593,#3949AB)'},
+  biochem:{em:'🔬',  bg:'#E0F2F1',fg:'#00695C',gr:'linear-gradient(135deg,#00695C,#00897B)'},
+  blood:  {em:'🧬',  bg:'#FFF3E0',fg:'#E65100',gr:'linear-gradient(135deg,#BF360C,#E53935)'}
 };
 
 // TESTS
-
-
-
 var T=[
 {id:'egfr',n:'eGFR (CKD-EPI 2021)',a:'Estimated GFR',c:'renal',d:'CKD-EPI 2021 race-free equation.',f:'142\u00d7min(Scr/\u03ba,1)^\u03b1\u00d7max(Scr/\u03ba,1)^-1.2\u00d70.9938^Age',
  F:[{i:'cr',l:'Serum Creatinine',p:'e.g. 1.0',u:['mg/dL','\u00b5mol/L'],cv:function(v,u){return UC.cr(v,u)}},
@@ -2402,7 +2463,115 @@ var T=[
  calc:function(v){return v.ecog},
  ru:'ECOG grade',
  refs:['0:Fully active','1:Restricted but ambulatory','2:Ambulatory, light work only','3:Limited self-care','4:Completely disabled','5:Dead'],
- interp:function(r){var v=+r;var msgs=['Fully active. No restriction. Standard chemotherapy regimens appropriate.','Restricted in strenuous activity but ambulatory. Light sedentary work. Standard chemotherapy generally appropriate.','Ambulatory and capable of self-care. Unable to work. Up and about >50% waking hours. Consider dose modifications.','Capable of limited self-care. Confined to bed/chair >50% waking hours. Reduced-intensity or palliative intent treatment.','Completely disabled. Cannot carry on self-care. Totally confined. Best supportive care consideration.','Dead.'];var fn=[rn,rn,rw,rw,rh,rh];return(fn[v]||ri)('ECOG PS '+v,msgs[v]||'')}}
+ interp:function(r){var v=+r;var msgs=['Fully active. No restriction. Standard chemotherapy regimens appropriate.','Restricted in strenuous activity but ambulatory. Light sedentary work. Standard chemotherapy generally appropriate.','Ambulatory and capable of self-care. Unable to work. Up and about >50% waking hours. Consider dose modifications.','Capable of limited self-care. Confined to bed/chair >50% waking hours. Reduced-intensity or palliative intent treatment.','Completely disabled. Cannot carry on self-care. Totally confined. Best supportive care consideration.','Dead.'];var fn=[rn,rn,rw,rw,rh,rh];return(fn[v]||ri)('ECOG PS '+v,msgs[v]||'')}},
+
+{id:'heart_score',n:'HEART Score',a:'Chest Pain Risk Stratification',c:'cardiac',d:'Estimates 6-week risk of major adverse cardiac events in ED chest pain patients.',f:'History+ECG+Age+Risk factors+Troponin (each 0-2)',
+ F:[{i:'h_hist',l:'History: 0=Slightly suspicious, 1=Moderately suspicious, 2=Highly suspicious',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'h_ecg',l:'ECG: 0=Normal, 1=Non-specific repolarisation, 2=Significant ST deviation',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'h_age',l:'Age: 0=<45, 1=45-64, 2=≥65',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'h_risk',l:'Risk factors: 0=None, 1=1-2 factors, 2=≥3 factors or known atherosclerotic disease',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'h_trop',l:'Troponin: 0=≤normal limit, 1=1-3× normal, 2=>3× normal',p:'0-2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.h_hist+ +v.h_ecg+ +v.h_age+ +v.h_risk+ +v.h_trop)},
+ ru:'points',refs:['0-3:Low risk (~0.9-1.7% MACE)','4-6:Moderate risk (~12-16.6% MACE)','7-10:High risk (~50-65% MACE)'],
+ interp:function(r){var v=+r;if(v<=3)return rn('Low Risk','HEART '+v+' — ~0.9-1.7% 6-week MACE risk. Consider early discharge with outpatient follow-up.');if(v<=6)return rw('Moderate Risk','HEART '+v+' — ~12-16.6% 6-week MACE risk. Admit for observation, serial troponins, and further work-up.');return rh('High Risk','HEART '+v+' — ~50-65% 6-week MACE risk. Admit; consider early cardiology and invasive strategy.')}},
+
+{id:'perc_rule',n:'PERC Rule',a:'PE Rule-Out Criteria',c:'resp',d:'Rules out PE in low pre-test probability patients without further testing if all 8 criteria are negative.',f:'8 criteria; all negative = PE excluded',
+ F:[{i:'p_age',l:'Age ≥50 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_hr',l:'HR ≥100 bpm (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_o2',l:'O₂ saturation <95% on room air (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_leg',l:'Unilateral leg swelling (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_hemo',l:'Haemoptysis (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_surg',l:'Recent surgery or trauma (≤4 weeks) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_prior',l:'Prior PE or DVT (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'p_horm',l:'Hormone use (oral contraceptive, HRT, oestrogen) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.p_age+ +v.p_hr+ +v.p_o2+ +v.p_leg+ +v.p_hemo+ +v.p_surg+ +v.p_prior+ +v.p_horm)},
+ ru:'criteria positive',refs:['0:PE ruled out (in low pre-test probability)','≥1:PERC not met — further work-up needed'],
+ interp:function(r){var v=+r;if(v===0)return rn('PERC Negative','0 criteria positive. In a patient with low pre-test probability, PE can be ruled out without D-dimer.');return rw('PERC Positive',v+' criteria met. PE not excluded — proceed to D-dimer or further imaging as indicated.')}},
+
+{id:'geneva_score',n:'Revised Geneva Score',a:'PE Clinical Probability',c:'resp',d:'Clinical probability of PE using only objective criteria, without requiring clinical gestalt.',f:'Age+Prior PE/DVT+Surgery/fracture+Malignancy+Leg pain+Haemoptysis+HR+Leg swelling/pain on palpation',
+ F:[{i:'g_age',l:'Age >65 (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'g_prior',l:'Previous PE or DVT (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'g_surg',l:'Surgery or fracture within 1 month (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'g_malig',l:'Active malignancy (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'g_leg',l:'Unilateral lower limb pain (3=Yes)',p:'0/3',u:['pts'],cv:function(v){return v}},
+    {i:'g_hemo',l:'Haemoptysis (2=Yes)',p:'0/2',u:['pts'],cv:function(v){return v}},
+    {i:'g_hr',l:'Heart rate: 0=<75, 3=75-94, 5=≥95',p:'0/3/5',u:['pts'],cv:function(v){return v}},
+    {i:'g_palp',l:'Pain on lower limb deep venous palpation + unilateral oedema (4=Yes)',p:'0/4',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.g_age+ +v.g_prior+ +v.g_surg+ +v.g_malig+ +v.g_leg+ +v.g_hemo+ +v.g_hr+ +v.g_palp)},
+ ru:'points',refs:['0-3:Low probability (~8%)','4-10:Intermediate probability (~29%)','≥11:High probability (~74%)'],
+ interp:function(r){var v=+r;if(v<=3)return rn('Low Probability','Geneva '+v+' — ~8% PE prevalence. D-dimer to further risk-stratify.');if(v<=10)return rw('Intermediate Probability','Geneva '+v+' — ~29% PE prevalence. D-dimer or imaging as per pathway.');return rh('High Probability','Geneva '+v+' — ~74% PE prevalence. Proceed directly to CT pulmonary angiography.')}},
+
+{id:'ts4_hit',n:'4Ts Score',a:'Heparin-Induced Thrombocytopenia Probability',c:'blood',d:'Pre-test probability of HIT based on thrombocytopenia pattern, timing, thrombosis, and alternative causes.',f:'Thrombocytopenia+Timing+Thrombosis+oTher causes (each 0-2)',
+ F:[{i:'t_count',l:'Thrombocytopenia: 0=<30% fall or nadir<10, 1=30-50% fall or nadir 10-19, 2=>50% fall and nadir ≥20',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'t_timing',l:'Timing of fall: 0=<4 days no recent exposure, 1=consistent but unclear, or onset after day 10, 2=clear onset days 5-10 or ≤1 day with recent exposure',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'t_thromb',l:'Thrombosis/sequelae: 0=None, 1=Progressive/recurrent/erythematous skin lesions, 2=New confirmed thrombosis, skin necrosis, or anaphylactoid reaction',p:'0-2',u:['pts'],cv:function(v){return v}},
+    {i:'t_other',l:'oTher causes: 0=Definite other cause present, 1=Possible other cause, 2=No other apparent cause',p:'0-2',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.t_count+ +v.t_timing+ +v.t_thromb+ +v.t_other)},
+ ru:'points',refs:['0-3:Low probability (~5%)','4-5:Intermediate probability (~14%)','6-8:High probability (~64%)'],
+ interp:function(r){var v=+r;if(v<=3)return rn('Low Probability','4Ts '+v+' — ~5% HIT probability. Alternative diagnosis likely; heparin can generally continue.');if(v<=5)return rw('Intermediate Probability','4Ts '+v+' — ~14% HIT probability. Consider stopping heparin, send HIT antibody assay.');return rh('High Probability','4Ts '+v+' — ~64% HIT probability. Stop all heparin, start non-heparin anticoagulant, confirm with functional assay.')}},
+
+{id:'imrie_score',n:'Glasgow-Imrie Score',a:'Pancreatitis Severity',c:'gi',d:'Predicts severity of acute pancreatitis at 48h using 8 criteria (PANCREAS mnemonic). ≥3 = severe.',f:'PaO2+Age+Neutrophils(WCC)+Calcium+Renal(Urea)+Enzymes(LDH)+Albumin+Sugar(Glucose), each 0/1',
+ F:[{i:'im_pao2',l:'PaO₂ <8 kPa / 60 mmHg (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_age',l:'Age >55 years (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_wcc',l:'WCC >15×10⁹/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_ca',l:'Corrected Calcium <2 mmol/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_urea',l:'Urea >16 mmol/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_ldh',l:'LDH >600 IU/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_alb',l:'Albumin <32 g/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'im_glu',l:'Glucose >10 mmol/L (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.im_pao2+ +v.im_age+ +v.im_wcc+ +v.im_ca+ +v.im_urea+ +v.im_ldh+ +v.im_alb+ +v.im_glu)},
+ ru:'points',refs:['<3:Mild pancreatitis','≥3:Severe pancreatitis — consider ICU/HDU'],
+ interp:function(r){var v=+r;if(v<3)return rn('Mild Pancreatitis','Imrie '+v+'/8. Predicted mild disease course. Ward-level supportive care.');return rh('Severe Pancreatitis','Imrie '+v+'/8. ≥3 criteria — predicts severe disease. Consider HDU/ICU admission and early imaging.')}},
+
+{id:'phq9',n:'PHQ-9',a:'Patient Health Questionnaire — Depression',c:'neuro',d:'Screens for and grades severity of depressive symptoms over the past 2 weeks. Each item scored 0 (not at all) to 3 (nearly every day).',f:'Sum of 9 items, each 0-3',
+ F:[{i:'q1',l:'Little interest or pleasure in doing things (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q2',l:'Feeling down, depressed, or hopeless (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q3',l:'Trouble falling/staying asleep, or sleeping too much (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q4',l:'Feeling tired or having little energy (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q5',l:'Poor appetite or overeating (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q6',l:'Feeling bad about yourself or that you are a failure (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q7',l:'Trouble concentrating (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q8',l:'Moving/speaking slowly, or being fidgety/restless (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'q9',l:'Thoughts of self-harm or that you would be better off dead (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.q1+ +v.q2+ +v.q3+ +v.q4+ +v.q5+ +v.q6+ +v.q7+ +v.q8+ +v.q9)},
+ ru:'points',refs:['0-4:Minimal','5-9:Mild','10-14:Moderate','15-19:Moderately severe','20-27:Severe'],
+ interp:function(r){var v=+r;if(v<=4)return rn('Minimal Depression','PHQ-9 '+v+'/27. Minimal or no depressive symptoms.');if(v<=9)return rl('Mild Depression','PHQ-9 '+v+'/27. Watchful waiting; repeat at follow-up.');if(v<=14)return rw('Moderate Depression','PHQ-9 '+v+'/27. Consider treatment plan, counselling, and/or pharmacotherapy.');if(v<=19)return rw('Moderately Severe Depression','PHQ-9 '+v+'/27. Active treatment with pharmacotherapy and/or psychotherapy recommended.');return rh('Severe Depression','PHQ-9 '+v+'/27. Immediate initiation of treatment; assess safety and suicide risk urgently.')}},
+
+{id:'gad7',n:'GAD-7',a:'Generalised Anxiety Disorder Scale',c:'neuro',d:'Screens for and grades severity of generalised anxiety symptoms over the past 2 weeks. Each item scored 0 (not at all) to 3 (nearly every day).',f:'Sum of 7 items, each 0-3',
+ F:[{i:'a1',l:'Feeling nervous, anxious, or on edge (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a2',l:'Not being able to stop or control worrying (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a3',l:'Worrying too much about different things (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a4',l:'Trouble relaxing (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a5',l:'Being so restless that it is hard to sit still (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a6',l:'Becoming easily annoyed or irritable (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}},
+    {i:'a7',l:'Feeling afraid as if something awful might happen (0-3)',p:'0-3',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.a1+ +v.a2+ +v.a3+ +v.a4+ +v.a5+ +v.a6+ +v.a7)},
+ ru:'points',refs:['0-4:Minimal anxiety','5-9:Mild anxiety','10-14:Moderate anxiety','15-21:Severe anxiety'],
+ interp:function(r){var v=+r;if(v<=4)return rn('Minimal Anxiety','GAD-7 '+v+'/21. Minimal or no anxiety symptoms.');if(v<=9)return rl('Mild Anxiety','GAD-7 '+v+'/21. Monitor; consider follow-up screening.');if(v<=14)return rw('Moderate Anxiety','GAD-7 '+v+'/21. Consider further evaluation and treatment (CBT and/or pharmacotherapy).');return rh('Severe Anxiety','GAD-7 '+v+'/21. Active treatment strongly recommended; consider psychiatry referral.')}},
+
+{id:'sf_syncope',n:'San Francisco Syncope Rule',a:'Serious Outcome Prediction',c:'cardiac',d:'Identifies syncope patients at risk of a serious outcome (death, MI, arrhythmia, PE, stroke, SAH, significant haemorrhage) within 7 days. Any positive criterion = high risk.',f:'CHF history+Haematocrit<30+Abnormal ECG+SOB+SBP<90',
+ F:[{i:'sf_chf',l:'History of congestive heart failure (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sf_hct',l:'Haematocrit <30% (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sf_ecg',l:'Abnormal ECG (new changes or non-sinus rhythm) (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sf_sob',l:'Shortness of breath (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sf_sbp',l:'Triage systolic BP <90 mmHg (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.sf_chf+ +v.sf_hct+ +v.sf_ecg+ +v.sf_sob+ +v.sf_sbp)},
+ ru:'criteria positive',refs:['0:Low risk','≥1:High risk — admit/observe'],
+ interp:function(r){var v=+r;if(v===0)return rn('Low Risk','0 criteria met. Low risk of serious outcome at 7 days. Consider outpatient work-up.');return rh('High Risk',v+' criteria met. Elevated risk of serious outcome — admit for monitoring and further evaluation.')}},
+
+{id:'nyha_class',n:'NYHA Functional Classification',a:'New York Heart Association Class',c:'cardiac',d:'Classifies severity of heart failure symptoms based on limitation of physical activity.',f:'Class I-IV based on symptom threshold',
+ F:[{i:'nyha',l:'Class: 1=No limitation, 2=Slight limitation (comfortable at rest), 3=Marked limitation (comfortable at rest), 4=Symptoms at rest',p:'1-4',u:['class'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.nyha},
+ ru:'NYHA class',
+ refs:['I:No limitation','II:Slight limitation','III:Marked limitation','IV:Symptoms at rest'],
+ interp:function(r){var v=+r;var msgs=['','No limitation of physical activity. Ordinary activity does not cause symptoms.','Slight limitation of physical activity. Comfortable at rest, but ordinary activity causes symptoms.','Marked limitation of physical activity. Comfortable at rest, but less-than-ordinary activity causes symptoms.','Unable to carry out any physical activity without symptoms, or symptoms present at rest.'];var fn=[ri,rn,rl,rw,rh];return(fn[v]||ri)('NYHA Class '+(v?['','I','II','III','IV'][v]:''),msgs[v]||'')}},
+
+{id:'mallampati',n:'Mallampati Score',a:'Airway Assessment',c:'resp',d:'Predicts difficulty of tracheal intubation based on visibility of oropharyngeal structures with mouth fully open and tongue protruded.',f:'Class I-IV based on visible structures',
+ F:[{i:'mp',l:'Class: 1=Soft palate+uvula+fauces+pillars fully visible, 2=Soft palate+uvula+fauces visible, 3=Soft palate+base of uvula visible, 4=Soft palate not visible',p:'1-4',u:['class'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.mp},
+ ru:'Mallampati class',
+ refs:['I:Easy intubation predicted','II:Generally easy','III:Potentially difficult','IV:Difficult intubation predicted'],
+ interp:function(r){var v=+r;var msgs=['','Full view of soft palate, uvula, fauces, and pillars. Easy laryngoscopy predicted.','Soft palate, uvula, and fauces visible. Generally straightforward intubation.','Only soft palate and base of uvula visible. Potentially difficult laryngoscopy — have backup airway plan ready.','Soft palate not visible at all. Difficult intubation predicted — anticipate and prepare difficult airway equipment/personnel.'];var fn=[ri,rn,rn,rw,rh];return(fn[v]||ri)('Class '+(v?['','I','II','III','IV'][v]:''),msgs[v]||'')}}
 ];
 var CV=[
 {id:'temp',n:'Temperature',em:'\u{1F321}\uFE0F',col:'#FF8F00',u:['\u00b0C','\u00b0F','K'],conv:function(v,f,t){var c=f=='\u00b0C'?v:f=='\u00b0F'?(v-32)*5/9:v-273.15;return t=='\u00b0C'?c:t=='\u00b0F'?c*9/5+32:c+273.15}},
@@ -2506,161 +2675,421 @@ var CV=[
  conv:function(v,f,t){return+(v*this.base[f]/this.base[t]).toFixed(2)}}
 ];
 
+/* ──────────────────────────────────────────────────────────
+   CORE STATE
+   ────────────────────────────────────────────────────────── */
+var cat = 'all';
+var medPage = 1;
+var convPage = 1;
+var PER_PAGE = 10;
+var activeMed = null;
+var activeConv = null;
+var SX = {};
 
+/* ──────────────────────────────────────────────────────────
+   MODAL HELPERS
+   ────────────────────────────────────────────────────────── */
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  activeMed = null; activeConv = null;
+  renderMed(); renderConv();
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('modal-overlay').classList.contains('open')) closeModal();
+});
 
+/* ──────────────────────────────────────────────────────────
+   PAGINATION BUILDER
+   ────────────────────────────────────────────────────────── */
+function buildPagination(current, total, pages, onPage, elId) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  if (pages <= 1) { el.style.display = 'none'; return; }
+  el.style.display = 'flex';
 
-// STATE
-var cat='all',activeMed=null,activeConv=null,SX={};
+  var chevL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>';
+  var chevR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>';
 
-function switchTab(id){
-  ['med','conv'].forEach(function(x){
-    document.getElementById('t-'+x).className='tab'+(x===id?' on':'');
-    document.getElementById('p-'+x).className='panel'+(x===id?' on':'');
+  // Build page number buttons (show max 5 around current)
+  var nums = '';
+  var start = Math.max(1, current - 2);
+  var end   = Math.min(pages, start + 4);
+  if (end - start < 4) start = Math.max(1, end - 4);
+
+  if (start > 1) nums += '<button class="page-btn" data-pg="1">1</button>'
+    + (start > 2 ? '<span style="color:var(--n400);padding:0 2px;line-height:32px">…</span>' : '');
+  for (var i = start; i <= end; i++) {
+    nums += '<button class="page-btn' + (i === current ? ' active' : '') + '" data-pg="' + i + '">' + i + '</button>';
+  }
+  if (end < pages) {
+    nums += (end < pages - 1 ? '<span style="color:var(--n400);padding:0 2px;line-height:32px">…</span>' : '')
+      + '<button class="page-btn" data-pg="' + pages + '">' + pages + '</button>';
+  }
+
+  var from = (current - 1) * PER_PAGE + 1;
+  var to   = Math.min(current * PER_PAGE, total);
+
+  el.innerHTML =
+    '<div class="page-info">Showing <span>' + from + '-' + to + '</span> of <span>' + total + '</span></div>'
+    + '<div class="page-controls">'
+    + '<button class="page-btn" data-pg="' + (current - 1) + '"' + (current <= 1 ? ' disabled' : '') + '>' + chevL + '</button>'
+    + '<div class="page-nums">' + nums + '</div>'
+    + '<button class="page-btn" data-pg="' + (current + 1) + '"' + (current >= pages ? ' disabled' : '') + '>' + chevR + '</button>'
+    + '</div>';
+
+  el.querySelectorAll('[data-pg]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pg = parseInt(btn.getAttribute('data-pg'));
+      if (pg >= 1 && pg <= pages && !btn.disabled) onPage(pg);
+    });
   });
 }
 
-function setCat(c,el){
-  cat=c;
-  document.querySelectorAll('#chips .chip').forEach(function(x){x.className='chip'});
-  el.className='chip on';
+/* ──────────────────────────────────────────────────────────
+   RENDER CALCULATORS LIST (PAGINATED)
+   ────────────────────────────────────────────────────────── */
+function renderMed() {
+  var q = (document.getElementById('med-q') || {}).value || '';
+  q = q.toLowerCase().trim();
+  var list = T.filter(function(t) {
+    return (cat === 'all' || t.c === cat) &&
+      (!q || t.n.toLowerCase().includes(q) || t.a.toLowerCase().includes(q));
+  });
+
+  var countEl = document.getElementById('med-count');
+  if (countEl) countEl.textContent = list.length;
+
+  var el = document.getElementById('med-list');
+  if (!el) return;
+
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No calculators found</div></div>';
+    var pg = document.getElementById('med-pagination');
+    if (pg) pg.style.display = 'none';
+    return;
+  }
+
+  var pages = Math.ceil(list.length / PER_PAGE);
+  if (medPage > pages) medPage = pages;
+  var slice = list.slice((medPage - 1) * PER_PAGE, medPage * PER_PAGE);
+
+  var out = '';
+  slice.forEach(function(t) {
+    var cc = CCAT[t.c] || { em: '🔬', bg: '#E8EAF6' };
+    out += '<div class="calc-item" data-tid="' + t.id + '">'
+      + '<div class="ci-icon" style="background:' + cc.bg + '">' + cc.em + '</div>'
+      + '<div class="ci-body">'
+      + '<div class="ci-name">' + t.n + '</div>'
+      + '<div class="ci-sub">' + t.a + '</div>'
+      + '</div>'
+      + '<div class="ci-arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>'
+      + '</div>';
+  });
+  el.innerHTML = out;
+  el.querySelectorAll('[data-tid]').forEach(function(d) {
+    d.addEventListener('click', function() { openTest(d.getAttribute('data-tid')); });
+  });
+
+  buildPagination(medPage, list.length, pages, function(pg) {
+    medPage = pg;
+    renderMed();
+    document.getElementById('p-med').scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }, 'med-pagination');
+}
+
+/* ──────────────────────────────────────────────────────────
+   RENDER CONVERTERS LIST (PAGINATED)
+   ────────────────────────────────────────────────────────── */
+function renderConv() {
+  var q = (document.getElementById('conv-q') || {}).value || '';
+  q = q.toLowerCase().trim();
+  var list = CV.filter(function(c) { return !q || c.n.toLowerCase().includes(q); });
+
+  var countEl = document.getElementById('conv-count');
+  if (countEl) countEl.textContent = list.length;
+
+  var el = document.getElementById('conv-list');
+  if (!el) return;
+
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No converters found</div></div>';
+    var pg = document.getElementById('conv-pagination');
+    if (pg) pg.style.display = 'none';
+    return;
+  }
+
+  var pages = Math.ceil(list.length / PER_PAGE);
+  if (convPage > pages) convPage = pages;
+  var slice = list.slice((convPage - 1) * PER_PAGE, convPage * PER_PAGE);
+
+  var out = '';
+  slice.forEach(function(c) {
+    var units = c.u ? c.u.slice(0, 3).join(' · ') : '';
+    out += '<div class="calc-item" data-cid="' + c.id + '">'
+      + '<div class="ci-icon" style="background:' + c.col + '22">' + c.em + '</div>'
+      + '<div class="ci-body">'
+      + '<div class="ci-name">' + c.n + '</div>'
+      + '<div class="ci-sub">' + units + '</div>'
+      + '</div>'
+      + '<div class="ci-arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>'
+      + '</div>';
+  });
+  el.innerHTML = out;
+  el.querySelectorAll('[data-cid]').forEach(function(d) {
+    d.addEventListener('click', function() { openConv(d.getAttribute('data-cid')); });
+  });
+
+  buildPagination(convPage, list.length, pages, function(pg) {
+    convPage = pg;
+    renderConv();
+    window.scrollTo(0, 0);
+  }, 'conv-pagination');
+}
+
+/* ──────────────────────────────────────────────────────────
+   CATEGORY + TAB SWITCH
+   ────────────────────────────────────────────────────────── */
+function setCat(c, el) {
+  cat = c; medPage = 1;
+  document.querySelectorAll('.cat-chip').forEach(function(ch) { ch.classList.remove('active'); });
+  if (el) el.classList.add('active');
   renderMed();
 }
-
-function renderMed(){
-  var q=document.getElementById('med-q').value.toLowerCase();
-  var list=T.filter(function(t){return(cat==='all'||t.c===cat)&&(t.n.toLowerCase().indexOf(q)>-1||t.a.toLowerCase().indexOf(q)>-1)});
-  var el=document.getElementById('med-list');
-  if(!list.length){el.innerHTML='<div class="empty">No tests found.</div>';return}
-  el.innerHTML=list.map(function(t){
-    var cc=CCAT[t.c]||{em:'',bg:'#E3F2FD',fg:'#1565C0'};
-    return '<div class="li'+(t.id===activeMed?' on':'')+'" onclick="openTest(\''+t.id+'\')">'
-      +'<div class="ico" style="background:'+cc.bg+';color:'+cc.fg+'">'+cc.em+'</div>'
-      +'<div class="li-info"><div class="li-name">'+t.n+'</div><div class="li-sub">'+t.a+'</div></div>'
-      +'<div class="li-arr">&#8250;</div></div>';
-  }).join('');
-}
-
-function renderConv(){
-  var q=document.getElementById('conv-q').value.toLowerCase();
-  var list=CV.filter(function(c){return c.n.toLowerCase().indexOf(q)>-1});
-  var el=document.getElementById('conv-list');
-  if(!list.length){el.innerHTML='<div class="empty">No converters found.</div>';return}
-  el.innerHTML=list.map(function(c){
-    return '<div class="li'+(c.id===activeConv?' on':'')+'" onclick="openConv(\''+c.id+'\')">'
-      +'<div class="ico" style="background:'+c.col+'22;color:'+c.col+'">'+c.em+'</div>'
-      +'<div class="li-info"><div class="li-name">'+c.n+'</div>'
-      +'<div class="li-sub">'+(c.u?c.u.slice(0,3).join(' \u00b7 ')+(c.u.length>3?'\u2026':''):'')+'</div></div>'
-      +'<div class="li-arr">&#8250;</div></div>';
-  }).join('');
-}
-
-function openTest(id){
-  activeMed=id; renderMed();
-  var t=T.filter(function(x){return x.id===id})[0];
-  var cc=CCAT[t.c]||{em:'',bg:'#E3F2FD',fg:'#1565C0',gr:'linear-gradient(135deg,#1565C0,#1976D2)'};
-  if(!SX[id]) SX[id]='M';
-  var card=document.getElementById('modal-box');
-  document.getElementById('modal-backdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-  var sxH=t.sex
-    ?'<div class="fld"><label class="fld-lbl">Biological Sex</label><div class="sex-row">'
-     +'<div class="sx on" id="sx-M-'+id+'" onclick="pickSex(\''+id+'\',\'M\')">&#9794; Male</div>'
-     +'<div class="sx" id="sx-F-'+id+'" onclick="pickSex(\''+id+'\',\'F\')">&#9792; Female</div>'
-     +'</div></div>':'';
-  var fH=t.F.map(function(f){
-    var multi=f.u&&f.u.length>1;
-    var uCtrl=multi
-      ?'<select class="usel" id="u-'+id+'-'+f.i+'">'
-        +f.u.map(function(u,k){return'<option value="'+u+'"'+(k===0?' selected':'')+'>'+u+'</option>'}).join('')
-        +'</select>'
-      :'<div class="ubadge">'+f.u[0]+'</div>';
-    return '<div class="fld"><label class="fld-lbl">'+f.l+'</label>'
-      +'<div class="fld-row" id="fr-'+id+'-'+f.i+'">'
-      +'<input class="inp" type="number" id="f-'+id+'-'+f.i+'" placeholder="'+f.p+'" step="any" '
-      +'oninput="document.getElementById(\'fr-'+id+'-'+f.i+'\').classList.remove(\'err\')">'
-      +uCtrl+'</div></div>';
-  }).join('');
-  card.innerHTML=
-    '<div class="cc-head" style="background:'+cc.gr+'">'
-    +'<button class="cc-close" onclick="closeCalc()">\u00d7</button>'
-    +'<div class="cc-row"><div class="cc-ico">'+cc.em+'</div>'
-    +'<div><div class="cc-name">'+t.n+'</div><div class="cc-abbr">'+t.a+'</div></div></div>'
-    +'<div class="cc-desc">'+t.d+'</div>'
-    +'<div class="cc-fml">&#402; '+t.f+'</div></div>'
-    +'<div class="cc-body">'+sxH+fH
-    +'<div class="btns">'
-    +'<button class="btn btn-p" onclick="doCalc(\''+id+'\')">&#9654; Calculate</button>'
-    +'<button class="btn btn-s" onclick="clearCalc(\''+id+'\')">Clear</button>'
-    +'</div>'
-    +'<div id="res-'+id+'" class="res"></div></div>';
-  document.getElementById('modal-box').scrollTop=0;
-  document.getElementById('modal-backdrop').scrollTop=0;
-}
-
-function pickSex(id,s){
-  SX[id]=s;
-  ['M','F'].forEach(function(x){
-    var el=document.getElementById('sx-'+x+'-'+id);
-    if(el) el.className='sx'+(s===x?' on':'');
+function switchTab(t, el) {
+  ['med','conv'].forEach(function(p) {
+    document.getElementById('p-' + p).classList.remove('active');
+    document.getElementById('tab-' + p).classList.remove('active');
   });
+  document.getElementById('p-' + t).classList.add('active');
+  if (el) el.classList.add('active');
 }
 
-function doCalc(id){
-  var t=T.filter(function(x){return x.id===id})[0];
-  var vals={};var ok=true;
-  for(var i=0;i<t.F.length;i++){
-    var f=t.F[i];
-    var el=document.getElementById('f-'+id+'-'+f.i);
-    var fr=document.getElementById('fr-'+id+'-'+f.i);
-    if(fr) fr.classList.remove('err');
-    if(el.value===''||isNaN(+el.value)){
-      if(t.allowEmpty){vals[f.i]=f.cv('',f.u?f.u[0]:'');continue;}
-      if(fr)fr.classList.add('err');el.focus();ok=false;break;
+/* ──────────────────────────────────────────────────────────
+   OPEN CALCULATOR IN MODAL
+   ────────────────────────────────────────────────────────── */
+function openTest(id) {
+  activeMed = id;
+  var t = T.filter(function(x) { return x.id === id; })[0];
+  if (!t) return;
+  var cc = CCAT[t.c] || { em: '🔬', bg: '#E8EAF6', gr: 'linear-gradient(135deg,#3949AB,#5C6BC0)' };
+  if (!SX[id]) SX[id] = 'M';
+
+  var sxH = '';
+  if (t.sex) {
+    sxH = '<div class="field"><label class="field-label">Biological Sex</label>'
+      + '<div class="sex-toggle">'
+      + '<div class="sex-btn active" id="sx-M-' + id + '" data-sex="M" data-tid="' + id + '"><span class="sex-check">✓</span>♂ Male</div>'
+      + '<div class="sex-btn" id="sx-F-' + id + '" data-sex="F" data-tid="' + id + '"><span class="sex-check">✓</span>♀ Female</div>'
+      + '</div></div>';
+  }
+
+  var fH = t.F.map(function(f) {
+    var multi = f.u && f.u.length > 1;
+    var uCtrl = multi
+      ? '<select class="field-unit-sel" id="u-' + id + '-' + f.i + '">'
+          + f.u.map(function(u, k) { return '<option value="' + u + '"' + (k === 0 ? ' selected' : '') + '>' + u + '</option>'; }).join('')
+          + '</select>'
+      : (f.u ? '<div class="field-unit-badge">' + f.u[0] + '</div>' : '');
+    return '<div class="field"><label class="field-label">' + f.l + '</label>'
+      + '<div class="field-row" id="fr-' + id + '-' + f.i + '">'
+      + '<input class="field-input" type="number" id="f-' + id + '-' + f.i + '" placeholder="' + f.p + '" step="any">'
+      + uCtrl + '</div></div>';
+  }).join('');
+
+  var panel = document.getElementById('modal-panel');
+  panel.innerHTML =
+    '<div class="modal-pill"></div>'
+    + '<button class="modal-close" onclick="closeModal()" aria-label="Close">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+    + '</button>'
+    + '<div class="calc-hero" style="background:' + cc.gr + '">'
+    + '<div class="hero-row">'
+    + '<div class="hero-icon">' + cc.em + '</div>'
+    + '<div><div class="hero-name">' + t.n + '</div>'
+    + '<div class="hero-abbr">' + t.a + '</div></div></div>'
+    + '<div class="hero-desc">' + t.d + '</div>'
+    + '<div class="hero-formula">ƒ&nbsp;' + t.f + '</div></div>'
+    + '<div class="calc-body">' + sxH + fH
+    + '<div class="btn-row">'
+    + '<button class="btn btn-primary" data-calc="' + id + '">'
+    + '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+    + 'Calculate</button>'
+    + '<button class="btn btn-secondary" data-clear="' + id + '">'
+    + '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.91"/></svg>'
+    + 'Reset</button>'
+    + '</div>'
+    + '<div id="res-' + id + '" class="result-card"></div></div>';
+
+  // Wire events
+  panel.querySelectorAll('[data-sex]').forEach(function(el) {
+    el.addEventListener('click', function() { pickSex(el.getAttribute('data-tid'), el.getAttribute('data-sex')); });
+  });
+  panel.querySelectorAll('.field-input').forEach(function(inp) {
+    inp.addEventListener('input', function() {
+      var frId = 'fr-' + id + '-' + inp.id.replace('f-' + id + '-', '');
+      var fr = document.getElementById(frId);
+      if (fr) fr.classList.remove('error');
+    });
+  });
+  var calcBtn = panel.querySelector('[data-calc]');
+  var clearBtn = panel.querySelector('[data-clear]');
+  if (calcBtn) calcBtn.addEventListener('click', function() { doCalc(id); });
+  if (clearBtn) clearBtn.addEventListener('click', function() { clearCalc(id); });
+
+  panel.scrollTop = 0;
+  openModal();
+}
+
+/* ──────────────────────────────────────────────────────────
+   OPEN CONVERTER IN MODAL
+   ────────────────────────────────────────────────────────── */
+function openConv(id) {
+  activeConv = id;
+  var c = CV.filter(function(x) { return x.id === id; })[0];
+  if (!c) return;
+  var panel = document.getElementById('modal-panel');
+  var closeBtn = '<div class="modal-pill"></div>'
+    + '<button class="modal-close" onclick="closeModal()" aria-label="Close">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+    + '</button>';
+
+  if (!c.conv) {
+    var special = id === 'dose_calc' ? buildDose(c.col) : id === 'iv_calc' ? buildIV(c.col) : buildBMI(c.col);
+    panel.innerHTML = closeBtn + special;
+    panel.scrollTop = 0;
+    openModal();
+    return;
+  }
+
+  var o0 = c.u.map(function(u, i) { return '<option value="' + u + '"' + (i === 0 ? ' selected' : '') + '>' + u + '</option>'; }).join('');
+  var o1 = c.u.map(function(u, i) { return '<option value="' + u + '"' + (i === 1 ? ' selected' : '') + '>' + u + '</option>'; }).join('');
+
+  panel.innerHTML = closeBtn
+    + '<div class="conv-hero" style="background:linear-gradient(135deg,' + c.col + ',' + c.col + 'BB)">'
+    + '<div class="conv-hero-icon">' + c.em + '</div>'
+    + '<div class="conv-hero-name">' + c.n + '</div>'
+    + '<div class="conv-hero-sub">' + c.u.length + ' unit types</div></div>'
+    + '<div class="calc-body">'
+    + '<div class="field"><label class="field-label">From</label>'
+    + '<div class="field-row"><input class="field-input" type="number" id="cv-in-' + id + '" placeholder="Enter value" step="any">'
+    + '<select class="field-unit-sel" id="cv-from-' + id + '">' + o0 + '</select></div></div>'
+    + '<div style="text-align:center">'
+    + '<button class="swap-btn" data-swap="' + id + '">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>'
+    + '</button></div>'
+    + '<div class="field"><label class="field-label">To</label>'
+    + '<div class="field-row"><input class="field-input" type="number" id="cv-out-' + id + '" placeholder="Result" readonly>'
+    + '<select class="field-unit-sel" id="cv-to-' + id + '">' + o1 + '</select></div></div>'
+    + '<div class="conv-result" id="cv-res-' + id + '">Enter a value above to convert</div>'
+    + '</div>';
+
+  var inp   = panel.querySelector('#cv-in-'   + id);
+  var from  = panel.querySelector('#cv-from-' + id);
+  var to    = panel.querySelector('#cv-to-'   + id);
+  var swap  = panel.querySelector('[data-swap]');
+  if (inp)  inp.addEventListener('input',  function() { doConv(id); });
+  if (from) from.addEventListener('change', function() { doConv(id); });
+  if (to)   to.addEventListener('change',   function() { doConv(id); });
+  if (swap) swap.addEventListener('click',  function() { swapConv(id); });
+
+  panel.scrollTop = 0;
+  openModal();
+}
+
+/* ──────────────────────────────────────────────────────────
+   CALCULATE
+   ────────────────────────────────────────────────────────── */
+function doCalc(id) {
+  var t = T.filter(function(x) { return x.id === id; })[0];
+  if (!t) return;
+  var s = SX[id] || 'M';
+  var vals = {}; var ok = true;
+  for (var i = 0; i < t.F.length; i++) {
+    var f = t.F[i];
+    var el = document.getElementById('f-' + id + '-' + f.i);
+    var fr = document.getElementById('fr-' + id + '-' + f.i);
+    if (!el) continue;
+    if (el.value === '' || isNaN(+el.value)) {
+      if (t.allowEmpty) { vals[f.i] = f.cv('', f.u ? f.u[0] : ''); continue; }
+      if (fr) fr.classList.add('error');
+      el.focus(); ok = false; break;
     }
-    var uSel=document.getElementById('u-'+id+'-'+f.i);
-    vals[f.i]=f.cv(+el.value,uSel?uSel.value:f.u[0]);
+    var uSel = document.getElementById('u-' + id + '-' + f.i);
+    vals[f.i] = f.cv(+el.value, uSel ? uSel.value : (f.u ? f.u[0] : ''));
   }
-  if(!ok) return;
-  var s=SX[id]||'M';
-  var result=t.sex?t.calc(vals,s):t.calc(vals);
-  var interp=t.rawCalc?t.interp(String(result),vals):(t.sex?t.interp(String(result),s):t.interp(String(result)));
-  var box=document.getElementById('res-'+id);
-  // Result unit selector
-  var ruSel='';
-  var rawNum=parseFloat(result);
-  if(t.ruU&&t.ruU.length>1&&!isNaN(rawNum)){
-    ruSel='<div class="res-ru"><span class="res-ru-lbl">Result Unit</span>'
-      +'<select class="res-ru-sel" id="ruu-'+id+'" onchange="convertRU(\''+id+'\')">'
-      +t.ruU.map(function(u,k){return'<option value="'+k+'">'+u+'</option>'}).join('')
-      +'</select></div>';
+  if (!ok) return;
+  var result = t.sex ? t.calc(vals, s) : t.calc(vals);
+  var rawNum = parseFloat(result);
+  var interp = t.rawCalc ? t.interp(String(result), vals)
+    : (t.sex ? t.interp(String(result), s) : t.interp(String(result)));
+  if (!interp) return;
+
+  var ruSel = '';
+  if (t.ruU && t.ruU.length > 1) {
+    ruSel = '<div class="result-unit-row">'
+      + '<span class="result-unit-label">Convert to</span>'
+      + '<select class="result-unit-sel" id="ru-sel-' + id + '">'
+      + t.ruU.map(function(u, k) { return '<option value="' + k + '">' + u + '</option>'; }).join('')
+      + '</select></div>';
   }
-  box.className='res show '+interp.cls;
-  var refsBlock=(t.refs&&t.refs.length)?('<div class="res-refs"><div class="refs-lbl">Reference Ranges</div>'
-    +'<div class="ref-tags">'+t.refs.map(function(r){return'<span class="rtag">'+r+'</span>'}).join('')+'</div></div>'):'';
-  box.innerHTML='<div class="res-hd">'+interp.st+'</div>'
-    +'<div class="res-val"><span class="res-n" id="rn-'+id+'">'+result+'</span>'
-    +'<span class="res-u" id="ru-'+id+'">'+t.ru+'</span></div>'
-    +'<div class="res-txt">'+interp.txt+'</div>'
-    +ruSel
-    +refsBlock;
-  box._raw=rawNum;
-  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  var refsBlock = '';
+  if (t.refs && t.refs.length) {
+    refsBlock = '<div class="result-refs"><div class="result-refs-label">Reference Ranges</div>'
+      + '<div class="result-refs-tags">'
+      + t.refs.map(function(r) { return '<div class="ref-tag">' + r + '</div>'; }).join('')
+      + '</div></div>';
+  }
+
+  var box = document.getElementById('res-' + id);
+  if (!box) return;
+  box.className = 'result-card show ' + interp.cls;
+  box.innerHTML =
+    '<div class="result-hd"><div class="result-hd-dot"></div>' + interp.st + '</div>'
+    + '<div class="result-value">'
+    + '<span class="result-num" id="rn-' + id + '">' + result + '</span>'
+    + '<span class="result-unit" id="ru-' + id + '">' + t.ru + '</span></div>'
+    + '<div class="result-text">' + interp.txt + '</div>'
+    + ruSel + refsBlock;
+  box._raw = rawNum;
+
+  if (ruSel) {
+    var sel = document.getElementById('ru-sel-' + id);
+    if (sel) sel.addEventListener('change', function() { convertResult(id, this.selectedIndex); });
+  }
+  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function convertRU(id){
-  var t=T.filter(function(x){return x.id===id})[0];
-  if(!t||!t.ruU||!t.ruF) return;
-  var sel=document.getElementById('ruu-'+id);
-  if(!sel) return;
-  var idx=+sel.value;
-  var box=document.getElementById('res-'+id);
-  if(!box||isNaN(box._raw)) return;
-  var converted=t.ruF(box._raw,idx);
-  var fmt=Math.abs(converted)<0.0001&&converted!==0?converted.toExponential(3):parseFloat(converted.toFixed(4)).toString();
-  var rnEl=document.getElementById('rn-'+id);
-  var ruEl=document.getElementById('ru-'+id);
-  if(rnEl) rnEl.textContent=fmt;
-  if(ruEl) ruEl.textContent=t.ruU[idx];
+function convertResult(id, idx) {
+  var t = T.filter(function(x) { return x.id === id; })[0];
+  if (!t || !t.ruF || !t.ruU) return;
+  var box = document.getElementById('res-' + id);
+  if (!box || box._raw === undefined) return;
+  var val = t.ruF(box._raw, idx);
+  var rnEl = document.getElementById('rn-' + id);
+  var ruEl = document.getElementById('ru-' + id);
+  if (rnEl) rnEl.textContent = val;
+  if (ruEl) ruEl.textContent = t.ruU[idx];
+}
+
+/* ──────────────────────────────────────────────────────────
+   SEX TOGGLE
+   ────────────────────────────────────────────────────────── */
+function pickSex(id, s) {
+  SX[id] = s;
+  ['M','F'].forEach(function(x) {
+    var el = document.getElementById('sx-' + x + '-' + id);
+    if (el) el.className = 'sex-btn' + (x === s ? ' active' : '');
+  });
 }
 
 function clearCalc(id){
@@ -2670,45 +3099,8 @@ function clearCalc(id){
     var fr=document.getElementById('fr-'+id+'-'+f.i);
     if(e){e.value='';if(fr)fr.classList.remove('err')}
   });
-  var b=document.getElementById('res-'+id);if(b)b.className='res';
-}
-
-function closeCalc(){ closeModal(); activeMed=null; renderMed(); }
-
-function openConv(id){
-  activeConv=id; renderConv();
-  var c=CV.filter(function(x){return x.id===id})[0];
-  var card=document.getElementById('modal-box');
-  document.getElementById('modal-backdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-  if(!c.conv){
-    if(id==='dose_calc') card.innerHTML=buildDose(c.col);
-    else if(id==='iv_calc') card.innerHTML=buildIV(c.col);
-    else card.innerHTML=buildBMI(c.col);
-    document.getElementById('modal-box').scrollTop=0;
-  document.getElementById('modal-backdrop').scrollTop=0;
-    return;
-  }
-  var o0=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===0?' selected':'')+'>'+u+'</option>'}).join('');
-  var o1=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===1?' selected':'')+'>'+u+'</option>'}).join('');
-  card.innerHTML=
-    '<div class="cv-hd" style="background:linear-gradient(135deg,'+c.col+','+c.col+'cc);color:#fff">'
-    +'<button class="cc-close" onclick="closeConv()">\u00d7</button>'
-    +'<div style="font-size:22px;margin-bottom:4px">'+c.em+'</div>'
-    +'<div style="font-size:16px;font-weight:700;padding-right:36px">'+c.n+'</div>'
-    +'<div style="font-size:11px;opacity:.8;margin-top:2px">'+c.u.length+' units available</div></div>'
-    +'<div class="cc-body">'
-    +'<div class="fld"><label class="fld-lbl">From</label>'
-    +'<div class="fld-row"><input class="inp" type="number" id="cv-in-'+id+'" placeholder="Enter value" step="any" oninput="doConv(\''+id+'\')">'
-    +'<select class="usel" id="cv-from-'+id+'" onchange="doConv(\''+id+'\')">'+o0+'</select></div></div>'
-    +'<button class="cv-swap" onclick="swapConv(\''+id+'\')">&#8645;</button>'
-    +'<div class="fld"><label class="fld-lbl">To</label>'
-    +'<div class="fld-row"><input class="inp" type="number" id="cv-out-'+id+'" placeholder="Result" readonly>'
-    +'<select class="usel" id="cv-to-'+id+'" onchange="doConv(\''+id+'\')">'+o1+'</select></div></div>'
-    +'<div class="cv-out" id="cv-res-'+id+'">Enter a value above to convert</div>'
-    +'</div>';
-  document.getElementById('modal-box').scrollTop=0;
-  document.getElementById('modal-backdrop').scrollTop=0;
+  var b=document.getElementById('res-'+id);
+  if(b){b.className='result-card';b.innerHTML='';b._raw=undefined}
 }
 
 function doConv(id){
@@ -2731,12 +3123,8 @@ function swapConv(id){
   doConv(id);
 }
 
-function handleBackdropClick(e){
-  if(e.target===document.getElementById('modal-backdrop')){ closeCalc(); closeConv(); }
-}
 function closeConv(){ closeModal(); activeConv=null; renderConv(); }
 
-var bmiSex='M';
 function buildDose(col){
   return '<div class="cv-hd" style="background:linear-gradient(135deg,'+col+','+col+'cc);color:#fff">'
     +'<button class="cc-close" onclick="closeConv()">\u00d7</button>'
@@ -2759,23 +3147,6 @@ function buildDose(col){
     +'<button class="btn btn-s" onclick="clrDose()">Clear</button></div>'
     +'<div id="dd-res"></div></div>';
 }
-function calcDose(){
-  var drug=document.getElementById('dd-drug').value||'Drug';
-  var d=+document.getElementById('dd-dose').value,du=document.getElementById('dd-du').value;
-  var w=+document.getElementById('dd-wt').value,wu=document.getElementById('dd-wu').value;
-  var freq=+document.getElementById('dd-freq').value||1;
-  var box=document.getElementById('dd-res');
-  if(!d||!w){box.innerHTML='<div style="color:#E65100;padding:10px;font-size:13px">Enter dose and weight.</div>';return}
-  var wt=wu==='lb'?w*.4536:w;
-  var mg=du==='\u00b5g/kg'?d*wt/1000:du==='g/kg'?d*wt*1000:d*wt;
-  var per=mg/freq;
-  box.className='res show ri';
-  box.innerHTML='<div class="res-hd">'+drug+' Dose</div>'
-    +'<div class="res-val"><span class="res-n">'+per.toFixed(1)+'</span><span class="res-u">mg / dose</span></div>'
-    +'<div class="res-txt">Weight: <b>'+wt.toFixed(1)+' kg</b> | Dose: <b>'+d+' '+du+'</b> | Frequency: <b>'+freq+'x/day</b><br>'
-    +'Total daily: <b>'+mg.toFixed(1)+' mg</b> | Per dose: <b>'+per.toFixed(1)+' mg</b> every '+(24/freq).toFixed(0)+'h</div>';
-}
-function clrDose(){['dd-drug','dd-dose','dd-wt','dd-freq'].forEach(function(i){var e=document.getElementById(i);if(e)e.value=''});var b=document.getElementById('dd-res');if(b){b.className='';b.innerHTML=''}}
 
 function buildIV(col){
   return '<div class="cv-hd" style="background:linear-gradient(135deg,'+col+','+col+'cc);color:#fff">'
@@ -2797,19 +3168,6 @@ function buildIV(col){
     +'<button class="btn btn-s" onclick="clrIV()">Clear</button></div>'
     +'<div id="iv-res"></div></div>';
 }
-function calcIV(){
-  var vol=+document.getElementById('iv-vol').value * +document.getElementById('iv-vu').value;
-  var mins=+document.getElementById('iv-time').value * +document.getElementById('iv-tu').value;
-  var gtts=+document.getElementById('iv-gtts').value;
-  var box=document.getElementById('iv-res');
-  if(!vol||!mins||!gtts){box.innerHTML='<div style="color:#E65100;padding:10px;font-size:13px">Fill all fields.</div>';return}
-  var mlhr=(vol/mins)*60,gm=(vol*gtts)/mins;
-  box.className='res show ri';
-  box.innerHTML='<div class="res-hd">IV Infusion Rate</div>'
-    +'<div class="res-val"><span class="res-n">'+mlhr.toFixed(1)+'</span><span class="res-u">mL/hr</span></div>'
-    +'<div class="res-txt">Drop rate: <b>'+gm.toFixed(0)+' gtts/min</b><br>Volume: <b>'+vol.toFixed(0)+' mL</b> | Drop factor: <b>'+gtts+' gtts/mL</b></div>';
-}
-function clrIV(){['iv-vol','iv-time','iv-gtts'].forEach(function(i){var e=document.getElementById(i);if(e)e.value=''});var b=document.getElementById('iv-res');if(b){b.className='';b.innerHTML=''}}
 
 function buildBMI(col){
   return '<div class="cv-hd" style="background:linear-gradient(135deg,'+col+','+col+'cc);color:#fff">'
@@ -2830,334 +3188,12 @@ function buildBMI(col){
     +'<button class="btn btn-s" onclick="clrBMI()">Clear</button></div>'
     +'<div id="bmi-res"></div></div>';
 }
-function calcBMI(){
-  var wr=+document.getElementById('bmi-wt').value,wu=document.getElementById('bmi-wu').value;
-  var hr=+document.getElementById('bmi-ht').value,hu=document.getElementById('bmi-hu').value;
-  var box=document.getElementById('bmi-res');
-  if(!wr||!hr){box.innerHTML='<div style="color:#E65100;padding:10px;font-size:13px">Enter weight and height.</div>';return}
-  var wt=wu==='lb'?wr*.4536:wr;
-  var ht=hu==='in'?hr*2.54:hu==='ft'?hr*30.48:hr;
-  var bmi=(wt/Math.pow(ht/100,2)).toFixed(1);
-  var hin=ht/2.54,ibw=Math.max(0,(bmiSex==='M'?50:45.5)+2.3*(hin-60)).toFixed(1);
-  var bsa=Math.sqrt((ht*wt)/3600).toFixed(2);
-  var adj=wt>+ibw?(+ibw+0.4*(wt-+ibw)).toFixed(1):null;
-  var cat2=+bmi<18.5?'Underweight':+bmi<25?'Normal Weight':+bmi<30?'Overweight':+bmi<35?'Obese I':+bmi<40?'Obese II':'Obese III';
-  var cls=+bmi<18.5?'rl':+bmi<25?'rn':+bmi<30?'rw':'rh';
-  box.className='res show '+cls;
-  box.innerHTML='<div class="res-hd">'+cat2+'</div>'
-    +'<div class="res-val"><span class="res-n">'+bmi+'</span><span class="res-u">kg/m\u00b2</span></div>'
-    +'<div class="res-txt"><b>IBW (Devine):</b> '+ibw+' kg<br><b>BSA (Mosteller):</b> '+bsa+' m\u00b2<br>'
-    +(adj?'<b>Adjusted BW:</b> '+adj+' kg<br>':'')
-    +'Weight: <b>'+wt.toFixed(1)+' kg</b> | Height: <b>'+ht.toFixed(0)+' cm</b></div>';
-}
-function clrBMI(){['bmi-wt','bmi-ht'].forEach(function(i){var e=document.getElementById(i);if(e)e.value=''});var b=document.getElementById('bmi-res');if(b){b.className='';b.innerHTML=''}}
-
-renderMed();
-renderConv();
-
-
-
-
-
-
-/* ── Modal helpers ── */
-function openModal(){
-  document.getElementById('modal-backdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeModal(){
-  document.getElementById('modal-backdrop').classList.remove('open');
-  document.body.style.overflow='';
-}
-function modal_scrollTop(){
-  var b=document.getElementById('modal-box');
-  if(b){b.scrollTop=0;}
-  var s=document.getElementById('modal-backdrop');
-  if(s){s.scrollTop=0;}
-}
-function handleBackdropClick(e){
-  if(e.target===document.getElementById('modal-backdrop')){
-    closeCalc();closeConv();
-  }
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){
-    var bd=document.getElementById('modal-backdrop');
-    if(bd&&bd.classList.contains('open')){closeCalc();closeConv();}
-  }
-});
-
-/* ── Patch renderMed / renderConv to use M3 classes ── */
-renderMed=function(){
-  var q=(document.getElementById('med-q')||{}).value||'';
-  q=q.toLowerCase();
-  var list=T.filter(function(t){
-    return(cat==='all'||t.c===cat)&&(!q||t.n.toLowerCase().includes(q)||t.a.toLowerCase().includes(q));
-  });
-  var el=document.getElementById('med-list');
-  if(!el)return;
-  if(!list.length){el.innerHTML='<div class="m3-empty">No calculators found</div>';return;}
-  var out='';
-  list.forEach(function(t){
-    var cc=CCAT[t.c]||{em:'🔬',bg:'#E8EAF6',gr:'linear-gradient(135deg,#3949AB,#5C6BC0)'};
-    var on=activeMed===t.id?' on':'';
-    out+='<div class="m3-li'+on+'" data-tid="'+t.id+'">'
-      +'<div class="li-leading" style="background:'+cc.bg+'"><span style="font-size:20px">'+cc.em+'</span></div>'
-      +'<div class="li-content"><div class="li-headline">'+t.n+'</div>'
-      +'<div class="li-supporting">'+t.a+'</div></div>'
-      +'<div class="li-trailing"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div></div>';
-  });
-  el.innerHTML=out;
-  el.querySelectorAll('[data-tid]').forEach(function(d){
-    d.addEventListener('click',function(){openTest(d.getAttribute('data-tid'));});
-  });
-};
-
-renderConv=function(){
-  var q=(document.getElementById('conv-q')||{}).value||'';
-  q=q.toLowerCase();
-  var list=CV.filter(function(c){return !q||c.n.toLowerCase().includes(q);});
-  var el=document.getElementById('conv-list');
-  if(!el)return;
-  if(!list.length){el.innerHTML='<div class="m3-empty">No converters found</div>';return;}
-  var out='';
-  list.forEach(function(c){
-    var on=activeConv===c.id?' on':'';
-    var units=c.u?c.u.slice(0,3).join(' · '):'';
-    out+='<div class="m3-li'+on+'" data-cid="'+c.id+'">'
-      +'<div class="li-leading" style="background:'+c.col+'22"><span style="font-size:20px">'+c.em+'</span></div>'
-      +'<div class="li-content"><div class="li-headline">'+c.n+'</div>'
-      +'<div class="li-supporting">'+units+'</div></div>'
-      +'<div class="li-trailing"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></div></div>';
-  });
-  el.innerHTML=out;
-  el.querySelectorAll('[data-cid]').forEach(function(d){
-    d.addEventListener('click',function(){openConv(d.getAttribute('data-cid'));});
-  });
-};
-
-/* ── Patch openTest to use M3 field classes ── */
-openTest=function(id){
-  activeMed=id; renderMed();
-  var t=T.filter(function(x){return x.id===id;})[0];
-  if(!t)return;
-  var cc=CCAT[t.c]||{em:'🔬',bg:'#E8EAF6',gr:'linear-gradient(135deg,#3949AB,#5C6BC0)'};
-  if(!SX[id])SX[id]='M';
-  var card=document.getElementById('modal-box');
-  openModal();
-
-  var sxH='';
-  if(t.sex){
-    sxH='<div class="m3-field"><label class="m3-field-label">Biological Sex</label>'
-      +'<div class="m3-seg">'
-      +'<div class="m3-seg-btn on" id="sx-M-'+id+'" data-sex="M" data-tid="'+id+'">'
-      +'<span class="m3-seg-check material-symbols-outlined">check</span>♂ Male</div>'
-      +'<div class="m3-seg-btn" id="sx-F-'+id+'" data-sex="F" data-tid="'+id+'">'
-      +'<span class="m3-seg-check material-symbols-outlined">check</span>♀ Female</div>'
-      +'</div></div>';
-  }
-
-  var fH=t.F.map(function(f){
-    var multi=f.u&&f.u.length>1;
-    var uCtrl=multi
-      ?'<select class="m3-unit-sel" id="u-'+id+'-'+f.i+'">'
-        +f.u.map(function(u,k){return'<option value="'+u+'"'+(k===0?' selected':'')+'>'+u+'</option>';}).join('')
-        +'</select>'
-      :(f.u?'<div class="m3-unit-badge">'+f.u[0]+'</div>':'');
-    return '<div class="m3-field"><label class="m3-field-label">'+f.l+'</label>'
-      +'<div class="m3-field-box" id="fr-'+id+'-'+f.i+'">'
-      +'<input class="m3-input" type="number" id="f-'+id+'-'+f.i+'" placeholder="'+f.p+'" step="any" data-fid="'+id+'">'
-      +uCtrl+'</div></div>';
-  }).join('');
-
-  card.innerHTML=
-    '<div class="modal-handle"></div>'
-    +'<button class="modal-close-btn" data-close="calc" aria-label="Close">'
-    +'<span class="material-symbols-outlined">close</span></button>'
-    +'<div class="calc-hero" style="background:'+cc.gr+'">'
-    +'<div class="calc-hero-row">'
-    +'<div class="calc-hero-icon">'+cc.em+'</div>'
-    +'<div><div class="calc-hero-name">'+t.n+'</div>'
-    +'<div class="calc-hero-abbr">'+t.a+'</div></div></div>'
-    +'<div class="calc-hero-desc">'+t.d+'</div>'
-    +'<div class="calc-hero-formula">ƒ '+t.f+'</div></div>'
-    +'<div class="calc-body">'+sxH+fH
-    +'<div class="btns">'
-    +'<button class="m3-btn m3-btn-filled" data-calc="'+id+'">'
-    +'<span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>Calculate</button>'
-    +'<button class="m3-btn m3-btn-outlined" data-clear="'+id+'">'
-    +'<span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>Clear</button>'
-    +'</div>'
-    +'<div id="res-'+id+'" class="m3-result"></div></div>';
-
-  // Wire events via data attrs
-  card.querySelectorAll('[data-sex]').forEach(function(el){
-    el.addEventListener('click',function(){pickSex(el.getAttribute('data-tid'),el.getAttribute('data-sex'));});
-  });
-  card.querySelectorAll('[data-fid]').forEach(function(el){
-    el.addEventListener('input',function(){
-      var fr=document.getElementById('fr-'+id+'-'+el.id.replace('f-'+id+'-',''));
-      if(fr)fr.classList.remove('err');
-    });
-  });
-  card.querySelector('[data-calc]').addEventListener('click',function(){doCalc(id);});
-  card.querySelector('[data-clear]').addEventListener('click',function(){clearCalc(id);});
-  card.querySelector('[data-close]').addEventListener('click',function(){closeCalc();});
-
-  modal_scrollTop();
-};
-
-/* ── Patch openConv to use M3 field classes ── */
-openConv=function(id){
-  activeConv=id; renderConv();
-  var c=CV.filter(function(x){return x.id===id;})[0];
-  if(!c)return;
-  var card=document.getElementById('modal-box');
-  openModal();
-
-  if(!c.conv){
-    var specialHTML;
-    if(id==='dose_calc') specialHTML=buildDose(c.col);
-    else if(id==='iv_calc') specialHTML=buildIV(c.col);
-    else specialHTML=buildBMI(c.col);
-    card.innerHTML='<div class="modal-handle"></div>'
-      +'<button class="modal-close-btn" data-close="conv" aria-label="Close">'
-      +'<span class="material-symbols-outlined">close</span></button>'+specialHTML;
-    card.querySelector('[data-close]').addEventListener('click',function(){closeConv();});
-    modal_scrollTop();return;
-  }
-
-  var o0=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===0?' selected':'')+'>'+u+'</option>';}).join('');
-  var o1=c.u.map(function(u,i){return'<option value="'+u+'"'+(i===1?' selected':'')+'>'+u+'</option>';}).join('');
-
-  card.innerHTML=
-    '<div class="modal-handle"></div>'
-    +'<button class="modal-close-btn" data-close="conv" aria-label="Close">'
-    +'<span class="material-symbols-outlined">close</span></button>'
-    +'<div class="conv-hero" style="background:linear-gradient(135deg,'+c.col+','+c.col+'BB)">'
-    +'<div class="conv-icon">'+c.em+'</div>'
-    +'<div class="conv-name">'+c.n+'</div>'
-    +'<div class="conv-units">'+c.u.length+' unit types</div></div>'
-    +'<div class="calc-body">'
-    +'<div class="m3-field"><label class="m3-field-label">From</label>'
-    +'<div class="m3-field-box"><input class="m3-input" type="number" id="cv-in-'+id+'" placeholder="Enter value" step="any">'
-    +'<select class="m3-unit-sel" id="cv-from-'+id+'">'+o0+'</select></div></div>'
-    +'<div style="text-align:center">'
-    +'<button class="conv-swap-btn" data-swap="'+id+'">'
-    +'<span class="material-symbols-outlined">swap_vert</span></button></div>'
-    +'<div class="m3-field"><label class="m3-field-label">To</label>'
-    +'<div class="m3-field-box"><input class="m3-input" type="number" id="cv-out-'+id+'" placeholder="Result" readonly>'
-    +'<select class="m3-unit-sel" id="cv-to-'+id+'">'+o1+'</select></div></div>'
-    +'<div class="conv-result" id="cv-res-'+id+'">Enter a value to convert</div></div>';
-
-  var inp=card.querySelector('#cv-in-'+id);
-  var from=card.querySelector('#cv-from-'+id);
-  var to=card.querySelector('#cv-to-'+id);
-  if(inp)inp.addEventListener('input',function(){doConv(id);});
-  if(from)from.addEventListener('change',function(){doConv(id);});
-  if(to)to.addEventListener('change',function(){doConv(id);});
-  var swapBtn=card.querySelector('[data-swap]');
-  if(swapBtn)swapBtn.addEventListener('click',function(){swapConv(id);});
-  card.querySelector('[data-close]').addEventListener('click',function(){closeConv();});
-
-  modal_scrollTop();
-};
-
-/* ── Patch doCalc result rendering to use M3 result classes ── */
-doCalc=function(id){
-  var t=T.filter(function(x){return x.id===id;})[0];
-  if(!t)return;
-  var s=SX[id]||'M';
-  var vals={};var ok=true;
-  for(var i=0;i<t.F.length;i++){
-    var f=t.F[i];
-    var el=document.getElementById('f-'+id+'-'+f.i);
-    var fr=document.getElementById('fr-'+id+'-'+f.i);
-    if(!el)continue;
-    if(el.value===''||isNaN(+el.value)){
-      if(t.allowEmpty){vals[f.i]=f.cv('',f.u?f.u[0]:'');continue;}
-      if(fr)fr.classList.add('err');el.focus();ok=false;break;
-    }
-    var uSel=document.getElementById('u-'+id+'-'+f.i);
-    vals[f.i]=f.cv(+el.value,uSel?uSel.value:(f.u?f.u[0]:''));
-  }
-  if(!ok)return;
-  var result=t.sex?t.calc(vals,s):t.calc(vals);
-  var rawNum=parseFloat(result);
-  var interp=t.rawCalc?t.interp(String(result),vals):(t.sex?t.interp(String(result),s):t.interp(String(result)));
-  if(!interp)return;
-
-  var ruSel='';
-  if(t.ruU&&t.ruU.length>1){
-    ruSel='<div class="res-unit-row"><span class="res-unit-label">Convert to</span>'
-      +'<select class="res-unit-sel" id="ru-sel-'+id+'">'
-      +t.ruU.map(function(u,k){return'<option value="'+k+'">'+u+'</option>';}).join('')
-      +'</select></div>';
-  }
-
-  var refsBlock='';
-  if(t.refs&&t.refs.length){
-    refsBlock='<div class="res-refs-wrap"><div class="res-refs-label">Reference Ranges</div>'
-      +'<div class="res-refs-tags">'
-      +t.refs.map(function(r){return'<div class="res-ref-tag">'+r+'</div>';}).join('')
-      +'</div></div>';
-  }
-
-  var box=document.getElementById('res-'+id);
-  if(!box)return;
-  box.className='m3-result show '+interp.cls;
-  box.innerHTML=
-    '<div class="res-header"><div class="res-header-dot"></div>'+interp.st+'</div>'
-    +'<div class="res-value-row">'
-    +'<span class="res-number" id="rn-'+id+'">'+result+'</span>'
-    +'<span class="res-unit" id="ru-'+id+'">'+t.ru+'</span></div>'
-    +'<div class="res-interp">'+interp.txt+'</div>'
-    +ruSel+refsBlock;
-  box._raw=rawNum;
-
-  if(ruSel){
-    var ruSelEl=document.getElementById('ru-sel-'+id);
-    if(ruSelEl){
-      ruSelEl.addEventListener('change',function(){convertResult(id,this.selectedIndex);});
-    }
-  }
-  box.scrollIntoView({behavior:'smooth',block:'nearest'});
-};
-
-/* ── Patch pickSex to use M3 seg classes ── */
-var _origPickSex=pickSex;
-pickSex=function(id,s){
-  SX[id]=s;
-  ['M','F'].forEach(function(x){
-    var el=document.getElementById('sx-'+x+'-'+id);
-    if(el)el.className='m3-seg-btn'+(x===s?' on':'');
-  });
-};
-
-/* ── Patch setCat to use m3-chip classes ── */
-var _origSetCat=setCat;
-setCat=function(c,el){
-  cat=c;
-  document.querySelectorAll('.m3-chip').forEach(function(ch){
-    ch.classList.remove('on');
-  });
-  if(el)el.classList.add('on');
-  renderMed();
-};
-
-/* ── Patch switchTab ── */
-var _origSwitchTab=switchTab;
-switchTab=function(t,el){
-  ['med','conv'].forEach(function(p){
-    document.getElementById('p-'+p).classList.remove('on');
-    document.getElementById('tab-'+p).classList.remove('on');
-  });
-  document.getElementById('p-'+t).classList.add('on');
-  if(el)el.classList.add('on');
-};
 
 /* ── Init ── */
-renderMed(); renderConv();
+renderMed();
+renderConv();
+var footerYearEl = document.getElementById('footer-year');
+if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
