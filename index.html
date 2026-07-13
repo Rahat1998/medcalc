@@ -709,7 +709,7 @@ body{
     <div class="topbar-title">MedCalc Pro</div>
     <div class="topbar-sub">Clinical Decision Suite</div>
   </div>
-  <div class="topbar-count">162 Calcs · 61 Conv</div>
+  <div class="topbar-count">172 Calcs · 61 Conv</div>
 </header>
 
 <!-- TAB BAR -->
@@ -2571,7 +2571,99 @@ var T=[
  calc:function(v){return v.mp},
  ru:'Mallampati class',
  refs:['I:Easy intubation predicted','II:Generally easy','III:Potentially difficult','IV:Difficult intubation predicted'],
- interp:function(r){var v=+r;var msgs=['','Full view of soft palate, uvula, fauces, and pillars. Easy laryngoscopy predicted.','Soft palate, uvula, and fauces visible. Generally straightforward intubation.','Only soft palate and base of uvula visible. Potentially difficult laryngoscopy — have backup airway plan ready.','Soft palate not visible at all. Difficult intubation predicted — anticipate and prepare difficult airway equipment/personnel.'];var fn=[ri,rn,rn,rw,rh];return(fn[v]||ri)('Class '+(v?['','I','II','III','IV'][v]:''),msgs[v]||'')}}
+ interp:function(r){var v=+r;var msgs=['','Full view of soft palate, uvula, fauces, and pillars. Easy laryngoscopy predicted.','Soft palate, uvula, and fauces visible. Generally straightforward intubation.','Only soft palate and base of uvula visible. Potentially difficult laryngoscopy — have backup airway plan ready.','Soft palate not visible at all. Difficult intubation predicted — anticipate and prepare difficult airway equipment/personnel.'];var fn=[ri,rn,rn,rw,rh];return(fn[v]||ri)('Class '+(v?['','I','II','III','IV'][v]:''),msgs[v]||'')}},
+
+{id:'spesi',n:'sPESI',a:'Simplified Pulmonary Embolism Severity Index',c:'resp',d:'Predicts 30-day mortality risk in patients with confirmed PE using 6 simple criteria, 1 point each.',f:'Age>80+Cancer+Cardiopulmonary disease+HR≥110+SBP<100+O2sat<90%',
+ F:[{i:'sp_age',l:'Age >80 years (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sp_ca',l:'History of cancer (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sp_cpd',l:'Chronic cardiopulmonary disease (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sp_hr',l:'Heart rate ≥110 bpm (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sp_sbp',l:'Systolic BP <100 mmHg (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'sp_o2',l:'O₂ saturation <90% (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.sp_age+ +v.sp_ca+ +v.sp_cpd+ +v.sp_hr+ +v.sp_sbp+ +v.sp_o2)},
+ ru:'points',refs:['0:Low risk (~1% 30-day mortality)','≥1:High risk (~10.9% 30-day mortality)'],
+ interp:function(r){var v=+r;if(v===0)return rn('Low Risk','sPESI 0 — ~1% 30-day mortality. Consider outpatient management if otherwise suitable.');return rh('High Risk','sPESI '+v+' — ~10.9% 30-day mortality. Inpatient management recommended.')}},
+
+{id:'nexus_cspine',n:'NEXUS Criteria',a:'Cervical Spine Imaging Rule',c:'ortho',d:'Determines need for cervical spine imaging after trauma. If all 5 criteria negative, imaging can be safely avoided.',f:'Midline tenderness+Neuro deficit+Altered consciousness+Intoxication+Distracting injury',
+ F:[{i:'nx_tender',l:'Posterior midline cervical tenderness (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'nx_neuro',l:'Focal neurological deficit (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'nx_alert',l:'Altered level of consciousness (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'nx_intox',l:'Evidence of intoxication (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'nx_distr',l:'Painful distracting injury (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.nx_tender+ +v.nx_neuro+ +v.nx_alert+ +v.nx_intox+ +v.nx_distr)},
+ ru:'criteria positive',refs:['0:Imaging not required','≥1:Imaging indicated'],
+ interp:function(r){var v=+r;if(v===0)return rn('Imaging Not Required','All 5 NEXUS criteria negative. C-spine imaging can be safely avoided.');return rh('Imaging Indicated',v+' criteria positive. C-spine imaging (CT) recommended.')}},
+
+{id:'canadian_cspine',n:'Canadian C-Spine Rule',a:'Cervical Spine Imaging Decision',c:'ortho',d:'Clinical decision rule for alert, stable trauma patients to determine need for C-spine imaging.',f:'High-risk factors → image; else Low-risk factors + ability to rotate neck determines need',
+ F:[{i:'cc_high',l:'Any high-risk factor present (age≥65, dangerous mechanism, paraesthesias in extremities) (1=Yes)',p:'0/1',u:['flag'],cv:function(v){return v}},
+    {i:'cc_low',l:'Any low-risk factor allowing safe assessment (simple rear-end MVC, sitting in ED, ambulatory at any time, delayed neck pain onset, no midline tenderness) (1=Yes)',p:'0/1',u:['flag'],cv:function(v){return v}},
+    {i:'cc_rotate',l:'Able to actively rotate neck 45° left and right (1=Yes)',p:'0/1',u:['flag'],cv:function(v){return v}}],
+ calc:function(v){if(+v.cc_high)return 2;if(!+v.cc_low)return 2;if(!+v.cc_rotate)return 1;return 0},
+ ru:'result',refs:['0:No imaging required','1:Imaging required (unable to rotate/assess)','2:Imaging required (high risk or no low-risk factor)'],
+ interp:function(r){var v=+r;if(v===0)return rn('Imaging Not Required','No high-risk factors, a low-risk factor is present, and the patient can rotate their neck 45° both ways. C-spine imaging can be safely avoided.');if(v===1)return rw('Imaging Required','Low-risk factor present but patient unable to actively rotate neck 45°. Imaging recommended.');return rh('Imaging Required','High-risk factor present, or no low-risk factor allows safe clinical assessment. C-spine imaging (CT) recommended.')}},
+
+{id:'rass',n:'RASS',a:'Richmond Agitation-Sedation Scale',c:'neuro',d:'Assesses level of sedation or agitation in critically ill patients, guiding sedation titration.',f:'Scored -5 (unarousable) to +4 (combative)',
+ F:[{i:'rass_v',l:'Score: +4=Combative, +3=Very agitated, +2=Agitated, +1=Restless, 0=Alert and calm, -1=Drowsy, -2=Light sedation, -3=Moderate sedation, -4=Deep sedation, -5=Unarousable',p:'-5 to 4',u:['score'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.rass_v},
+ ru:'RASS score',
+ refs:['+4:Combative','+3:Very agitated','+2:Agitated','+1:Restless','0:Alert and calm','-1:Drowsy','-2:Light sedation','-3:Moderate sedation','-4:Deep sedation','-5:Unarousable'],
+ interp:function(r){var v=+r;var labels={4:'Combative',3:'Very Agitated',2:'Agitated',1:'Restless',0:'Alert and Calm','-1':'Drowsy','-2':'Light Sedation','-3':'Moderate Sedation','-4':'Deep Sedation','-5':'Unarousable'};var lbl=labels[v]!==undefined?labels[v]:'Out of range';var fn;if(v===0)fn=rn;else if(v>0)fn=v>=3?rh:rw;else fn=v<=-4?rh:v<=-2?rw:rl;return fn('RASS '+(v>0?'+':'')+v+' — '+lbl,v>0?'Agitation present. Assess for pain, delirium, or under-sedation; consider treating underlying cause.':v<0?'Sedated. Titrate sedation to target RASS per unit protocol; assess for over-sedation.':'Patient alert and calm — at target for most ICU sedation goals.')}},
+
+{id:'hunt_hess',n:'Hunt and Hess Grade',a:'Subarachnoid Haemorrhage Severity',c:'neuro',d:'Grades clinical severity of aneurysmal subarachnoid haemorrhage, correlating with surgical risk and prognosis.',f:'Grade I-V based on clinical presentation',
+ F:[{i:'hh',l:'Grade: 1=Asymptomatic/mild headache, 2=Moderate-severe headache+nuchal rigidity, 3=Drowsy/confused±mild focal deficit, 4=Stupor+moderate-severe hemiparesis, 5=Deep coma/decerebrate',p:'1-5',u:['grade'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.hh},
+ ru:'Hunt-Hess grade',
+ refs:['I:~70% survival','II:~60% survival','III:~50% survival','IV:~20% survival','V:~10% survival'],
+ interp:function(r){var v=+r;var msgs=['','Asymptomatic or minimal headache and slight nuchal rigidity. Good prognosis.','Moderate-severe headache, nuchal rigidity, no neurological deficit other than cranial nerve palsy.','Drowsiness, confusion, or mild focal deficit.','Stupor, moderate-severe hemiparesis, possibly early decerebrate rigidity.','Deep coma, decerebrate rigidity, moribund appearance. Poor prognosis.'];var fn=[ri,rn,rl,rw,rh,rh];return(fn[v]||ri)('Grade '+(v?['','I','II','III','IV','V'][v]:''),msgs[v]||'')}},
+
+{id:'fisher_scale',n:'Modified Fisher Scale',a:'SAH Vasospasm Risk (CT-based)',c:'neuro',d:'Grades subarachnoid haemorrhage on CT to predict risk of cerebral vasospasm.',f:'Grade 0-4 based on blood thickness and presence of intraventricular haemorrhage',
+ F:[{i:'fs',l:'Grade: 0=No SAH/IVH, 1=Thin SAH no IVH, 2=Thin SAH with IVH, 3=Thick SAH no IVH, 4=Thick SAH with IVH',p:'0-4',u:['grade'],cv:function(v){return Math.round(+v)}}],
+ calc:function(v){return v.fs},
+ ru:'Fisher grade',
+ refs:['0:Minimal vasospasm risk','1:Low risk (~24%)','2:Low risk (~33%)','3:High risk (~33-38%)','4:High risk (~34%)'],
+ interp:function(r){var v=+r;var msgs=['No subarachnoid or intraventricular blood seen. Minimal vasospasm risk.','Thin/focal SAH, no IVH. Relatively low vasospasm risk.','Thin SAH with IVH present. Low-moderate vasospasm risk.','Thick, diffuse SAH, no IVH. High vasospasm risk — close monitoring warranted.','Thick, diffuse SAH with IVH. High vasospasm risk — close monitoring warranted.'];var fn=[rn,rn,rl,rw,rh];return(fn[v]||ri)('Modified Fisher Grade '+v,msgs[v]||'')}},
+
+{id:'maddrey_df',n:"Maddrey's Discriminant Function",a:'Alcoholic Hepatitis Severity',c:'liver',d:'Predicts short-term mortality and steroid-treatment benefit in severe alcoholic hepatitis. DF = 4.6×(patient PT − control PT) + total bilirubin (mg/dL).',f:'4.6×(PT−control PT)+Bilirubin(mg/dL)',
+ F:[{i:'md_pt',l:"Patient's prothrombin time",p:'sec',u:['sec'],cv:function(v){return v}},
+    {i:'md_ptc',l:'Control (lab reference) prothrombin time',p:'sec',u:['sec'],cv:function(v){return v}},
+    {i:'md_bili',l:'Total bilirubin',p:'mg/dL',u:['mg/dL'],cv:function(v){return v}}],
+ calc:function(v){return Math.round((4.6*(+v.md_pt-+v.md_ptc)+ +v.md_bili)*10)/10},
+ ru:'DF score',refs:['<32:Mild disease, 90% 30-day survival without steroids','≥32:Severe disease, ~50% 30-day mortality — consider corticosteroids'],
+ interp:function(r){var v=+r;if(v<32)return rn('Mild Disease','DF '+v+'. <32 — mild-moderate alcoholic hepatitis; corticosteroids not indicated on DF alone.');return rh('Severe Disease','DF '+v+'. ≥32 — severe alcoholic hepatitis with ~50% 30-day mortality untreated. Consider corticosteroids if no contraindication.')}},
+
+{id:'apfel_score',n:'Apfel Score',a:'Post-Operative Nausea & Vomiting Risk',c:'meta',d:'Predicts risk of PONV in adults undergoing general anaesthesia using 4 independent risk factors.',f:'Female sex+Non-smoker+PONV/motion sickness history+Postop opioids, 1 point each',
+ F:[{i:'ap_sex',l:'Female sex (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ap_smoke',l:'Non-smoker (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ap_hist',l:'History of PONV or motion sickness (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}},
+    {i:'ap_opioid',l:'Use of postoperative opioids (1=Yes)',p:'0/1',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.ap_sex+ +v.ap_smoke+ +v.ap_hist+ +v.ap_opioid)},
+ ru:'risk factors',refs:['0:~10% PONV risk','1:~21% PONV risk','2:~39% PONV risk','3:~61% PONV risk','4:~79% PONV risk'],
+ interp:function(r){var v=+r;var pct=['~10%','~21%','~39%','~61%','~79%'][v]||'';if(v<=1)return rn('Low Risk','Apfel '+v+'/4 — '+pct+' PONV risk. Routine prophylaxis generally not required.');if(v===2)return rw('Moderate Risk','Apfel '+v+'/4 — '+pct+' PONV risk. Consider 1-2 prophylactic antiemetics.');return rh('High Risk','Apfel '+v+'/4 — '+pct+' PONV risk. Multimodal antiemetic prophylaxis and consider TIVA.')}},
+
+{id:'lights_criteria',n:"Light's Criteria",a:'Pleural Effusion — Exudate vs Transudate',c:'resp',d:'Differentiates exudative from transudative pleural effusions. Meeting any one criterion classifies the effusion as exudate.',f:'Pleural/serum protein>0.5, Pleural/serum LDH>0.6, or Pleural LDH>⅔ upper limit of normal serum LDH',
+ F:[{i:'lc_pprot',l:'Pleural fluid protein',p:'g/dL',u:['g/dL'],cv:function(v){return v}},
+    {i:'lc_sprot',l:'Serum protein',p:'g/dL',u:['g/dL'],cv:function(v){return v}},
+    {i:'lc_pldh',l:'Pleural fluid LDH',p:'IU/L',u:['IU/L'],cv:function(v){return v}},
+    {i:'lc_sldh',l:'Serum LDH',p:'IU/L',u:['IU/L'],cv:function(v){return v}},
+    {i:'lc_uln',l:'Upper limit of normal serum LDH (lab reference)',p:'IU/L',u:['IU/L'],cv:function(v){return v}}],
+ calc:function(v){var pr=+v.lc_pprot/ +v.lc_sprot,ld=+v.lc_pldh/ +v.lc_sldh,hi=+v.lc_pldh>(2/3)*+v.lc_uln;return(pr>0.5||ld>0.6||hi)?1:0},
+ ru:'classification',refs:['0:Transudate — treat systemic cause (e.g. CHF, cirrhosis, nephrotic syndrome)','1:Exudate — further pleural fluid work-up needed (infection, malignancy, inflammatory)'],
+ interp:function(r){var v=+r;if(v===0)return rn('Transudate',"No Light's criteria met. Consistent with transudate — evaluate for CHF, cirrhosis, or nephrotic syndrome.");return rw('Exudate',"At least one Light's criterion met. Consistent with exudate — evaluate for infection, malignancy, or inflammatory cause.")}},
+
+{id:'barthel_index',n:'Barthel Index',a:'Activities of Daily Living',c:'neuro',d:'Measures functional independence in activities of daily living, commonly used in rehabilitation and stroke settings.',f:'Sum of 10 weighted ADL items (0-100)',
+ F:[{i:'b_feed',l:'Feeding: 0=Unable, 5=Needs help, 10=Independent',p:'0/5/10',u:['pts'],cv:function(v){return v}},
+    {i:'b_bath',l:'Bathing: 0=Dependent, 5=Independent',p:'0/5',u:['pts'],cv:function(v){return v}},
+    {i:'b_groom',l:'Grooming: 0=Needs help, 5=Independent',p:'0/5',u:['pts'],cv:function(v){return v}},
+    {i:'b_dress',l:'Dressing: 0=Dependent, 5=Needs help, 10=Independent',p:'0/5/10',u:['pts'],cv:function(v){return v}},
+    {i:'b_bowel',l:'Bowel control: 0=Incontinent, 5=Occasional accident, 10=Continent',p:'0/5/10',u:['pts'],cv:function(v){return v}},
+    {i:'b_bladder',l:'Bladder control: 0=Incontinent, 5=Occasional accident, 10=Continent',p:'0/5/10',u:['pts'],cv:function(v){return v}},
+    {i:'b_toilet',l:'Toilet use: 0=Dependent, 5=Needs help, 10=Independent',p:'0/5/10',u:['pts'],cv:function(v){return v}},
+    {i:'b_transfer',l:'Bed/chair transfer: 0=Unable, 5=Major help, 10=Minor help, 15=Independent',p:'0/5/10/15',u:['pts'],cv:function(v){return v}},
+    {i:'b_mobil',l:'Mobility on level surface: 0=Immobile, 5=Wheelchair independent, 10=Walks with help, 15=Independent',p:'0/5/10/15',u:['pts'],cv:function(v){return v}},
+    {i:'b_stairs',l:'Stairs: 0=Unable, 5=Needs help, 10=Independent',p:'0/5/10',u:['pts'],cv:function(v){return v}}],
+ calc:function(v){return Math.round(+v.b_feed+ +v.b_bath+ +v.b_groom+ +v.b_dress+ +v.b_bowel+ +v.b_bladder+ +v.b_toilet+ +v.b_transfer+ +v.b_mobil+ +v.b_stairs)},
+ ru:'points (max 100)',refs:['0-20:Total dependency','21-60:Severe dependency','61-90:Moderate dependency','91-99:Slight dependency','100:Independent'],
+ interp:function(r){var v=+r;if(v>=100)return rn('Independent','Barthel '+v+'/100. Fully independent in activities of daily living.');if(v>=91)return rl('Slight Dependency','Barthel '+v+'/100. Slight dependency; minimal assistance needed.');if(v>=61)return rw('Moderate Dependency','Barthel '+v+'/100. Moderate dependency; support needed for several ADLs.');if(v>=21)return rw('Severe Dependency','Barthel '+v+'/100. Severe dependency; significant assistance required across most ADLs.');return rh('Total Dependency','Barthel '+v+'/100. Total dependency; full assistance required for all ADLs.')}}
 ];
 var CV=[
 {id:'temp',n:'Temperature',em:'\u{1F321}\uFE0F',col:'#FF8F00',u:['\u00b0C','\u00b0F','K'],conv:function(v,f,t){var c=f=='\u00b0C'?v:f=='\u00b0F'?(v-32)*5/9:v-273.15;return t=='\u00b0C'?c:t=='\u00b0F'?c*9/5+32:c+273.15}},
